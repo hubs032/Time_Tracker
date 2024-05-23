@@ -1,4 +1,4 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Salesforce_UpdateTimecardHeader" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ss="clr-namespace:System.Security;assembly=mscorlib" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:usa="clr-namespace:UiPath.Salesforce.Activities;assembly=UiPath.Salesforce.Activities" xmlns:usam="clr-namespace:UiPath.Salesforce.Activities.Models;assembly=UiPath.Salesforce.Activities" xmlns:usawm="clr-namespace:UiPath.Salesforce.Activities.Wizards.Models;assembly=UiPath.Salesforce.Activities.Wizards" xmlns:usc="clr-namespace:UiPath.Salesforce.ConnectionService;assembly=UiPath.Salesforce" xmlns:usm="clr-namespace:UiPath.Salesforce.Models;assembly=UiPath.Salesforce" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Salesforce_UpdateTimecardHeader" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:ss="clr-namespace:System.Security;assembly=System.Private.CoreLib" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:usa="clr-namespace:UiPath.Salesforce.Activities;assembly=UiPath.Salesforce.Activities" xmlns:usam="clr-namespace:UiPath.Salesforce.Activities.Models;assembly=UiPath.Salesforce.Activities" xmlns:usawm="clr-namespace:UiPath.Salesforce.Activities.Wizards.Models;assembly=UiPath.Salesforce.Activities.Wizards" xmlns:usc="clr-namespace:UiPath.Salesforce.ConnectionService;assembly=UiPath.Salesforce" xmlns:usm="clr-namespace:UiPath.Salesforce.Models;assembly=UiPath.Salesforce" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property Name="in_config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
     <x:Property Name="in_rowToAdd" Type="InArgument(sd:DataRow)" />
@@ -21,82 +21,88 @@
   <this:Salesforce_UpdateTimecardHeader.in_projectId>
     <InArgument x:TypeArguments="x:String" />
   </this:Salesforce_UpdateTimecardHeader.in_projectId>
-  <mva:VisualBasic.Settings>
+  <VisualBasic.Settings>
     <x:Null />
-  </mva:VisualBasic.Settings>
+  </VisualBasic.Settings>
   <sap:VirtualizedContainerService.HintSize>906.4,1440</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>Salesforce_UpdateTimecardHeader_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="34">
-      <x:String>System.Activities</x:String>
-      <x:String>System.Activities.Statements</x:String>
-      <x:String>System.Activities.Expressions</x:String>
-      <x:String>System.Activities.Validation</x:String>
-      <x:String>System.Activities.XamlIntegration</x:String>
       <x:String>Microsoft.VisualBasic</x:String>
       <x:String>Microsoft.VisualBasic.Activities</x:String>
       <x:String>System</x:String>
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
       <x:String>System.Collections</x:String>
       <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.ComponentModel</x:String>
       <x:String>System.Data</x:String>
       <x:String>System.Diagnostics</x:String>
       <x:String>System.Drawing</x:String>
       <x:String>System.IO</x:String>
       <x:String>System.Linq</x:String>
       <x:String>System.Net.Mail</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>System.Runtime.InteropServices</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>System.Security</x:String>
+      <x:String>System.Windows.Markup</x:String>
       <x:String>System.Xml</x:String>
       <x:String>System.Xml.Linq</x:String>
       <x:String>UiPath.Core</x:String>
       <x:String>UiPath.Core.Activities</x:String>
-      <x:String>System.Windows.Markup</x:String>
-      <x:String>System.Security</x:String>
+      <x:String>UiPath.Salesforce.Activities</x:String>
+      <x:String>UiPath.Salesforce.Activities.Models</x:String>
+      <x:String>UiPath.Salesforce.Activities.Wizards.Models</x:String>
       <x:String>UiPath.Salesforce.ConnectionService</x:String>
       <x:String>UiPath.Salesforce.Models</x:String>
-      <x:String>System.ComponentModel</x:String>
       <x:String>UiPath.Salesforce.Telemetry</x:String>
-      <x:String>System.Collections.ObjectModel</x:String>
-      <x:String>UiPath.Salesforce.Activities.Wizards.Models</x:String>
-      <x:String>UiPath.Salesforce.Activities.Models</x:String>
-      <x:String>UiPath.Salesforce.Activities</x:String>
-      <x:String>System.Activities.DynamicUpdate</x:String>
-      <x:String>System.Runtime.Serialization</x:String>
-      <x:String>System.Runtime.InteropServices</x:String>
-      <x:String>System.Reflection</x:String>
     </scg:List>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
-    <scg:List x:TypeArguments="AssemblyReference" Capacity="31">
-      <AssemblyReference>System.Activities</AssemblyReference>
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="62">
+      <AssemblyReference>Microsoft.Bcl.AsyncInterfaces</AssemblyReference>
       <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
       <AssemblyReference>mscorlib</AssemblyReference>
-      <AssemblyReference>System.Data</AssemblyReference>
-      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
       <AssemblyReference>System</AssemblyReference>
-      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.Collections</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
       <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.Common</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Linq</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.ObjectModel</AssemblyReference>
+      <AssemblyReference>System.Private.CoreLib</AssemblyReference>
+      <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
       <AssemblyReference>System.Xml</AssemblyReference>
       <AssemblyReference>System.Xml.Linq</AssemblyReference>
-      <AssemblyReference>PresentationFramework</AssemblyReference>
-      <AssemblyReference>WindowsBase</AssemblyReference>
-      <AssemblyReference>PresentationCore</AssemblyReference>
-      <AssemblyReference>System.Xaml</AssemblyReference>
-      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
-      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
-      <AssemblyReference>UiPath.Salesforce</AssemblyReference>
-      <AssemblyReference>UiPath.Salesforce.Activities.Wizards</AssemblyReference>
-      <AssemblyReference>UiPath.Salesforce.Activities</AssemblyReference>
-      <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
-      <AssemblyReference>System.Memory</AssemblyReference>
-      <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
-      <AssemblyReference>System.ValueTuple</AssemblyReference>
-      <AssemblyReference>System.ServiceModel</AssemblyReference>
-      <AssemblyReference>UiPath.Mail</AssemblyReference>
       <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
       <AssemblyReference>UiPath.OCR.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.Salesforce</AssemblyReference>
+      <AssemblyReference>UiPath.Salesforce.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Salesforce.Activities.Wizards</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
       <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
-      <AssemblyReference>Microsoft.Bcl.AsyncInterfaces</AssemblyReference>
-      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
-      <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
+      <AssemblyReference>UiPath.Workflow</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
   <Sequence DisplayName="Salesforce_UpdateTimecardHeader" sap:VirtualizedContainerService.HintSize="524.8,1375.2" sap2010:WorkflowViewState.IdRef="Sequence_1">
@@ -269,7 +275,7 @@
         </scg:List>
       </ui:MultipleAssign.AssignOperations>
     </ui:MultipleAssign>
-    <usa:SalesforceApplicationScope ConsumerKey="{x:Null}" ConsumerSecret="{x:Null}" CustomServer="{x:Null}" Password="{x:Null}" Port="{x:Null}" ProxyPassword="{x:Null}" ProxyServer="{x:Null}" ProxyUser="{x:Null}" SecurityToken="{x:Null}" ServerType="{x:Null}" Username="{x:Null}" DisplayName="Salesforce Application Scope for timecard" ExistingConnectionService="[io_sfdcConnection]" sap:VirtualizedContainerService.HintSize="483.2,172.8" sap2010:WorkflowViewState.IdRef="SalesforceApplicationScope_1" ReportApiErrorAsException="True" SalesforceConnection="[io_sfdcConnection]" TelemetryEnabled="False" UseStrongDataTyping="False">
+    <usa:SalesforceApplicationScope ConsumerKey="{x:Null}" ConsumerSecret="{x:Null}" CustomServer="{x:Null}" Password="{x:Null}" Port="{x:Null}" ProxyPassword="{x:Null}" ProxyServer="{x:Null}" ProxyUser="{x:Null}" SecurityToken="{x:Null}" ServerType="{x:Null}" Sforce_Auto_Assign="{x:Null}" Username="{x:Null}" DisplayName="Salesforce Application Scope for timecard" ExistingConnectionService="[io_sfdcConnection]" sap:VirtualizedContainerService.HintSize="483.2,172.8" sap2010:WorkflowViewState.IdRef="SalesforceApplicationScope_1" ReportApiErrorAsException="True" SalesforceConnection="[io_sfdcConnection]" TelemetryEnabled="False" UseStrongDataTyping="False">
       <usa:SalesforceApplicationScope.Body>
         <ActivityAction x:TypeArguments="usc:IConnectionService">
           <ActivityAction.Argument>
@@ -580,7 +586,7 @@
         </ActivityAction>
       </usa:SalesforceApplicationScope.Body>
       <usa:SalesforceApplicationScope.DesignSalesforceConnectionInfo>
-        <usm:SalesforceConnectionInfo CustomInstanceEndpoint="{x:Null}" ProxyPassword="{x:Null}" ProxyPort="{x:Null}" ProxyServer="{x:Null}" ProxyUser="{x:Null}" ConsumerKey="3MVG9jBOyAOWY5bWf8f68Jp8Rfn5dpbxlBT4nQ2DYd1KQ_Yqa9FWUcxrQN23wNhZiwlXHZbv6YIz.OqYK09MN" EncryptedConsumerSecret="AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAPXVxG7tjT0+VCUOwrtphNAAAAAACAAAAAAAQZgAAAAEAACAAAACgpoX9WOLXpttBj+m83YpQyFOshiPSWyr2gH+QVMWYswAAAAAOgAAAAAIAACAAAAAriGeaFe9UO/KGPkTKQJCDJFurxFhqMtWmcknLNeW2clAAAADH86gODE6bVkmR0CTzPC8riKGYON/sSlzcqaNdC+jAW7x7wz22DxKpfYFRZUEQBdxhr7q3+OqhzVQex9huoz3T1Wlo5MNOiyfouh2/p5UqPEAAAADKhw5BRjVqu3ncJ7uysJMzNxyVuKjiNiH1B5IQPDBQWD2izvjNf9IwO+rQKW/E5z4HsHn38tlgvgr3X1jDQITM" EncryptedProxyUserPassword="" EncryptedSecurityToken="AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAPXVxG7tjT0+VCUOwrtphNAAAAAACAAAAAAAQZgAAAAEAACAAAABIi/Y3cTZ2vQYneSQsFqU3UDP0QPQAp8fYSIdfiEpmFQAAAAAOgAAAAAIAACAAAADe2HXBXsfFWC3QmObto4vwG2gS2mSm872YaZIHzUWcMCAAAABeqxGXDyJLjudLNM4m89qhAx3uFRXnyZPsyw/QczuoWEAAAAD3ELvgC6mowe5F49KIbUbTapIBKoq71vbGk/2Lj4e5PpJpaXVy4PDiyTXd5zN0/PKV+u1pkIuKHz1LthWc7Nha" ServerInstance="Test" UserName="florentin.burcea@uipath.com.uatfull">
+        <usm:SalesforceConnectionInfo CustomInstanceEndpoint="{x:Null}" ProxyPassword="{x:Null}" ProxyPort="{x:Null}" ProxyServer="{x:Null}" ProxyUser="{x:Null}" SforceAutoAssign="{x:Null}" ConsumerKey="3MVG9jBOyAOWY5bWf8f68Jp8Rfn5dpbxlBT4nQ2DYd1KQ_Yqa9FWUcxrQN23wNhZiwlXHZbv6YIz.OqYK09MN" EncryptedConsumerSecret="AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAPXVxG7tjT0+VCUOwrtphNAAAAAACAAAAAAAQZgAAAAEAACAAAACgpoX9WOLXpttBj+m83YpQyFOshiPSWyr2gH+QVMWYswAAAAAOgAAAAAIAACAAAAAriGeaFe9UO/KGPkTKQJCDJFurxFhqMtWmcknLNeW2clAAAADH86gODE6bVkmR0CTzPC8riKGYON/sSlzcqaNdC+jAW7x7wz22DxKpfYFRZUEQBdxhr7q3+OqhzVQex9huoz3T1Wlo5MNOiyfouh2/p5UqPEAAAADKhw5BRjVqu3ncJ7uysJMzNxyVuKjiNiH1B5IQPDBQWD2izvjNf9IwO+rQKW/E5z4HsHn38tlgvgr3X1jDQITM" EncryptedProxyUserPassword="" EncryptedSecurityToken="AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAPXVxG7tjT0+VCUOwrtphNAAAAAACAAAAAAAQZgAAAAEAACAAAABIi/Y3cTZ2vQYneSQsFqU3UDP0QPQAp8fYSIdfiEpmFQAAAAAOgAAAAAIAACAAAADe2HXBXsfFWC3QmObto4vwG2gS2mSm872YaZIHzUWcMCAAAABeqxGXDyJLjudLNM4m89qhAx3uFRXnyZPsyw/QczuoWEAAAAD3ELvgC6mowe5F49KIbUbTapIBKoq71vbGk/2Lj4e5PpJpaXVy4PDiyTXd5zN0/PKV+u1pkIuKHz1LthWc7Nha" ServerInstance="Test" UserName="florentin.burcea@uipath.com.uatfull">
           <usm:SalesforceConnectionInfo.ConsumerSecret>
             <ss:SecureString />
           </usm:SalesforceConnectionInfo.ConsumerSecret>
