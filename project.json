@@ -4,6 +4,7 @@
   "description": "Timer Tracker Process",
   "main": "Main.xaml",
   "dependencies": {
+    "COE6168_FFTimeCards_Library_Windows": "[1.0.13.1]",
     "UiPath.Excel.Activities": "[2.22.3]",
     "UiPath.Mail.Activities": "[1.21.1]",
     "UiPath.System.Activities": "[23.10.6]",
