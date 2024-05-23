@@ -1,4 +1,21 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Main" VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="1381,812" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Main" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:co="clr-namespace:COE6168_FFTimeCards_Library.Orchestrator;assembly=COE6168_FFTimeCards_Library" xmlns:cs="clr-namespace:COE6168_FFTimeCards_Library.Salesforce;assembly=COE6168_FFTimeCards_Library" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:usc="clr-namespace:UiPath.Salesforce.ConnectionService;assembly=UiPath.Salesforce" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_str_QA_Asset_Suffix" Type="InArgument(x:String)" />
+    <x:Property Name="in_OrchestratorFolderPath" Type="InArgument(x:String)" />
+    <x:Property Name="in_str_Activity" Type="InArgument(x:String)" />
+    <x:Property Name="in_UserEmail" Type="InArgument(x:String)" />
+  </x:Members>
+  <this:Main.in_str_QA_Asset_Suffix>
+    <InArgument x:TypeArguments="x:String" />
+  </this:Main.in_str_QA_Asset_Suffix>
+  <this:Main.in_OrchestratorFolderPath>
+    <InArgument x:TypeArguments="x:String" />
+  </this:Main.in_OrchestratorFolderPath>
+  <VisualBasic.Settings>
+    <x:Null />
+  </VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>1389,1802</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>ActivityBuilder_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
       <x:String>System.Activities</x:String>
@@ -29,6 +46,22 @@
       <x:String>COE6168_FFTimeCards_Library.Datatable</x:String>
       <x:String>COE6168_FFTimeCards_Library.Orchestrator</x:String>
       <x:String>COE6168_FFTimeCards_Library.Salesforce</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>UiPath.Salesforce.ConnectionService</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>System.Runtime.InteropServices</x:String>
+      <x:String>System.Security</x:String>
+      <x:String>System.Security.Cryptography</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>UiPath.Salesforce.Activities</x:String>
+      <x:String>UiPath.Salesforce.Activities.Models</x:String>
+      <x:String>UiPath.Salesforce.Models</x:String>
+      <x:String>UiPath.Salesforce.Telemetry</x:String>
+      <x:String>UiPath.Studio.Forms.Runtime</x:String>
+      <x:String>UiPath.Forms.Activities</x:String>
+      <x:String>UiPath.Platform.GlobalVariables</x:String>
+      <x:String>UiPath.Forms.Activities.Base</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -61,13 +94,134 @@
       <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
       <AssemblyReference>UiPath.Workflow</AssemblyReference>
       <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>System.Private.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Formatters</AssemblyReference>
+      <AssemblyReference>System.Private.DataContractSerialization</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Primitives</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.ViewModels</AssemblyReference>
+      <AssemblyReference>NPOI</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.Memory.Data</AssemblyReference>
+      <AssemblyReference>System.Console</AssemblyReference>
+      <AssemblyReference>System.Configuration.ConfigurationManager</AssemblyReference>
+      <AssemblyReference>System.Security.Permissions</AssemblyReference>
+      <AssemblyReference>System.ComponentModel</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.Private.Uri</AssemblyReference>
+      <AssemblyReference>System.Linq.Async</AssemblyReference>
+      <AssemblyReference>System.Reflection.DispatchProxy</AssemblyReference>
+      <AssemblyReference>System.Reflection.TypeExtensions</AssemblyReference>
+      <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
+      <AssemblyReference>UiPath.Salesforce</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.EventBasedAsync</AssemblyReference>
+      <AssemblyReference>Microsoft.Win32.Primitives</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Primitives</AssemblyReference>
+      <AssemblyReference>System.Windows.Forms.Design</AssemblyReference>
+      <AssemblyReference>System.Runtime.InteropServices</AssemblyReference>
+      <AssemblyReference>System.Runtime.InteropServices.RuntimeInformation</AssemblyReference>
+      <AssemblyReference>System.Security.Cryptography.Algorithms</AssemblyReference>
+      <AssemblyReference>System.Security.Cryptography.Pkcs</AssemblyReference>
+      <AssemblyReference>System.Security.Cryptography.Encoding</AssemblyReference>
+      <AssemblyReference>System.Security.Cryptography.Primitives</AssemblyReference>
+      <AssemblyReference>System.Security.Cryptography.ProtectedData</AssemblyReference>
+      <AssemblyReference>System.Security.Cryptography.OpenSsl</AssemblyReference>
+      <AssemblyReference>System.Security.Cryptography.Cng</AssemblyReference>
+      <AssemblyReference>System.Security.Cryptography.Csp</AssemblyReference>
+      <AssemblyReference>System.Private.Xml</AssemblyReference>
+      <AssemblyReference>UiPath.Salesforce.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Forms.Runtime</AssemblyReference>
+      <AssemblyReference>UiPath.Forms.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Platform</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Main Sequence" sap:VirtualizedContainerService.HintSize="450,103" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Main Sequence" sap:VirtualizedContainerService.HintSize="559,1737" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="scg:Dictionary(x:String, x:Object)" Name="Config" />
+      <Variable x:TypeArguments="x:String" Name="userEmailAddress" />
+      <Variable x:TypeArguments="usc:IConnectionService" Name="io_sfdcConnection" />
+      <Variable x:TypeArguments="x:String" Name="resourceRole" />
+      <Variable x:TypeArguments="x:String" Name="resourceManager" />
+      <Variable x:TypeArguments="x:String" Name="encryptedResourceId" />
+    </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
+    <Sequence DisplayName="First run" sap:VirtualizedContainerService.HintSize="497,953" sap2010:WorkflowViewState.IdRef="Sequence_2">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke InitAllSettings workflow" sap:VirtualizedContainerService.HintSize="434,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" LogEntry="No" LogExit="No" UnSafe="False" WorkflowFileName="Framework\InitAllSettings.xaml">
+        <ui:InvokeWorkflowFile.Arguments>
+          <InArgument x:TypeArguments="x:String" x:Key="in_ConfigFile">
+            <Literal x:TypeArguments="x:String">Data\Config.xlsx</Literal>
+          </InArgument>
+          <InArgument x:TypeArguments="s:String[]" x:Key="in_ConfigSheets">
+            <VisualBasicValue x:TypeArguments="s:String[]" ExpressionText="{}{&quot;Settings&quot;, &quot;Constants&quot;,&quot;Credentials&quot;}" />
+          </InArgument>
+          <OutArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="out_Config">
+            <VisualBasicReference x:TypeArguments="scg:Dictionary(x:String, x:Object)" ExpressionText="Config" />
+          </OutArgument>
+          <InArgument x:TypeArguments="x:String" x:Key="in_OrchestratorFolderPath">
+            <VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_OrchestratorFolderPath" />
+          </InArgument>
+          <InArgument x:TypeArguments="x:String" x:Key="in_QA_Asset_Suffix">
+            <VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_str_QA_Asset_Suffix" />
+          </InArgument>
+        </ui:InvokeWorkflowFile.Arguments>
+      </ui:InvokeWorkflowFile>
+      <ui:AddLogFields sap2010:Annotation.AnnotationText="Add the process name to the logs generated after this point. &#xA;This log field can be used to create reports and visualizations about the process." DisplayName="Add Log Fields (BusinessProcessName)" sap:VirtualizedContainerService.HintSize="434,162" sap2010:WorkflowViewState.IdRef="AddLogFields_1">
+        <ui:AddLogFields.Fields>
+          <InArgument x:TypeArguments="x:String" x:Key="logF_BusinessProcessName">[Config("logF_BusinessProcessName").ToString]</InArgument>
+        </ui:AddLogFields.Fields>
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </ui:AddLogFields>
+      <co:GetEncryptedUserMail EncryptedEmailAddress="[userEmailAddress]" sap:VirtualizedContainerService.HintSize="434,90" sap2010:WorkflowViewState.IdRef="GetEncryptedUserMail_1" />
+      <Assign DisplayName="Assign- user email" sap:VirtualizedContainerService.HintSize="434,82" sap2010:WorkflowViewState.IdRef="Assign_1">
+        <Assign.To>
+          <OutArgument x:TypeArguments="x:Object">[config("user_email")]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="x:String">[userEmailAddress]</InArgument>
+        </Assign.Value>
+      </Assign>
+      <Assign DisplayName="AH 2023-08-28 Assign- QA Prefix" sap:VirtualizedContainerService.HintSize="434,82" sap2010:WorkflowViewState.IdRef="Assign_2">
+        <Assign.To>
+          <OutArgument x:TypeArguments="x:Object">[config("QA_Asset_Suffix")]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="x:Object">[in_str_QA_Asset_Suffix + ""]</InArgument>
+        </Assign.Value>
+      </Assign>
+      <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke InitiAllApplications workflow" sap:VirtualizedContainerService.HintSize="434,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" LogEntry="No" LogExit="No" UnSafe="False" WorkflowFileName="Framework\InitAllApplications.xaml">
+        <ui:InvokeWorkflowFile.Arguments>
+          <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_config">
+            <VisualBasicValue x:TypeArguments="scg:Dictionary(x:String, x:Object)" ExpressionText="config" />
+          </InArgument>
+          <InOutArgument x:TypeArguments="usc:IConnectionService" x:Key="io_sfdcConnection">
+            <VisualBasicReference x:TypeArguments="usc:IConnectionService" ExpressionText="io_sfdcConnection" />
+          </InOutArgument>
+        </ui:InvokeWorkflowFile.Arguments>
+      </ui:InvokeWorkflowFile>
+    </Sequence>
+    <cs:GetDecryptContactRecordIdAndManagerEmail EncryptedEmailAddress="[Config(&quot;user_email&quot;).ToString]" EncryptedResourceId="[encryptedResourceId]" sap:VirtualizedContainerService.HintSize="497,294" sap2010:WorkflowViewState.IdRef="GetDecryptContactRecordIdAndManagerEmail_1" ResourceManager="[resourceManager]" ResourceRole="[resourceRole]" SfdcConnection="[io_sfdcConnection]" />
+    <Switch x:TypeArguments="x:String" DisplayName="Switch" Expression="[in_str_Activity]" sap:VirtualizedContainerService.HintSize="497,299" sap2010:WorkflowViewState.IdRef="Switch`1_1">
+      <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" x:Key="GetOutlookCategories" DisplayName="GetOutlookCategories.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="334,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="Data Layer\GetOutlookCategories.xaml">
+        <ui:InvokeWorkflowFile.Arguments>
+          <InArgument x:TypeArguments="x:String" x:Key="in_str_CurrentUser_Email">
+            <VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_UserEmail" />
+          </InArgument>
+        </ui:InvokeWorkflowFile.Arguments>
+      </ui:InvokeWorkflowFile>
+    </Switch>
   </Sequence>
 </Activity>
