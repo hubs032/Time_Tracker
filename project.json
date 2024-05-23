@@ -5,6 +5,7 @@
   "main": "Main.xaml",
   "dependencies": {
     "COE6168_FFTimeCards_Library_Windows": "[1.0.13.1]",
+    "UiPath.DataService.Activities": "[23.10.0]",
     "UiPath.Excel.Activities": "[2.22.3]",
     "UiPath.Mail.Activities": "[1.21.1]",
     "UiPath.System.Activities": "[23.10.6]",
@@ -12,7 +13,14 @@
     "UiPath.UIAutomation.Activities": "[23.10.11]"
   },
   "webServices": [],
-  "entitiesStores": [],
+  "entitiesStores": [
+    {
+      "serviceDocument": ".entities/EntitiesStore.json",
+      "tenantName": "Hackweek_2024",
+      "namespace": "Time_Tracker",
+      "uniqueReference": "CpPBo4selU8ZQwV9Lzyr0vczLGQqBovOPD76kFbY7Qo="
+    }
+  ],
   "schemaVersion": "4.0",
   "studioVersion": "23.10.6.0",
   "projectVersion": "1.0.0",
