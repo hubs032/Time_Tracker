@@ -4,7 +4,7 @@
   "description": "Timer Tracker Process",
   "main": "Main.xaml",
   "dependencies": {
-    "COE6168_FFTimeCards_Library": "[1.0.13.4]",
+    "COE6168_FFTimeCards_Library": "[1.0.13.9]",
     "UiPath.ConnectorBuilder.IntegrationService.Activities": "[4.0.4]",
     "UiPath.DataService.Activities": "[23.10.0]",
     "UiPath.Excel.Activities": "[2.22.3]",
@@ -26,7 +26,7 @@
   ],
   "schemaVersion": "4.0",
   "studioVersion": "23.10.6.0",
-  "projectVersion": "1.0.0",
+  "projectVersion": "1.0.2",
   "runtimeOptions": {
     "autoDispose": false,
     "netFrameworkLazyLoading": false,
