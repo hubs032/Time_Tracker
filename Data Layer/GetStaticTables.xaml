@@ -1,14 +1,16 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="GetStaticTables" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:cs="clr-namespace:COE6168_FFTimeCards_Library.Salesforce;assembly=COE6168_FFTimeCards_Library" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:si="clr-namespace:System.IO;assembly=System.Private.CoreLib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:usc="clr-namespace:UiPath.Salesforce.ConnectionService;assembly=UiPath.Salesforce" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="GetStaticTables" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:cd="clr-namespace:COE6168_FFTimeCards_Library.Datatable;assembly=COE6168_FFTimeCards_Library" xmlns:cs="clr-namespace:COE6168_FFTimeCards_Library.Salesforce;assembly=COE6168_FFTimeCards_Library" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:si="clr-namespace:System.IO;assembly=System.Private.CoreLib" xmlns:t="clr-namespace:Time_Tracker;assembly=DataService.Time_Tracker" xmlns:uda="clr-namespace:UiPath.DataService.Activities;assembly=UiPath.DataService.Activities.Core" xmlns:udam="clr-namespace:UiPath.DataService.Activities.Models;assembly=UiPath.DataService.Activities.Core" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:usc="clr-namespace:UiPath.Salesforce.ConnectionService;assembly=UiPath.Salesforce" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property Name="in_config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
     <x:Property Name="io_sfdcConnection" Type="InOutArgument(usc:IConnectionService)" />
     <x:Property Name="out_responseData" Type="OutArgument(x:String)" />
     <x:Property Name="in_encryptedResourceId" Type="InArgument(x:String)" />
+    <x:Property Name="BreakTriggerScopeInArgument" Type="InArgument(x:String)" />
+    <x:Property Name="in_UserEmail" Type="InArgument(x:String)" />
   </x:Members>
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1381,8995</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1381,8150</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>GetStaticTables_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="66">
@@ -54,10 +56,16 @@
       <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
       <x:String>GlobalVariablesNamespace</x:String>
       <x:String>GlobalConstantsNamespace</x:String>
+      <x:String>COE6168_FFTimeCards_Library.Datatable</x:String>
+      <x:String>UiPath.DataService.Activities</x:String>
+      <x:String>UiPath.DataService.Definition</x:String>
+      <x:String>UiPath.DataService.Activities.Models</x:String>
+      <x:String>UiPath.Shared.Activities</x:String>
+      <x:String>Time_Tracker</x:String>
     </scg:List>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
-    <scg:List x:TypeArguments="AssemblyReference" Capacity="60">
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="120">
       <AssemblyReference>COE6168_FFTimeCards_Library</AssemblyReference>
       <AssemblyReference>Microsoft.Bcl.AsyncInterfaces</AssemblyReference>
       <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
@@ -118,9 +126,19 @@
       <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
       <AssemblyReference>UiPath.Workflow</AssemblyReference>
       <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.EventBasedAsync</AssemblyReference>
+      <AssemblyReference>Microsoft.Win32.Primitives</AssemblyReference>
+      <AssemblyReference>netstandard</AssemblyReference>
+      <AssemblyReference>UiPath.DataService.Activities.Core</AssemblyReference>
+      <AssemblyReference>UiPath.DataService.Definition</AssemblyReference>
+      <AssemblyReference>UiPath.MicrosoftOffice365.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Testing.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Web.Activities</AssemblyReference>
+      <AssemblyReference>DataService.Time_Tracker</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic.Forms</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="Gets data for my active and past assignments and global projects tables.&#xA;" DisplayName="GetStaticTables" sap:VirtualizedContainerService.HintSize="730,8930" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="Gets data for my active and past assignments and global projects tables.&#xA;" DisplayName="GetStaticTables" sap:VirtualizedContainerService.HintSize="572,8085" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="sd:DataTable" Name="dtActiveAssignments" />
       <Variable x:TypeArguments="sd:DataTable" Name="dtPastAssignments" />
@@ -139,8 +157,8 @@
         <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:LogMessage DisplayName="Log Message Start" sap:VirtualizedContainerService.HintSize="668,141" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Start GetStaticTables.&quot;]" />
-    <ui:MultipleAssign DisplayName="Multiple Assign wee start and end" sap:VirtualizedContainerService.HintSize="668,147" sap2010:WorkflowViewState.IdRef="MultipleAssign_3">
+    <ui:LogMessage DisplayName="Log Message Start" sap:VirtualizedContainerService.HintSize="510,141" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Start GetStaticTables.&quot;]" />
+    <ui:MultipleAssign DisplayName="Multiple Assign wee start and end" sap:VirtualizedContainerService.HintSize="510,147" sap2010:WorkflowViewState.IdRef="MultipleAssign_3">
       <ui:MultipleAssign.AssignOperations>
         <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
           <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_8">
@@ -162,18 +180,54 @@
         </scg:List>
       </ui:MultipleAssign.AssignOperations>
     </ui:MultipleAssign>
-    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke Salesforce_ExecuteQuery workflowglobal" sap:VirtualizedContainerService.HintSize="668,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4" UnSafe="False" WorkflowFileName="ServiceLayer\Salesforce\Salesforce_ExecuteQuery.xaml">
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke Salesforce_ExecuteQuery workflowglobal" sap:VirtualizedContainerService.HintSize="510,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4" UnSafe="False" WorkflowFileName="ServiceLayer\Salesforce\Salesforce_ExecuteQuery.xaml">
       <ui:InvokeWorkflowFile.Arguments>
         <InOutArgument x:TypeArguments="usc:IConnectionService" x:Key="io_sfdcConnection">[io_sfdcConnection]</InOutArgument>
         <InArgument x:TypeArguments="x:String" x:Key="in_query">[in_config("sfdcQuery_GetGlobalProjects").ToString]</InArgument>
         <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_dtResult">[dtGlobal]</OutArgument>
       </ui:InvokeWorkflowFile.Arguments>
     </ui:InvokeWorkflowFile>
-    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="668,141" sap2010:WorkflowViewState.IdRef="LogMessage_2" Message="[String.Format(in_config(&quot;sfdcQuery_GetActiveAssignments&quot;).ToString, weekStart.ToString(&quot;yyyy-MM-dd&quot;),  weekEnd.ToString(&quot;yyyy-MM-dd&quot;) ,in_encryptedResourceId)]" />
-    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="668,141" sap2010:WorkflowViewState.IdRef="LogMessage_3" Message="[String.Format(in_config(&quot;sfdcQuery_GetPastAssignments&quot;).ToString, in_encryptedResourceId)]" />
-    <cs:ExecuteSfdcQueryWithEncryptedData DtResult="[dtActiveAssignments]" EncryptedTextFromQuery="[in_encryptedResourceId]" sap:VirtualizedContainerService.HintSize="668,243" sap2010:WorkflowViewState.IdRef="ExecuteSfdcQueryWithEncryptedData_1" QueryToExecute="[String.Format(in_config(&quot;sfdcQuery_GetActiveAssignments&quot;).ToString, weekStart.ToString(&quot;yyyy-MM-dd&quot;),  weekEnd.ToString(&quot;yyyy-MM-dd&quot;) ,in_encryptedResourceId)]" SfdcConnection="[io_sfdcConnection]" />
-    <cs:ExecuteSfdcQueryWithEncryptedData DtResult="[dtPastAssignments]" EncryptedTextFromQuery="[in_encryptedResourceId]" sap:VirtualizedContainerService.HintSize="668,243" sap2010:WorkflowViewState.IdRef="ExecuteSfdcQueryWithEncryptedData_2" QueryToExecute="[String.Format(in_config(&quot;sfdcQuery_GetPastAssignments&quot;).ToString, in_encryptedResourceId)]" SfdcConnection="[io_sfdcConnection]" />
-    <ui:MultipleAssign DisplayName="Multiple Assign construct show dt" sap:VirtualizedContainerService.HintSize="668,178" sap2010:WorkflowViewState.IdRef="MultipleAssign_2">
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="510,141" sap2010:WorkflowViewState.IdRef="LogMessage_2" Message="[String.Format(in_config(&quot;sfdcQuery_GetActiveAssignments&quot;).ToString, weekStart.ToString(&quot;yyyy-MM-dd&quot;),  weekEnd.ToString(&quot;yyyy-MM-dd&quot;) ,in_encryptedResourceId)]" />
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="510,141" sap2010:WorkflowViewState.IdRef="LogMessage_3" Message="[String.Format(in_config(&quot;sfdcQuery_GetPastAssignments&quot;).ToString, in_encryptedResourceId)]" />
+    <cs:ExecuteSfdcQueryWithEncryptedData DtResult="[dtActiveAssignments]" EncryptedTextFromQuery="[in_encryptedResourceId]" sap:VirtualizedContainerService.HintSize="510,243" sap2010:WorkflowViewState.IdRef="ExecuteSfdcQueryWithEncryptedData_1" QueryToExecute="[String.Format(in_config(&quot;sfdcQuery_GetActiveAssignments&quot;).ToString, weekStart.ToString(&quot;yyyy-MM-dd&quot;),  weekEnd.ToString(&quot;yyyy-MM-dd&quot;) ,in_encryptedResourceId)]" SfdcConnection="[io_sfdcConnection]" />
+    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="510,52" sap2010:WorkflowViewState.IdRef="CommentOut_1">
+      <ui:CommentOut.Body>
+        <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="450,201" sap2010:WorkflowViewState.IdRef="Sequence_9">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <cd:RemoveSingleQuoteIfAnyFromDatatable DTDataTable="[dtActiveAssignments]" sap:VirtualizedContainerService.HintSize="388,90" sap2010:WorkflowViewState.IdRef="RemoveSingleQuoteIfAnyFromDatatable_1" />
+        </Sequence>
+      </ui:CommentOut.Body>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:CommentOut>
+    <cs:ExecuteSfdcQueryWithEncryptedData DtResult="[dtPastAssignments]" EncryptedTextFromQuery="[in_encryptedResourceId]" sap:VirtualizedContainerService.HintSize="510,243" sap2010:WorkflowViewState.IdRef="ExecuteSfdcQueryWithEncryptedData_2" QueryToExecute="[String.Format(in_config(&quot;sfdcQuery_GetPastAssignments&quot;).ToString, in_encryptedResourceId)]" SfdcConnection="[io_sfdcConnection]" />
+    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="510,52" sap2010:WorkflowViewState.IdRef="CommentOut_2">
+      <ui:CommentOut.Body>
+        <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="450,201" sap2010:WorkflowViewState.IdRef="Sequence_10">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <cd:RemoveSingleQuoteIfAnyFromDatatable DTDataTable="[dtPastAssignments]" sap:VirtualizedContainerService.HintSize="388,90" sap2010:WorkflowViewState.IdRef="RemoveSingleQuoteIfAnyFromDatatable_2" />
+        </Sequence>
+      </ui:CommentOut.Body>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:CommentOut>
+    <ui:MultipleAssign DisplayName="Multiple Assign construct show dt" sap:VirtualizedContainerService.HintSize="510,178" sap2010:WorkflowViewState.IdRef="MultipleAssign_2">
       <ui:MultipleAssign.AssignOperations>
         <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
           <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_5">
@@ -203,7 +257,7 @@
         </scg:List>
       </ui:MultipleAssign.AssignOperations>
     </ui:MultipleAssign>
-    <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each, column needed, add to show datatable active" sap:VirtualizedContainerService.HintSize="668,372" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[listOfStaticTablesCols]">
+    <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each, column needed, add to show datatable active" sap:VirtualizedContainerService.HintSize="510,372" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[listOfStaticTablesCols]">
       <ui:ForEach.Body>
         <ActivityAction x:TypeArguments="x:String">
           <ActivityAction.Argument>
@@ -219,7 +273,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:ForEach>
-    <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[dtActiveAssignments]" DisplayName="For Each Row in assignments active, complete assignment name" sap:VirtualizedContainerService.HintSize="668,478" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
+    <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[dtActiveAssignments]" DisplayName="For Each Row in assignments active, complete assignment name" sap:VirtualizedContainerService.HintSize="510,478" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
       <ui:ForEachRow.Body>
         <ActivityAction x:TypeArguments="sd:DataRow">
           <ActivityAction.Argument>
@@ -257,8 +311,8 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:ForEachRow>
-    <ui:MergeDataTable Destination="[dtStaticTablesShowData]" DisplayName="Merge Data Table active to temp" sap:VirtualizedContainerService.HintSize="668,133" sap2010:WorkflowViewState.IdRef="MergeDataTable_1" MissingSchemaAction="Ignore" Source="[dtActiveAssignments]" />
-    <Assign DisplayName="Assign to assignmetns active concat data" sap:VirtualizedContainerService.HintSize="668,82" sap2010:WorkflowViewState.IdRef="Assign_3">
+    <ui:MergeDataTable Destination="[dtStaticTablesShowData]" DisplayName="Merge Data Table active to temp" sap:VirtualizedContainerService.HintSize="510,133" sap2010:WorkflowViewState.IdRef="MergeDataTable_1" MissingSchemaAction="Ignore" Source="[dtActiveAssignments]" />
+    <Assign DisplayName="Assign to assignmetns active concat data" sap:VirtualizedContainerService.HintSize="510,82" sap2010:WorkflowViewState.IdRef="Assign_3">
       <Assign.To>
         <OutArgument x:TypeArguments="sd:DataTable">[dtActiveAssignments]</OutArgument>
       </Assign.To>
@@ -266,7 +320,7 @@
         <InArgument x:TypeArguments="sd:DataTable">[dtStaticTablesShowData]</InArgument>
       </Assign.Value>
     </Assign>
-    <Assign DisplayName="Assign new static dt for past" sap:VirtualizedContainerService.HintSize="668,82" sap2010:WorkflowViewState.IdRef="Assign_7">
+    <Assign DisplayName="Assign new static dt for past" sap:VirtualizedContainerService.HintSize="510,82" sap2010:WorkflowViewState.IdRef="Assign_7">
       <Assign.To>
         <OutArgument x:TypeArguments="sd:DataTable">[dtStaticTablesShowData]</OutArgument>
       </Assign.To>
@@ -274,7 +328,7 @@
         <InArgument x:TypeArguments="sd:DataTable">[new DataTable()]</InArgument>
       </Assign.Value>
     </Assign>
-    <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each, column needed, add to show datatable past" sap:VirtualizedContainerService.HintSize="668,372" sap2010:WorkflowViewState.IdRef="ForEach`1_2" Values="[listOfStaticTablesCols]">
+    <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each, column needed, add to show datatable past" sap:VirtualizedContainerService.HintSize="510,372" sap2010:WorkflowViewState.IdRef="ForEach`1_2" Values="[listOfStaticTablesCols]">
       <ui:ForEach.Body>
         <ActivityAction x:TypeArguments="x:String">
           <ActivityAction.Argument>
@@ -290,7 +344,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:ForEach>
-    <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[dtPastAssignments]" DisplayName="For Each Row in past assignments, complete assignment name" sap:VirtualizedContainerService.HintSize="668,478" sap2010:WorkflowViewState.IdRef="ForEachRow_2">
+    <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[dtPastAssignments]" DisplayName="For Each Row in past assignments, complete assignment name" sap:VirtualizedContainerService.HintSize="510,478" sap2010:WorkflowViewState.IdRef="ForEachRow_2">
       <ui:ForEachRow.Body>
         <ActivityAction x:TypeArguments="sd:DataRow">
           <ActivityAction.Argument>
@@ -328,8 +382,8 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:ForEachRow>
-    <ui:MergeDataTable Destination="[dtStaticTablesShowData]" DisplayName="Merge Data Table all past data to show data" sap:VirtualizedContainerService.HintSize="668,133" sap2010:WorkflowViewState.IdRef="MergeDataTable_2" MissingSchemaAction="Ignore" Source="[dtPastAssignments]" />
-    <Assign DisplayName="Assign to past assignmetns concat data" sap:VirtualizedContainerService.HintSize="668,82" sap2010:WorkflowViewState.IdRef="Assign_5">
+    <ui:MergeDataTable Destination="[dtStaticTablesShowData]" DisplayName="Merge Data Table all past data to show data" sap:VirtualizedContainerService.HintSize="510,133" sap2010:WorkflowViewState.IdRef="MergeDataTable_2" MissingSchemaAction="Ignore" Source="[dtPastAssignments]" />
+    <Assign DisplayName="Assign to past assignmetns concat data" sap:VirtualizedContainerService.HintSize="510,82" sap2010:WorkflowViewState.IdRef="Assign_5">
       <Assign.To>
         <OutArgument x:TypeArguments="sd:DataTable">[dtPastAssignments]</OutArgument>
       </Assign.To>
@@ -337,7 +391,7 @@
         <InArgument x:TypeArguments="sd:DataTable">[dtStaticTablesShowData]</InArgument>
       </Assign.Value>
     </Assign>
-    <Assign DisplayName="Assign new static dt for global" sap:VirtualizedContainerService.HintSize="668,82" sap2010:WorkflowViewState.IdRef="Assign_8">
+    <Assign DisplayName="Assign new static dt for global" sap:VirtualizedContainerService.HintSize="510,82" sap2010:WorkflowViewState.IdRef="Assign_8">
       <Assign.To>
         <OutArgument x:TypeArguments="sd:DataTable">[dtStaticTablesShowData]</OutArgument>
       </Assign.To>
@@ -345,7 +399,7 @@
         <InArgument x:TypeArguments="sd:DataTable">[new DataTable()]</InArgument>
       </Assign.Value>
     </Assign>
-    <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each, column needed, add to show datatable global" sap:VirtualizedContainerService.HintSize="668,372" sap2010:WorkflowViewState.IdRef="ForEach`1_3" Values="[listOfGlobalTableColumns]">
+    <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each, column needed, add to show datatable global" sap:VirtualizedContainerService.HintSize="510,372" sap2010:WorkflowViewState.IdRef="ForEach`1_3" Values="[listOfGlobalTableColumns]">
       <ui:ForEach.Body>
         <ActivityAction x:TypeArguments="x:String">
           <ActivityAction.Argument>
@@ -361,8 +415,8 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:ForEach>
-    <ui:MergeDataTable Destination="[dtStaticTablesShowData]" DisplayName="Merge Data Table global to temp" sap:VirtualizedContainerService.HintSize="668,133" sap2010:WorkflowViewState.IdRef="MergeDataTable_3" MissingSchemaAction="Ignore" Source="[dtGlobal]" />
-    <Assign DisplayName="Assign to global temp dt" sap:VirtualizedContainerService.HintSize="668,82" sap2010:WorkflowViewState.IdRef="Assign_6">
+    <ui:MergeDataTable Destination="[dtStaticTablesShowData]" DisplayName="Merge Data Table global to temp" sap:VirtualizedContainerService.HintSize="510,133" sap2010:WorkflowViewState.IdRef="MergeDataTable_3" MissingSchemaAction="Ignore" Source="[dtGlobal]" />
+    <Assign DisplayName="Assign to global temp dt" sap:VirtualizedContainerService.HintSize="510,82" sap2010:WorkflowViewState.IdRef="Assign_6">
       <Assign.To>
         <OutArgument x:TypeArguments="sd:DataTable">[dtGlobal]</OutArgument>
       </Assign.To>
@@ -370,76 +424,94 @@
         <InArgument x:TypeArguments="sd:DataTable">[dtStaticTablesShowData]</InArgument>
       </Assign.Value>
     </Assign>
-    <Sequence DisplayName="AH - 2023-08-07 - Outlook Integration Options" sap:VirtualizedContainerService.HintSize="668,3307" sap2010:WorkflowViewState.IdRef="Sequence_4">
+    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="510,52" sap2010:WorkflowViewState.IdRef="CommentOut_3">
+      <ui:CommentOut.Body>
+        <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="512,192" sap2010:WorkflowViewState.IdRef="Sequence_11">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <Sequence DisplayName="AH - 2023-08-07 - Outlook Integration Options" sap:VirtualizedContainerService.HintSize="450,81" sap2010:WorkflowViewState.IdRef="Sequence_4">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ui:BuildDataTable DataTable="[dt_OutlookOptions]" DisplayName="Build Data Table" sap:VirtualizedContainerService.HintSize="606,60" sap2010:WorkflowViewState.IdRef="BuildDataTable_1" TableInfo="&lt;NewDataSet&gt;&#xA;  &lt;xs:schema id=&quot;NewDataSet&quot; xmlns=&quot;&quot; xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:msdata=&quot;urn:schemas-microsoft-com:xml-msdata&quot;&gt;&#xA;    &lt;xs:element name=&quot;NewDataSet&quot; msdata:IsDataSet=&quot;true&quot; msdata:MainDataTable=&quot;TableName&quot; msdata:UseCurrentLocale=&quot;true&quot;&gt;&#xA;      &lt;xs:complexType&gt;&#xA;        &lt;xs:choice minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot;&gt;&#xA;          &lt;xs:element name=&quot;TableName&quot;&gt;&#xA;            &lt;xs:complexType&gt;&#xA;              &lt;xs:sequence&gt;&#xA;                &lt;xs:element name=&quot;Option&quot; msdata:Caption=&quot;&quot; minOccurs=&quot;0&quot;&gt;&#xA;                  &lt;xs:simpleType&gt;&#xA;                    &lt;xs:restriction base=&quot;xs:string&quot;&gt;&#xA;                      &lt;xs:maxLength value=&quot;100&quot; /&gt;&#xA;                    &lt;/xs:restriction&gt;&#xA;                  &lt;/xs:simpleType&gt;&#xA;                &lt;/xs:element&gt;&#xA;                &lt;xs:element name=&quot;Value&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;              &lt;/xs:sequence&gt;&#xA;            &lt;/xs:complexType&gt;&#xA;          &lt;/xs:element&gt;&#xA;        &lt;/xs:choice&gt;&#xA;      &lt;/xs:complexType&gt;&#xA;    &lt;/xs:element&gt;&#xA;  &lt;/xs:schema&gt;&#xA;&lt;/NewDataSet&gt;" />
+            <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[{&quot;customerPrefix&quot;,in_config(&quot;customerPrefix&quot;).ToString}]" DataTable="[dt_OutlookOptions]" DisplayName="Add Data Row" sap:VirtualizedContainerService.HintSize="606,186" sap2010:WorkflowViewState.IdRef="AddDataRow_1" />
+            <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[{&quot;milestonePrefix&quot;,in_config(&quot;milestonePrefix&quot;).ToString}]" DataTable="[dt_OutlookOptions]" DisplayName="Add Data Row" sap:VirtualizedContainerService.HintSize="606,186" sap2010:WorkflowViewState.IdRef="AddDataRow_2" />
+            <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[{&quot;internalPrefix&quot;,in_config(&quot;internalPrefix&quot;).ToString}]" DataTable="[dt_OutlookOptions]" DisplayName="Add Data Row" sap:VirtualizedContainerService.HintSize="606,186" sap2010:WorkflowViewState.IdRef="AddDataRow_11" />
+            <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[{&quot;IncludeTentative&quot;,in_config(&quot;IncludeTentative&quot;).ToString}]" DataTable="[dt_OutlookOptions]" DisplayName="Add Data Row" sap:VirtualizedContainerService.HintSize="606,186" sap2010:WorkflowViewState.IdRef="AddDataRow_3" />
+            <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[{&quot;IgnoreDoneLabel&quot;,in_config(&quot;IgnoreDoneLabel&quot;).ToString}]" DataTable="[dt_OutlookOptions]" DisplayName="Add Data Row" sap:VirtualizedContainerService.HintSize="606,186" sap2010:WorkflowViewState.IdRef="AddDataRow_4" />
+            <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[{&quot;IgnoreAllDayEvents&quot;,in_config(&quot;IgnoreAllDayEvents&quot;).ToString}]" DataTable="[dt_OutlookOptions]" DisplayName="Add Data Row" sap:VirtualizedContainerService.HintSize="606,186" sap2010:WorkflowViewState.IdRef="AddDataRow_5" />
+            <If Condition="[left(in_config(&quot;DefaultTimesheetLocation&quot;).ToString,5)=&quot;.xlsm&quot;]" sap:VirtualizedContainerService.HintSize="606,1740" sap2010:WorkflowViewState.IdRef="If_1">
+              <If.Then>
+                <Sequence sap:VirtualizedContainerService.HintSize="376,500" sap2010:WorkflowViewState.IdRef="Sequence_5">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[{&quot;DefaultTimesheetLocation&quot;,in_config(&quot;DefaultTimesheetLocation&quot;).ToString}]" DataTable="[dt_OutlookOptions]" DisplayName="Add Data Row" sap:VirtualizedContainerService.HintSize="334,186" sap2010:WorkflowViewState.IdRef="AddDataRow_7" />
+                  <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[{&quot;DefaultNextTSDate&quot;,(Date.Today.AddDays(6 -Date.today.DayOfWeek)).ToString(&quot;MM-dd-yyyy&quot;)}]" DataTable="[dt_OutlookOptions]" DisplayName="Add Data Row" sap:VirtualizedContainerService.HintSize="334,186" sap2010:WorkflowViewState.IdRef="AddDataRow_9" />
+                </Sequence>
+              </If.Then>
+              <If.Else>
+                <Sequence sap:VirtualizedContainerService.HintSize="572,1058" sap2010:WorkflowViewState.IdRef="Sequence_6">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <ui:ForEachFileX DisplayName="For Each File in Folder" Filter="*.xlsm" Folder="[in_config(&quot;DefaultTimesheetLocation&quot;).ToString]" sap:VirtualizedContainerService.HintSize="530,970" sap2010:WorkflowViewState.IdRef="ForEachFileX_1" IncludeSubDirectories="False" OrderBy="NameDescFirst" SkipFolderWithoutPermission="False">
+                    <ui:ForEachFileX.Body>
+                      <ActivityAction x:TypeArguments="si:FileInfo, x:Int32">
+                        <ActivityAction.Argument1>
+                          <DelegateInArgument x:TypeArguments="si:FileInfo" Name="CurrentFile" />
+                        </ActivityAction.Argument1>
+                        <ActivityAction.Argument2>
+                          <DelegateInArgument x:TypeArguments="x:Int32" Name="CurrentIndex" />
+                        </ActivityAction.Argument2>
+                        <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="496,710" sap2010:WorkflowViewState.IdRef="Sequence_7">
+                          <Sequence.Variables>
+                            <Variable x:TypeArguments="x:String" Name="str_myDate" />
+                          </Sequence.Variables>
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                          <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[{&quot;DefaultTimesheetLocation&quot;,CurrentFile.ToString}]" DataTable="[dt_OutlookOptions]" DisplayName="Add Data Row" sap:VirtualizedContainerService.HintSize="434,186" sap2010:WorkflowViewState.IdRef="AddDataRow_8" />
+                          <Assign sap:VirtualizedContainerService.HintSize="434,82" sap2010:WorkflowViewState.IdRef="Assign_12">
+                            <Assign.To>
+                              <OutArgument x:TypeArguments="x:String">[str_myDate]</OutArgument>
+                            </Assign.To>
+                            <Assign.Value>
+                              <InArgument x:TypeArguments="x:String">[left(right(CurrentFile.Name,15),10)]</InArgument>
+                            </Assign.Value>
+                          </Assign>
+                          <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[{&quot;DefaultNextTSDate&quot;,(cdate(str_myDate).AddDays(7)).ToString(&quot;MM-dd-yyyy&quot;)}]" DataTable="[dt_OutlookOptions]" DisplayName="Add Data Row" sap:VirtualizedContainerService.HintSize="434,186" sap2010:WorkflowViewState.IdRef="AddDataRow_10" />
+                          <ui:Break sap:VirtualizedContainerService.HintSize="434,25" sap2010:WorkflowViewState.IdRef="Break_1" />
+                        </Sequence>
+                      </ActivityAction>
+                    </ui:ForEachFileX.Body>
+                  </ui:ForEachFileX>
+                </Sequence>
+              </If.Else>
+            </If>
+          </Sequence>
+        </Sequence>
+      </ui:CommentOut.Body>
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-      <ui:BuildDataTable DataTable="[dt_OutlookOptions]" DisplayName="Build Data Table" sap:VirtualizedContainerService.HintSize="606,60" sap2010:WorkflowViewState.IdRef="BuildDataTable_1" TableInfo="&lt;NewDataSet&gt;&#xA;  &lt;xs:schema id=&quot;NewDataSet&quot; xmlns=&quot;&quot; xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:msdata=&quot;urn:schemas-microsoft-com:xml-msdata&quot;&gt;&#xA;    &lt;xs:element name=&quot;NewDataSet&quot; msdata:IsDataSet=&quot;true&quot; msdata:MainDataTable=&quot;TableName&quot; msdata:UseCurrentLocale=&quot;true&quot;&gt;&#xA;      &lt;xs:complexType&gt;&#xA;        &lt;xs:choice minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot;&gt;&#xA;          &lt;xs:element name=&quot;TableName&quot;&gt;&#xA;            &lt;xs:complexType&gt;&#xA;              &lt;xs:sequence&gt;&#xA;                &lt;xs:element name=&quot;Option&quot; msdata:Caption=&quot;&quot; minOccurs=&quot;0&quot;&gt;&#xA;                  &lt;xs:simpleType&gt;&#xA;                    &lt;xs:restriction base=&quot;xs:string&quot;&gt;&#xA;                      &lt;xs:maxLength value=&quot;100&quot; /&gt;&#xA;                    &lt;/xs:restriction&gt;&#xA;                  &lt;/xs:simpleType&gt;&#xA;                &lt;/xs:element&gt;&#xA;                &lt;xs:element name=&quot;Value&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;              &lt;/xs:sequence&gt;&#xA;            &lt;/xs:complexType&gt;&#xA;          &lt;/xs:element&gt;&#xA;        &lt;/xs:choice&gt;&#xA;      &lt;/xs:complexType&gt;&#xA;    &lt;/xs:element&gt;&#xA;  &lt;/xs:schema&gt;&#xA;&lt;/NewDataSet&gt;" />
-      <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[{&quot;customerPrefix&quot;,in_config(&quot;customerPrefix&quot;).ToString}]" DataTable="[dt_OutlookOptions]" DisplayName="Add Data Row" sap:VirtualizedContainerService.HintSize="606,186" sap2010:WorkflowViewState.IdRef="AddDataRow_1" />
-      <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[{&quot;milestonePrefix&quot;,in_config(&quot;milestonePrefix&quot;).ToString}]" DataTable="[dt_OutlookOptions]" DisplayName="Add Data Row" sap:VirtualizedContainerService.HintSize="606,186" sap2010:WorkflowViewState.IdRef="AddDataRow_2" />
-      <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[{&quot;internalPrefix&quot;,in_config(&quot;internalPrefix&quot;).ToString}]" DataTable="[dt_OutlookOptions]" DisplayName="Add Data Row" sap:VirtualizedContainerService.HintSize="606,186" sap2010:WorkflowViewState.IdRef="AddDataRow_11" />
-      <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[{&quot;IncludeTentative&quot;,in_config(&quot;IncludeTentative&quot;).ToString}]" DataTable="[dt_OutlookOptions]" DisplayName="Add Data Row" sap:VirtualizedContainerService.HintSize="606,186" sap2010:WorkflowViewState.IdRef="AddDataRow_3" />
-      <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[{&quot;IgnoreDoneLabel&quot;,in_config(&quot;IgnoreDoneLabel&quot;).ToString}]" DataTable="[dt_OutlookOptions]" DisplayName="Add Data Row" sap:VirtualizedContainerService.HintSize="606,186" sap2010:WorkflowViewState.IdRef="AddDataRow_4" />
-      <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[{&quot;IgnoreAllDayEvents&quot;,in_config(&quot;IgnoreAllDayEvents&quot;).ToString}]" DataTable="[dt_OutlookOptions]" DisplayName="Add Data Row" sap:VirtualizedContainerService.HintSize="606,186" sap2010:WorkflowViewState.IdRef="AddDataRow_5" />
-      <If Condition="[left(in_config(&quot;DefaultTimesheetLocation&quot;).ToString,5)=&quot;.xlsm&quot;]" sap:VirtualizedContainerService.HintSize="606,1740" sap2010:WorkflowViewState.IdRef="If_1">
-        <If.Then>
-          <Sequence sap:VirtualizedContainerService.HintSize="376,500" sap2010:WorkflowViewState.IdRef="Sequence_5">
-            <sap:WorkflowViewStateService.ViewState>
-              <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-              </scg:Dictionary>
-            </sap:WorkflowViewStateService.ViewState>
-            <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[{&quot;DefaultTimesheetLocation&quot;,in_config(&quot;DefaultTimesheetLocation&quot;).ToString}]" DataTable="[dt_OutlookOptions]" DisplayName="Add Data Row" sap:VirtualizedContainerService.HintSize="334,186" sap2010:WorkflowViewState.IdRef="AddDataRow_7" />
-            <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[{&quot;DefaultNextTSDate&quot;,(Date.Today.AddDays(6 -Date.today.DayOfWeek)).ToString(&quot;MM-dd-yyyy&quot;)}]" DataTable="[dt_OutlookOptions]" DisplayName="Add Data Row" sap:VirtualizedContainerService.HintSize="334,186" sap2010:WorkflowViewState.IdRef="AddDataRow_9" />
-          </Sequence>
-        </If.Then>
-        <If.Else>
-          <Sequence sap:VirtualizedContainerService.HintSize="572,1058" sap2010:WorkflowViewState.IdRef="Sequence_6">
-            <sap:WorkflowViewStateService.ViewState>
-              <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-              </scg:Dictionary>
-            </sap:WorkflowViewStateService.ViewState>
-            <ui:ForEachFileX DisplayName="For Each File in Folder" Filter="*.xlsm" Folder="[in_config(&quot;DefaultTimesheetLocation&quot;).ToString]" sap:VirtualizedContainerService.HintSize="530,970" sap2010:WorkflowViewState.IdRef="ForEachFileX_1" IncludeSubDirectories="False" OrderBy="NameDescFirst" SkipFolderWithoutPermission="False">
-              <ui:ForEachFileX.Body>
-                <ActivityAction x:TypeArguments="si:FileInfo, x:Int32">
-                  <ActivityAction.Argument1>
-                    <DelegateInArgument x:TypeArguments="si:FileInfo" Name="CurrentFile" />
-                  </ActivityAction.Argument1>
-                  <ActivityAction.Argument2>
-                    <DelegateInArgument x:TypeArguments="x:Int32" Name="CurrentIndex" />
-                  </ActivityAction.Argument2>
-                  <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="496,710" sap2010:WorkflowViewState.IdRef="Sequence_7">
-                    <Sequence.Variables>
-                      <Variable x:TypeArguments="x:String" Name="str_myDate" />
-                    </Sequence.Variables>
-                    <sap:WorkflowViewStateService.ViewState>
-                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                      </scg:Dictionary>
-                    </sap:WorkflowViewStateService.ViewState>
-                    <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[{&quot;DefaultTimesheetLocation&quot;,CurrentFile.ToString}]" DataTable="[dt_OutlookOptions]" DisplayName="Add Data Row" sap:VirtualizedContainerService.HintSize="434,186" sap2010:WorkflowViewState.IdRef="AddDataRow_8" />
-                    <Assign sap:VirtualizedContainerService.HintSize="434,82" sap2010:WorkflowViewState.IdRef="Assign_12">
-                      <Assign.To>
-                        <OutArgument x:TypeArguments="x:String">[str_myDate]</OutArgument>
-                      </Assign.To>
-                      <Assign.Value>
-                        <InArgument x:TypeArguments="x:String">[left(right(CurrentFile.Name,15),10)]</InArgument>
-                      </Assign.Value>
-                    </Assign>
-                    <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[{&quot;DefaultNextTSDate&quot;,(cdate(str_myDate).AddDays(7)).ToString(&quot;MM-dd-yyyy&quot;)}]" DataTable="[dt_OutlookOptions]" DisplayName="Add Data Row" sap:VirtualizedContainerService.HintSize="434,186" sap2010:WorkflowViewState.IdRef="AddDataRow_10" />
-                    <ui:Break sap:VirtualizedContainerService.HintSize="434,25" sap2010:WorkflowViewState.IdRef="Break_1" />
-                  </Sequence>
-                </ActivityAction>
-              </ui:ForEachFileX.Body>
-            </ui:ForEachFileX>
-          </Sequence>
-        </If.Else>
-      </If>
-    </Sequence>
-    <ui:MultipleAssign DisplayName="Multiple Assign tables to dictionary" sap:VirtualizedContainerService.HintSize="668,240" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
+    </ui:CommentOut>
+    <ui:MultipleAssign DisplayName="Multiple Assign tables to dictionary" sap:VirtualizedContainerService.HintSize="510,240" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
       <ui:MultipleAssign.AssignOperations>
         <scg:List x:TypeArguments="ui:AssignOperation" Capacity="8">
           <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_1">
@@ -485,7 +557,175 @@
         </scg:List>
       </ui:MultipleAssign.AssignOperations>
     </ui:MultipleAssign>
-    <Assign DisplayName="Assign serialize show datatable to json" sap:VirtualizedContainerService.HintSize="668,82" sap2010:WorkflowViewState.IdRef="Assign_1">
+    <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[dtActiveAssignments]" DisplayName="For Each Row in Data Table" sap:VirtualizedContainerService.HintSize="510,702" sap2010:WorkflowViewState.IdRef="ForEachRow_3">
+      <ui:ForEachRow.Body>
+        <ActivityAction x:TypeArguments="sd:DataRow">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="sd:DataRow" Name="CurrentRow" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="376,516" sap2010:WorkflowViewState.IdRef="Sequence_8">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <uda:CreateEntityRecord x:TypeArguments="t:TTAssignments" InputEntity="{x:Null}" IsInRecordView="{x:Null}" OutputEntity="{x:Null}" VisibleDynamicPropertiesInfo="{x:Null}" ContinueOnError="False" DisplayName="Create Entity Record" EntityId="e6ce2e0c-af18-ef11-96f5-002248095c31" ExpansionDepth="2" sap:VirtualizedContainerService.HintSize="334,428" sap2010:WorkflowViewState.IdRef="CreateEntityRecord`1_1" InputEntityInFieldView="[new Time_Tracker.TTAssignments() With {  .Project = CurrentRow(&quot;Name&quot;).ToString,  .UserEmail = in_UserEmail,  .AssignedHours = IF(IsNumeric(CurrentRow(&quot;pse__Planned_Hours__c&quot;).ToString),cdec(CurrentRow(&quot;pse__Planned_Hours__c&quot;).ToString),0),  .AssignmentEndDate = cdate(CurrentRow(&quot;pse__End_Date__c&quot;).ToString),  .AssignmentStartDate = cdate(CurrentRow(&quot;pse__Start_Date__c&quot;).ToString),  .ProjectType = &quot;Active&quot; }]" TimeoutInMs="30000">
+              <uda:CreateEntityRecord.State>
+                <udam:RecordState RequiredFieldCount="2">
+                  <udam:RecordState.SelectedFields>
+                    <scg:List x:TypeArguments="udam:DynamicEntityField" Capacity="6">
+                      <udam:DynamicEntityField Id="421e79c9-b018-ef11-96f5-002248095c31" IsRequired="True" Name="Project">
+                        <udam:DynamicEntityField.ArgumentValue>
+                          <InArgument x:TypeArguments="x:String">[CurrentRow("Name").ToString]</InArgument>
+                        </udam:DynamicEntityField.ArgumentValue>
+                      </udam:DynamicEntityField>
+                      <udam:DynamicEntityField Id="3eb73c67-b318-ef11-96f5-002248095c31" IsRequired="True" Name="UserEmail">
+                        <udam:DynamicEntityField.ArgumentValue>
+                          <InArgument x:TypeArguments="x:String">[in_UserEmail]</InArgument>
+                        </udam:DynamicEntityField.ArgumentValue>
+                      </udam:DynamicEntityField>
+                      <udam:DynamicEntityField Id="2f54271f-4919-ef11-96f5-002248095c31" Name="AssignedHours">
+                        <udam:DynamicEntityField.ArgumentValue>
+                          <InArgument x:TypeArguments="x:Decimal">[IF(IsNumeric(CurrentRow("pse__Planned_Hours__c").ToString),cdec(CurrentRow("pse__Planned_Hours__c").ToString),0)]</InArgument>
+                        </udam:DynamicEntityField.ArgumentValue>
+                      </udam:DynamicEntityField>
+                      <udam:DynamicEntityField Id="bb0a1f7e-4d19-ef11-96f5-002248095c31" Name="AssignmentEndDate">
+                        <udam:DynamicEntityField.ArgumentValue>
+                          <InArgument x:TypeArguments="s:DateTime">[cdate(CurrentRow("pse__End_Date__c").ToString)]</InArgument>
+                        </udam:DynamicEntityField.ArgumentValue>
+                      </udam:DynamicEntityField>
+                      <udam:DynamicEntityField Id="ba0a1f7e-4d19-ef11-96f5-002248095c31" Name="AssignmentStartDate">
+                        <udam:DynamicEntityField.ArgumentValue>
+                          <InArgument x:TypeArguments="s:DateTime">[cdate(CurrentRow("pse__Start_Date__c").ToString)]</InArgument>
+                        </udam:DynamicEntityField.ArgumentValue>
+                      </udam:DynamicEntityField>
+                      <udam:DynamicEntityField Id="38ad8f28-4d19-ef11-96f5-002248095c31" Name="ProjectType">
+                        <udam:DynamicEntityField.ArgumentValue>
+                          <InArgument x:TypeArguments="x:String">Active</InArgument>
+                        </udam:DynamicEntityField.ArgumentValue>
+                      </udam:DynamicEntityField>
+                    </scg:List>
+                  </udam:RecordState.SelectedFields>
+                </udam:RecordState>
+              </uda:CreateEntityRecord.State>
+            </uda:CreateEntityRecord>
+          </Sequence>
+        </ActivityAction>
+      </ui:ForEachRow.Body>
+    </ui:ForEachRow>
+    <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[dtPastAssignments]" DisplayName="For Each Row in Data Table" sap:VirtualizedContainerService.HintSize="510,702" sap2010:WorkflowViewState.IdRef="ForEachRow_4">
+      <ui:ForEachRow.Body>
+        <ActivityAction x:TypeArguments="sd:DataRow">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="sd:DataRow" Name="CurrentRow" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="376,516" sap2010:WorkflowViewState.IdRef="Sequence_12">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <uda:CreateEntityRecord x:TypeArguments="t:TTAssignments" InputEntity="{x:Null}" IsInRecordView="{x:Null}" OutputEntity="{x:Null}" VisibleDynamicPropertiesInfo="{x:Null}" ContinueOnError="False" DisplayName="Create Entity Record" EntityId="e6ce2e0c-af18-ef11-96f5-002248095c31" ExpansionDepth="2" sap:VirtualizedContainerService.HintSize="334,428" sap2010:WorkflowViewState.IdRef="CreateEntityRecord`1_2" InputEntityInFieldView="[new Time_Tracker.TTAssignments() With {  .Project = CurrentRow(&quot;Name&quot;).ToString,  .UserEmail = in_UserEmail,  .AssignedHours = IF(IsNumeric(CurrentRow(&quot;pse__Planned_Hours__c&quot;).ToString),cdec(CurrentRow(&quot;pse__Planned_Hours__c&quot;).ToString),0),  .AssignmentEndDate = cdate(CurrentRow(&quot;pse__End_Date__c&quot;).ToString),  .AssignmentStartDate = cdate(CurrentRow(&quot;pse__Start_Date__c&quot;).ToString),  .ProjectType = &quot;Past&quot; }]" TimeoutInMs="30000">
+              <uda:CreateEntityRecord.State>
+                <udam:RecordState RequiredFieldCount="2">
+                  <udam:RecordState.SelectedFields>
+                    <scg:List x:TypeArguments="udam:DynamicEntityField" Capacity="6">
+                      <udam:DynamicEntityField Id="421e79c9-b018-ef11-96f5-002248095c31" IsRequired="True" Name="Project">
+                        <udam:DynamicEntityField.ArgumentValue>
+                          <InArgument x:TypeArguments="x:String">[CurrentRow("Name").ToString]</InArgument>
+                        </udam:DynamicEntityField.ArgumentValue>
+                      </udam:DynamicEntityField>
+                      <udam:DynamicEntityField Id="3eb73c67-b318-ef11-96f5-002248095c31" IsRequired="True" Name="UserEmail">
+                        <udam:DynamicEntityField.ArgumentValue>
+                          <InArgument x:TypeArguments="x:String">[in_UserEmail]</InArgument>
+                        </udam:DynamicEntityField.ArgumentValue>
+                      </udam:DynamicEntityField>
+                      <udam:DynamicEntityField Id="2f54271f-4919-ef11-96f5-002248095c31" Name="AssignedHours">
+                        <udam:DynamicEntityField.ArgumentValue>
+                          <InArgument x:TypeArguments="x:Decimal">[IF(IsNumeric(CurrentRow("pse__Planned_Hours__c").ToString),cdec(CurrentRow("pse__Planned_Hours__c").ToString),0)]</InArgument>
+                        </udam:DynamicEntityField.ArgumentValue>
+                      </udam:DynamicEntityField>
+                      <udam:DynamicEntityField Id="bb0a1f7e-4d19-ef11-96f5-002248095c31" Name="AssignmentEndDate">
+                        <udam:DynamicEntityField.ArgumentValue>
+                          <InArgument x:TypeArguments="s:DateTime">[cdate(CurrentRow("pse__End_Date__c").ToString)]</InArgument>
+                        </udam:DynamicEntityField.ArgumentValue>
+                      </udam:DynamicEntityField>
+                      <udam:DynamicEntityField Id="ba0a1f7e-4d19-ef11-96f5-002248095c31" Name="AssignmentStartDate">
+                        <udam:DynamicEntityField.ArgumentValue>
+                          <InArgument x:TypeArguments="s:DateTime">[cdate(CurrentRow("pse__Start_Date__c").ToString)]</InArgument>
+                        </udam:DynamicEntityField.ArgumentValue>
+                      </udam:DynamicEntityField>
+                      <udam:DynamicEntityField Id="38ad8f28-4d19-ef11-96f5-002248095c31" Name="ProjectType">
+                        <udam:DynamicEntityField.ArgumentValue>
+                          <InArgument x:TypeArguments="x:String">Past</InArgument>
+                        </udam:DynamicEntityField.ArgumentValue>
+                      </udam:DynamicEntityField>
+                    </scg:List>
+                  </udam:RecordState.SelectedFields>
+                </udam:RecordState>
+              </uda:CreateEntityRecord.State>
+            </uda:CreateEntityRecord>
+          </Sequence>
+        </ActivityAction>
+      </ui:ForEachRow.Body>
+    </ui:ForEachRow>
+    <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[dtGlobal]" DisplayName="For Each Row in Data Table" sap:VirtualizedContainerService.HintSize="510,702" sap2010:WorkflowViewState.IdRef="ForEachRow_5">
+      <ui:ForEachRow.Body>
+        <ActivityAction x:TypeArguments="sd:DataRow">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="sd:DataRow" Name="CurrentRow" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="376,516" sap2010:WorkflowViewState.IdRef="Sequence_13">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <uda:CreateEntityRecord x:TypeArguments="t:TTAssignments" InputEntity="{x:Null}" IsInRecordView="{x:Null}" OutputEntity="{x:Null}" VisibleDynamicPropertiesInfo="{x:Null}" ContinueOnError="False" DisplayName="Create Entity Record" EntityId="e6ce2e0c-af18-ef11-96f5-002248095c31" ExpansionDepth="2" sap:VirtualizedContainerService.HintSize="334,428" sap2010:WorkflowViewState.IdRef="CreateEntityRecord`1_3" InputEntityInFieldView="[new Time_Tracker.TTAssignments() With {  .Project = CurrentRow(&quot;Name&quot;).ToString,  .UserEmail = in_UserEmail,  .AssignedHours = IF(IsNumeric(CurrentRow(&quot;pse__Planned_Hours__c&quot;).ToString),cdec(CurrentRow(&quot;pse__Planned_Hours__c&quot;).ToString),0),  .AssignmentEndDate = cdate(CurrentRow(&quot;pse__End_Date__c&quot;).ToString),  .AssignmentStartDate = cdate(CurrentRow(&quot;pse__Start_Date__c&quot;).ToString),  .ProjectType = &quot;Global&quot; }]" TimeoutInMs="30000">
+              <uda:CreateEntityRecord.State>
+                <udam:RecordState RequiredFieldCount="2">
+                  <udam:RecordState.SelectedFields>
+                    <scg:List x:TypeArguments="udam:DynamicEntityField" Capacity="6">
+                      <udam:DynamicEntityField Id="421e79c9-b018-ef11-96f5-002248095c31" IsRequired="True" Name="Project">
+                        <udam:DynamicEntityField.ArgumentValue>
+                          <InArgument x:TypeArguments="x:String">[CurrentRow("Name").ToString]</InArgument>
+                        </udam:DynamicEntityField.ArgumentValue>
+                      </udam:DynamicEntityField>
+                      <udam:DynamicEntityField Id="3eb73c67-b318-ef11-96f5-002248095c31" IsRequired="True" Name="UserEmail">
+                        <udam:DynamicEntityField.ArgumentValue>
+                          <InArgument x:TypeArguments="x:String">[in_UserEmail]</InArgument>
+                        </udam:DynamicEntityField.ArgumentValue>
+                      </udam:DynamicEntityField>
+                      <udam:DynamicEntityField Id="2f54271f-4919-ef11-96f5-002248095c31" Name="AssignedHours">
+                        <udam:DynamicEntityField.ArgumentValue>
+                          <InArgument x:TypeArguments="x:Decimal">[IF(IsNumeric(CurrentRow("pse__Planned_Hours__c").ToString),cdec(CurrentRow("pse__Planned_Hours__c").ToString),0)]</InArgument>
+                        </udam:DynamicEntityField.ArgumentValue>
+                      </udam:DynamicEntityField>
+                      <udam:DynamicEntityField Id="bb0a1f7e-4d19-ef11-96f5-002248095c31" Name="AssignmentEndDate">
+                        <udam:DynamicEntityField.ArgumentValue>
+                          <InArgument x:TypeArguments="s:DateTime">[cdate(CurrentRow("pse__End_Date__c").ToString)]</InArgument>
+                        </udam:DynamicEntityField.ArgumentValue>
+                      </udam:DynamicEntityField>
+                      <udam:DynamicEntityField Id="ba0a1f7e-4d19-ef11-96f5-002248095c31" Name="AssignmentStartDate">
+                        <udam:DynamicEntityField.ArgumentValue>
+                          <InArgument x:TypeArguments="s:DateTime">[cdate(CurrentRow("pse__Start_Date__c").ToString)]</InArgument>
+                        </udam:DynamicEntityField.ArgumentValue>
+                      </udam:DynamicEntityField>
+                      <udam:DynamicEntityField Id="38ad8f28-4d19-ef11-96f5-002248095c31" Name="ProjectType">
+                        <udam:DynamicEntityField.ArgumentValue>
+                          <InArgument x:TypeArguments="x:String">Global</InArgument>
+                        </udam:DynamicEntityField.ArgumentValue>
+                      </udam:DynamicEntityField>
+                    </scg:List>
+                  </udam:RecordState.SelectedFields>
+                </udam:RecordState>
+              </uda:CreateEntityRecord.State>
+            </uda:CreateEntityRecord>
+          </Sequence>
+        </ActivityAction>
+      </ui:ForEachRow.Body>
+    </ui:ForEachRow>
+    <Assign DisplayName="Assign serialize show datatable to json" sap:VirtualizedContainerService.HintSize="510,82" sap2010:WorkflowViewState.IdRef="Assign_1">
       <Assign.To>
         <OutArgument x:TypeArguments="x:String">[out_responseData]</OutArgument>
       </Assign.To>
