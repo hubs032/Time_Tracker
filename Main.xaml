@@ -1,9 +1,10 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Main" this:Main.in_str_Activity="GetAssignments" this:Main.in_UserEmail="aaron.hubbart@uipath.com" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:usc="clr-namespace:UiPath.Salesforce.ConnectionService;assembly=UiPath.Salesforce" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Main" this:Main.in_UserEmail="aaron.hubbart@uipath.com" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:usc="clr-namespace:UiPath.Salesforce.ConnectionService;assembly=UiPath.Salesforce" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property Name="in_str_QA_Asset_Suffix" Type="InArgument(x:String)" />
     <x:Property Name="in_OrchestratorFolderPath" Type="InArgument(x:String)" />
     <x:Property Name="in_str_Activity" Type="InArgument(x:String)" />
     <x:Property Name="in_UserEmail" Type="InArgument(x:String)" />
+    <x:Property Name="in_str_Update_Type" Type="InArgument(x:String)" />
   </x:Members>
   <this:Main.in_str_QA_Asset_Suffix>
     <InArgument x:TypeArguments="x:String" />
@@ -195,6 +196,9 @@
             <InArgument x:TypeArguments="x:String" x:Key="BreakTriggerScopeInArgument" />
             <InArgument x:TypeArguments="x:String" x:Key="in_UserEmail">
               <VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_UserEmail" />
+            </InArgument>
+            <InArgument x:TypeArguments="x:String" x:Key="in_Update_Type">
+              <VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_str_Update_Type" />
             </InArgument>
           </ui:InvokeWorkflowFile.Arguments>
         </ui:InvokeWorkflowFile>

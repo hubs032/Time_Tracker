@@ -6,11 +6,12 @@
     <x:Property Name="in_encryptedResourceId" Type="InArgument(x:String)" />
     <x:Property Name="BreakTriggerScopeInArgument" Type="InArgument(x:String)" />
     <x:Property Name="in_UserEmail" Type="InArgument(x:String)" />
+    <x:Property Name="in_Update_Type" Type="InArgument(x:String)" />
   </x:Members>
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1381,8150</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1381,6590</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>GetStaticTables_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="66">
@@ -138,7 +139,7 @@
       <AssemblyReference>Microsoft.VisualBasic.Forms</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="Gets data for my active and past assignments and global projects tables.&#xA;" DisplayName="GetStaticTables" sap:VirtualizedContainerService.HintSize="572,8085" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="Gets data for my active and past assignments and global projects tables.&#xA;" DisplayName="GetStaticTables" sap:VirtualizedContainerService.HintSize="572,6525" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="sd:DataTable" Name="dtActiveAssignments" />
       <Variable x:TypeArguments="sd:DataTable" Name="dtPastAssignments" />
@@ -557,174 +558,525 @@
         </scg:List>
       </ui:MultipleAssign.AssignOperations>
     </ui:MultipleAssign>
-    <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[dtActiveAssignments]" DisplayName="For Each Row in Data Table" sap:VirtualizedContainerService.HintSize="510,702" sap2010:WorkflowViewState.IdRef="ForEachRow_3">
-      <ui:ForEachRow.Body>
-        <ActivityAction x:TypeArguments="sd:DataRow">
-          <ActivityAction.Argument>
-            <DelegateInArgument x:TypeArguments="sd:DataRow" Name="CurrentRow" />
-          </ActivityAction.Argument>
-          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="376,516" sap2010:WorkflowViewState.IdRef="Sequence_8">
-            <sap:WorkflowViewStateService.ViewState>
-              <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-              </scg:Dictionary>
-            </sap:WorkflowViewStateService.ViewState>
-            <uda:CreateEntityRecord x:TypeArguments="t:TTAssignments" InputEntity="{x:Null}" IsInRecordView="{x:Null}" OutputEntity="{x:Null}" VisibleDynamicPropertiesInfo="{x:Null}" ContinueOnError="False" DisplayName="Create Entity Record" EntityId="e6ce2e0c-af18-ef11-96f5-002248095c31" ExpansionDepth="2" sap:VirtualizedContainerService.HintSize="334,428" sap2010:WorkflowViewState.IdRef="CreateEntityRecord`1_1" InputEntityInFieldView="[new Time_Tracker.TTAssignments() With {  .Project = CurrentRow(&quot;Name&quot;).ToString,  .UserEmail = in_UserEmail,  .AssignedHours = IF(IsNumeric(CurrentRow(&quot;pse__Planned_Hours__c&quot;).ToString),cdec(CurrentRow(&quot;pse__Planned_Hours__c&quot;).ToString),0),  .AssignmentEndDate = cdate(CurrentRow(&quot;pse__End_Date__c&quot;).ToString),  .AssignmentStartDate = cdate(CurrentRow(&quot;pse__Start_Date__c&quot;).ToString),  .ProjectType = &quot;Active&quot; }]" TimeoutInMs="30000">
-              <uda:CreateEntityRecord.State>
-                <udam:RecordState RequiredFieldCount="2">
-                  <udam:RecordState.SelectedFields>
-                    <scg:List x:TypeArguments="udam:DynamicEntityField" Capacity="6">
-                      <udam:DynamicEntityField Id="421e79c9-b018-ef11-96f5-002248095c31" IsRequired="True" Name="Project">
-                        <udam:DynamicEntityField.ArgumentValue>
-                          <InArgument x:TypeArguments="x:String">[CurrentRow("Name").ToString]</InArgument>
-                        </udam:DynamicEntityField.ArgumentValue>
-                      </udam:DynamicEntityField>
-                      <udam:DynamicEntityField Id="3eb73c67-b318-ef11-96f5-002248095c31" IsRequired="True" Name="UserEmail">
-                        <udam:DynamicEntityField.ArgumentValue>
-                          <InArgument x:TypeArguments="x:String">[in_UserEmail]</InArgument>
-                        </udam:DynamicEntityField.ArgumentValue>
-                      </udam:DynamicEntityField>
-                      <udam:DynamicEntityField Id="2f54271f-4919-ef11-96f5-002248095c31" Name="AssignedHours">
-                        <udam:DynamicEntityField.ArgumentValue>
-                          <InArgument x:TypeArguments="x:Decimal">[IF(IsNumeric(CurrentRow("pse__Planned_Hours__c").ToString),cdec(CurrentRow("pse__Planned_Hours__c").ToString),0)]</InArgument>
-                        </udam:DynamicEntityField.ArgumentValue>
-                      </udam:DynamicEntityField>
-                      <udam:DynamicEntityField Id="bb0a1f7e-4d19-ef11-96f5-002248095c31" Name="AssignmentEndDate">
-                        <udam:DynamicEntityField.ArgumentValue>
-                          <InArgument x:TypeArguments="s:DateTime">[cdate(CurrentRow("pse__End_Date__c").ToString)]</InArgument>
-                        </udam:DynamicEntityField.ArgumentValue>
-                      </udam:DynamicEntityField>
-                      <udam:DynamicEntityField Id="ba0a1f7e-4d19-ef11-96f5-002248095c31" Name="AssignmentStartDate">
-                        <udam:DynamicEntityField.ArgumentValue>
-                          <InArgument x:TypeArguments="s:DateTime">[cdate(CurrentRow("pse__Start_Date__c").ToString)]</InArgument>
-                        </udam:DynamicEntityField.ArgumentValue>
-                      </udam:DynamicEntityField>
-                      <udam:DynamicEntityField Id="38ad8f28-4d19-ef11-96f5-002248095c31" Name="ProjectType">
-                        <udam:DynamicEntityField.ArgumentValue>
-                          <InArgument x:TypeArguments="x:String">Active</InArgument>
-                        </udam:DynamicEntityField.ArgumentValue>
-                      </udam:DynamicEntityField>
-                    </scg:List>
-                  </udam:RecordState.SelectedFields>
-                </udam:RecordState>
-              </uda:CreateEntityRecord.State>
-            </uda:CreateEntityRecord>
-          </Sequence>
-        </ActivityAction>
-      </ui:ForEachRow.Body>
-    </ui:ForEachRow>
-    <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[dtPastAssignments]" DisplayName="For Each Row in Data Table" sap:VirtualizedContainerService.HintSize="510,702" sap2010:WorkflowViewState.IdRef="ForEachRow_4">
-      <ui:ForEachRow.Body>
-        <ActivityAction x:TypeArguments="sd:DataRow">
-          <ActivityAction.Argument>
-            <DelegateInArgument x:TypeArguments="sd:DataRow" Name="CurrentRow" />
-          </ActivityAction.Argument>
-          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="376,516" sap2010:WorkflowViewState.IdRef="Sequence_12">
-            <sap:WorkflowViewStateService.ViewState>
-              <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-              </scg:Dictionary>
-            </sap:WorkflowViewStateService.ViewState>
-            <uda:CreateEntityRecord x:TypeArguments="t:TTAssignments" InputEntity="{x:Null}" IsInRecordView="{x:Null}" OutputEntity="{x:Null}" VisibleDynamicPropertiesInfo="{x:Null}" ContinueOnError="False" DisplayName="Create Entity Record" EntityId="e6ce2e0c-af18-ef11-96f5-002248095c31" ExpansionDepth="2" sap:VirtualizedContainerService.HintSize="334,428" sap2010:WorkflowViewState.IdRef="CreateEntityRecord`1_2" InputEntityInFieldView="[new Time_Tracker.TTAssignments() With {  .Project = CurrentRow(&quot;Name&quot;).ToString,  .UserEmail = in_UserEmail,  .AssignedHours = IF(IsNumeric(CurrentRow(&quot;pse__Planned_Hours__c&quot;).ToString),cdec(CurrentRow(&quot;pse__Planned_Hours__c&quot;).ToString),0),  .AssignmentEndDate = cdate(CurrentRow(&quot;pse__End_Date__c&quot;).ToString),  .AssignmentStartDate = cdate(CurrentRow(&quot;pse__Start_Date__c&quot;).ToString),  .ProjectType = &quot;Past&quot; }]" TimeoutInMs="30000">
-              <uda:CreateEntityRecord.State>
-                <udam:RecordState RequiredFieldCount="2">
-                  <udam:RecordState.SelectedFields>
-                    <scg:List x:TypeArguments="udam:DynamicEntityField" Capacity="6">
-                      <udam:DynamicEntityField Id="421e79c9-b018-ef11-96f5-002248095c31" IsRequired="True" Name="Project">
-                        <udam:DynamicEntityField.ArgumentValue>
-                          <InArgument x:TypeArguments="x:String">[CurrentRow("Name").ToString]</InArgument>
-                        </udam:DynamicEntityField.ArgumentValue>
-                      </udam:DynamicEntityField>
-                      <udam:DynamicEntityField Id="3eb73c67-b318-ef11-96f5-002248095c31" IsRequired="True" Name="UserEmail">
-                        <udam:DynamicEntityField.ArgumentValue>
-                          <InArgument x:TypeArguments="x:String">[in_UserEmail]</InArgument>
-                        </udam:DynamicEntityField.ArgumentValue>
-                      </udam:DynamicEntityField>
-                      <udam:DynamicEntityField Id="2f54271f-4919-ef11-96f5-002248095c31" Name="AssignedHours">
-                        <udam:DynamicEntityField.ArgumentValue>
-                          <InArgument x:TypeArguments="x:Decimal">[IF(IsNumeric(CurrentRow("pse__Planned_Hours__c").ToString),cdec(CurrentRow("pse__Planned_Hours__c").ToString),0)]</InArgument>
-                        </udam:DynamicEntityField.ArgumentValue>
-                      </udam:DynamicEntityField>
-                      <udam:DynamicEntityField Id="bb0a1f7e-4d19-ef11-96f5-002248095c31" Name="AssignmentEndDate">
-                        <udam:DynamicEntityField.ArgumentValue>
-                          <InArgument x:TypeArguments="s:DateTime">[cdate(CurrentRow("pse__End_Date__c").ToString)]</InArgument>
-                        </udam:DynamicEntityField.ArgumentValue>
-                      </udam:DynamicEntityField>
-                      <udam:DynamicEntityField Id="ba0a1f7e-4d19-ef11-96f5-002248095c31" Name="AssignmentStartDate">
-                        <udam:DynamicEntityField.ArgumentValue>
-                          <InArgument x:TypeArguments="s:DateTime">[cdate(CurrentRow("pse__Start_Date__c").ToString)]</InArgument>
-                        </udam:DynamicEntityField.ArgumentValue>
-                      </udam:DynamicEntityField>
-                      <udam:DynamicEntityField Id="38ad8f28-4d19-ef11-96f5-002248095c31" Name="ProjectType">
-                        <udam:DynamicEntityField.ArgumentValue>
-                          <InArgument x:TypeArguments="x:String">Past</InArgument>
-                        </udam:DynamicEntityField.ArgumentValue>
-                      </udam:DynamicEntityField>
-                    </scg:List>
-                  </udam:RecordState.SelectedFields>
-                </udam:RecordState>
-              </uda:CreateEntityRecord.State>
-            </uda:CreateEntityRecord>
-          </Sequence>
-        </ActivityAction>
-      </ui:ForEachRow.Body>
-    </ui:ForEachRow>
-    <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[dtGlobal]" DisplayName="For Each Row in Data Table" sap:VirtualizedContainerService.HintSize="510,702" sap2010:WorkflowViewState.IdRef="ForEachRow_5">
-      <ui:ForEachRow.Body>
-        <ActivityAction x:TypeArguments="sd:DataRow">
-          <ActivityAction.Argument>
-            <DelegateInArgument x:TypeArguments="sd:DataRow" Name="CurrentRow" />
-          </ActivityAction.Argument>
-          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="376,516" sap2010:WorkflowViewState.IdRef="Sequence_13">
-            <sap:WorkflowViewStateService.ViewState>
-              <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-              </scg:Dictionary>
-            </sap:WorkflowViewStateService.ViewState>
-            <uda:CreateEntityRecord x:TypeArguments="t:TTAssignments" InputEntity="{x:Null}" IsInRecordView="{x:Null}" OutputEntity="{x:Null}" VisibleDynamicPropertiesInfo="{x:Null}" ContinueOnError="False" DisplayName="Create Entity Record" EntityId="e6ce2e0c-af18-ef11-96f5-002248095c31" ExpansionDepth="2" sap:VirtualizedContainerService.HintSize="334,428" sap2010:WorkflowViewState.IdRef="CreateEntityRecord`1_3" InputEntityInFieldView="[new Time_Tracker.TTAssignments() With {  .Project = CurrentRow(&quot;Name&quot;).ToString,  .UserEmail = in_UserEmail,  .AssignedHours = IF(IsNumeric(CurrentRow(&quot;pse__Planned_Hours__c&quot;).ToString),cdec(CurrentRow(&quot;pse__Planned_Hours__c&quot;).ToString),0),  .AssignmentEndDate = cdate(CurrentRow(&quot;pse__End_Date__c&quot;).ToString),  .AssignmentStartDate = cdate(CurrentRow(&quot;pse__Start_Date__c&quot;).ToString),  .ProjectType = &quot;Global&quot; }]" TimeoutInMs="30000">
-              <uda:CreateEntityRecord.State>
-                <udam:RecordState RequiredFieldCount="2">
-                  <udam:RecordState.SelectedFields>
-                    <scg:List x:TypeArguments="udam:DynamicEntityField" Capacity="6">
-                      <udam:DynamicEntityField Id="421e79c9-b018-ef11-96f5-002248095c31" IsRequired="True" Name="Project">
-                        <udam:DynamicEntityField.ArgumentValue>
-                          <InArgument x:TypeArguments="x:String">[CurrentRow("Name").ToString]</InArgument>
-                        </udam:DynamicEntityField.ArgumentValue>
-                      </udam:DynamicEntityField>
-                      <udam:DynamicEntityField Id="3eb73c67-b318-ef11-96f5-002248095c31" IsRequired="True" Name="UserEmail">
-                        <udam:DynamicEntityField.ArgumentValue>
-                          <InArgument x:TypeArguments="x:String">[in_UserEmail]</InArgument>
-                        </udam:DynamicEntityField.ArgumentValue>
-                      </udam:DynamicEntityField>
-                      <udam:DynamicEntityField Id="2f54271f-4919-ef11-96f5-002248095c31" Name="AssignedHours">
-                        <udam:DynamicEntityField.ArgumentValue>
-                          <InArgument x:TypeArguments="x:Decimal">[IF(IsNumeric(CurrentRow("pse__Planned_Hours__c").ToString),cdec(CurrentRow("pse__Planned_Hours__c").ToString),0)]</InArgument>
-                        </udam:DynamicEntityField.ArgumentValue>
-                      </udam:DynamicEntityField>
-                      <udam:DynamicEntityField Id="bb0a1f7e-4d19-ef11-96f5-002248095c31" Name="AssignmentEndDate">
-                        <udam:DynamicEntityField.ArgumentValue>
-                          <InArgument x:TypeArguments="s:DateTime">[cdate(CurrentRow("pse__End_Date__c").ToString)]</InArgument>
-                        </udam:DynamicEntityField.ArgumentValue>
-                      </udam:DynamicEntityField>
-                      <udam:DynamicEntityField Id="ba0a1f7e-4d19-ef11-96f5-002248095c31" Name="AssignmentStartDate">
-                        <udam:DynamicEntityField.ArgumentValue>
-                          <InArgument x:TypeArguments="s:DateTime">[cdate(CurrentRow("pse__Start_Date__c").ToString)]</InArgument>
-                        </udam:DynamicEntityField.ArgumentValue>
-                      </udam:DynamicEntityField>
-                      <udam:DynamicEntityField Id="38ad8f28-4d19-ef11-96f5-002248095c31" Name="ProjectType">
-                        <udam:DynamicEntityField.ArgumentValue>
-                          <InArgument x:TypeArguments="x:String">Global</InArgument>
-                        </udam:DynamicEntityField.ArgumentValue>
-                      </udam:DynamicEntityField>
-                    </scg:List>
-                  </udam:RecordState.SelectedFields>
-                </udam:RecordState>
-              </uda:CreateEntityRecord.State>
-            </uda:CreateEntityRecord>
-          </Sequence>
-        </ActivityAction>
-      </ui:ForEachRow.Body>
-    </ui:ForEachRow>
+    <If Condition="[in_Update_Type = &quot;Active&quot;]" sap:VirtualizedContainerService.HintSize="510,182" sap2010:WorkflowViewState.IdRef="If_5">
+      <If.Then>
+        <Sequence sap:VirtualizedContainerService.HintSize="528,1909" sap2010:WorkflowViewState.IdRef="Sequence_20">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[dtActiveAssignments]" DisplayName="For Each Row in Data Table" sap:VirtualizedContainerService.HintSize="486,1821" sap2010:WorkflowViewState.IdRef="ForEachRow_3">
+            <ui:ForEachRow.Body>
+              <ActivityAction x:TypeArguments="sd:DataRow">
+                <ActivityAction.Argument>
+                  <DelegateInArgument x:TypeArguments="sd:DataRow" Name="CurrentRow" />
+                </ActivityAction.Argument>
+                <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="452,1635" sap2010:WorkflowViewState.IdRef="Sequence_8">
+                  <Sequence.Variables>
+                    <Variable x:TypeArguments="x:Int64" Name="int_RecCnt" />
+                    <Variable x:TypeArguments="scg:IList(t:TTAssignments)" Name="obj_UpdateRecord" />
+                  </Sequence.Variables>
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <uda:QueryEntityRecords x:TypeArguments="t:TTAssignments" ContinueOnError="False" DisplayName="Query Entity Records" EntityId="e6ce2e0c-af18-ef11-96f5-002248095c31" ExpansionDepth="2" sap:VirtualizedContainerService.HintSize="410,140" sap2010:WorkflowViewState.IdRef="QueryEntityRecords`1_1" OutputRecords="[obj_UpdateRecord]" QueriedEntityId="e6ce2e0c-af18-ef11-96f5-002248095c31" Skip="0" SortAscending="True" SortByField="Id" TimeoutInMs="30000" Top="100" TotalRecords="[int_RecCnt]">
+                    <uda:QueryEntityRecords.FilterArguments>
+                      <uda:FilterArgument FilterActivityType="{x:Null}">
+                        <uda:FilterArgument.Filter>
+                          <uda:GroupFilter Index="0" Operator="AND">
+                            <uda:GroupFilter.Filters>
+                              <scg:List x:TypeArguments="uda:SimpleFilter" Capacity="4">
+                                <uda:SimpleFilter ExpressionValue="{x:Null}" FieldName="UserEmail" FieldType="UiPath.DataService.Core.Models.EntityField" Operator="=" ValueIndex="0" />
+                                <uda:SimpleFilter ExpressionValue="{x:Null}" FieldName="AssignmentID" FieldType="UiPath.DataService.Core.Models.EntityField" Operator="=" ValueIndex="1" />
+                                <uda:SimpleFilter ExpressionValue="{x:Null}" FieldName="ProjectType" FieldType="UiPath.DataService.Core.Models.EntityField" Operator="=" ValueIndex="2" />
+                              </scg:List>
+                            </uda:GroupFilter.Filters>
+                            <uda:GroupFilter.Groups>
+                              <scg:List x:TypeArguments="uda:GroupFilter" Capacity="0" />
+                            </uda:GroupFilter.Groups>
+                          </uda:GroupFilter>
+                        </uda:FilterArgument.Filter>
+                      </uda:FilterArgument>
+                    </uda:QueryEntityRecords.FilterArguments>
+                    <uda:QueryEntityRecords.FilterValues>
+                      <scg:List x:TypeArguments="InArgument" Capacity="4">
+                        <InArgument x:TypeArguments="x:String">[in_UserEmail]</InArgument>
+                        <InArgument x:TypeArguments="x:String">[CurrentRow("Id").ToString]</InArgument>
+                        <InArgument x:TypeArguments="x:String">Active</InArgument>
+                      </scg:List>
+                    </uda:QueryEntityRecords.FilterValues>
+                  </uda:QueryEntityRecords>
+                  <If Condition="[int_RecCnt &gt; 0]" sap:VirtualizedContainerService.HintSize="410,1367" sap2010:WorkflowViewState.IdRef="If_2">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <If.Then>
+                      <Sequence sap:VirtualizedContainerService.HintSize="376,516" sap2010:WorkflowViewState.IdRef="Sequence_14">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <uda:UpdateEntityRecord x:TypeArguments="t:TTAssignments" InputEntity="{x:Null}" OutputEntity="{x:Null}" VisibleDynamicPropertiesInfo="{x:Null}" ContinueOnError="False" DisplayName="Update Entity Record" EntityId="e6ce2e0c-af18-ef11-96f5-002248095c31" ExpansionDepth="2" sap:VirtualizedContainerService.HintSize="334,428" sap2010:WorkflowViewState.IdRef="UpdateEntityRecord`1_1" InputEntityInFieldView="[new Time_Tracker.TTAssignments() With {  .AssignedHours = if(dtActiveAssignments.Columns.Contains(&quot;pse__Planned_Hours__c&quot;),IF(IsNumeric(CurrentRow(&quot;pse__Planned_Hours__c&quot;).ToString),cdec(CurrentRow(&quot;pse__Planned_Hours__c&quot;).ToString),0),0),  .AssignmentEndDate = cdate(CurrentRow(&quot;pse__End_Date__c&quot;).ToString),  .AssignmentStartDate = cdate(CurrentRow(&quot;pse__Start_Date__c&quot;).ToString),  .RemainingHours = If(dtActiveAssignments.Columns.Contains(&quot;Remaining_Hours__c&quot;),If(IsNumeric(CurrentRow(&quot;Remaining_Hours__c&quot;).ToString),CDec(CurrentRow(&quot;Remaining_Hours__c&quot;).ToString),0),0),  .SubmittedHours = If(dtActiveAssignments.Columns.Contains(&quot;pse__Billable_Hours_Submitted__c&quot;),If(IsNumeric(CurrentRow(&quot;pse__Billable_Hours_Submitted__c&quot;).ToString),CDec(CurrentRow(&quot;pse__Billable_Hours_Submitted__c&quot;).ToString),0),0), .Id = obj_UpdateRecord(0).Id }]" IsInRecordView="False" RecordId="[obj_UpdateRecord(0).Id]" TimeoutInMs="30000">
+                          <uda:UpdateEntityRecord.State>
+                            <udam:RecordState RequiredFieldCount="3">
+                              <udam:RecordState.SelectedFields>
+                                <scg:List x:TypeArguments="udam:DynamicEntityField" Capacity="5">
+                                  <udam:DynamicEntityField Id="2f54271f-4919-ef11-96f5-002248095c31" Name="AssignedHours">
+                                    <udam:DynamicEntityField.ArgumentValue>
+                                      <InArgument x:TypeArguments="x:Decimal">[if(dtActiveAssignments.Columns.Contains("pse__Planned_Hours__c"),IF(IsNumeric(CurrentRow("pse__Planned_Hours__c").ToString),cdec(CurrentRow("pse__Planned_Hours__c").ToString),0),0)]</InArgument>
+                                    </udam:DynamicEntityField.ArgumentValue>
+                                  </udam:DynamicEntityField>
+                                  <udam:DynamicEntityField Id="bb0a1f7e-4d19-ef11-96f5-002248095c31" Name="AssignmentEndDate">
+                                    <udam:DynamicEntityField.ArgumentValue>
+                                      <InArgument x:TypeArguments="s:DateTime">[cdate(CurrentRow("pse__End_Date__c").ToString)]</InArgument>
+                                    </udam:DynamicEntityField.ArgumentValue>
+                                  </udam:DynamicEntityField>
+                                  <udam:DynamicEntityField Id="ba0a1f7e-4d19-ef11-96f5-002248095c31" Name="AssignmentStartDate">
+                                    <udam:DynamicEntityField.ArgumentValue>
+                                      <InArgument x:TypeArguments="s:DateTime">[cdate(CurrentRow("pse__Start_Date__c").ToString)]</InArgument>
+                                    </udam:DynamicEntityField.ArgumentValue>
+                                  </udam:DynamicEntityField>
+                                  <udam:DynamicEntityField Id="6b0bf762-5d19-ef11-96f5-002248095c31" Name="RemainingHours">
+                                    <udam:DynamicEntityField.ArgumentValue>
+                                      <InArgument x:TypeArguments="x:Decimal">[If(dtActiveAssignments.Columns.Contains("Remaining_Hours__c"),If(IsNumeric(CurrentRow("Remaining_Hours__c").ToString),CDec(CurrentRow("Remaining_Hours__c").ToString),0),0)]</InArgument>
+                                    </udam:DynamicEntityField.ArgumentValue>
+                                  </udam:DynamicEntityField>
+                                  <udam:DynamicEntityField Id="26a28198-6019-ef11-96f5-002248095c31" Name="SubmittedHours">
+                                    <udam:DynamicEntityField.ArgumentValue>
+                                      <InArgument x:TypeArguments="x:Decimal">[If(dtActiveAssignments.Columns.Contains("pse__Billable_Hours_Submitted__c"),If(IsNumeric(CurrentRow("pse__Billable_Hours_Submitted__c").ToString),CDec(CurrentRow("pse__Billable_Hours_Submitted__c").ToString),0),0)]</InArgument>
+                                    </udam:DynamicEntityField.ArgumentValue>
+                                  </udam:DynamicEntityField>
+                                </scg:List>
+                              </udam:RecordState.SelectedFields>
+                            </udam:RecordState>
+                          </uda:UpdateEntityRecord.State>
+                        </uda:UpdateEntityRecord>
+                      </Sequence>
+                    </If.Then>
+                    <If.Else>
+                      <Sequence sap:VirtualizedContainerService.HintSize="376,669" sap2010:WorkflowViewState.IdRef="Sequence_15">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <uda:CreateEntityRecord x:TypeArguments="t:TTAssignments" InputEntity="{x:Null}" IsInRecordView="{x:Null}" OutputEntity="{x:Null}" VisibleDynamicPropertiesInfo="{x:Null}" ContinueOnError="False" DisplayName="Create Entity Record" EntityId="e6ce2e0c-af18-ef11-96f5-002248095c31" ExpansionDepth="2" sap:VirtualizedContainerService.HintSize="334,581" sap2010:WorkflowViewState.IdRef="CreateEntityRecord`1_1" InputEntityInFieldView="[new Time_Tracker.TTAssignments() With {  .AssignmentID = CurrentRow(&quot;Id&quot;).ToString,  .Project = CurrentRow(&quot;Name&quot;).ToString,  .UserEmail = in_UserEmail,  .AssignedHours = if(dtActiveAssignments.Columns.Contains(&quot;pse__Planned_Hours__c&quot;),IF(IsNumeric(CurrentRow(&quot;pse__Planned_Hours__c&quot;).ToString),cdec(CurrentRow(&quot;pse__Planned_Hours__c&quot;).ToString),0),0),  .AssignmentEndDate = cdate(CurrentRow(&quot;pse__End_Date__c&quot;).ToString),  .AssignmentStartDate = cdate(CurrentRow(&quot;pse__Start_Date__c&quot;).ToString),  .ProjectType = &quot;Active&quot;,  .RemainingHours = If(dtActiveAssignments.Columns.Contains(&quot;Remaining_Hours__c&quot;),If(IsNumeric(CurrentRow(&quot;Remaining_Hours__c&quot;).ToString),CDec(CurrentRow(&quot;Remaining_Hours__c&quot;).ToString),0),0),  .SubmittedHours = If(dtActiveAssignments.Columns.Contains(&quot;pse__Billable_Hours_Submitted__c&quot;),If(IsNumeric(CurrentRow(&quot;pse__Billable_Hours_Submitted__c&quot;).ToString),CDec(CurrentRow(&quot;pse__Billable_Hours_Submitted__c&quot;).ToString),0),0) }]" TimeoutInMs="30000">
+                          <uda:CreateEntityRecord.State>
+                            <udam:RecordState RequiredFieldCount="3">
+                              <udam:RecordState.SelectedFields>
+                                <scg:List x:TypeArguments="udam:DynamicEntityField" Capacity="9">
+                                  <udam:DynamicEntityField Id="2297686c-5d19-ef11-96f5-002248095c31" IsRequired="True" Name="AssignmentID">
+                                    <udam:DynamicEntityField.ArgumentValue>
+                                      <InArgument x:TypeArguments="x:String">[CurrentRow("Id").ToString]</InArgument>
+                                    </udam:DynamicEntityField.ArgumentValue>
+                                  </udam:DynamicEntityField>
+                                  <udam:DynamicEntityField Id="421e79c9-b018-ef11-96f5-002248095c31" IsRequired="True" Name="Project">
+                                    <udam:DynamicEntityField.ArgumentValue>
+                                      <InArgument x:TypeArguments="x:String">[CurrentRow("Name").ToString]</InArgument>
+                                    </udam:DynamicEntityField.ArgumentValue>
+                                  </udam:DynamicEntityField>
+                                  <udam:DynamicEntityField Id="3eb73c67-b318-ef11-96f5-002248095c31" IsRequired="True" Name="UserEmail">
+                                    <udam:DynamicEntityField.ArgumentValue>
+                                      <InArgument x:TypeArguments="x:String">[in_UserEmail]</InArgument>
+                                    </udam:DynamicEntityField.ArgumentValue>
+                                  </udam:DynamicEntityField>
+                                  <udam:DynamicEntityField Id="2f54271f-4919-ef11-96f5-002248095c31" Name="AssignedHours">
+                                    <udam:DynamicEntityField.ArgumentValue>
+                                      <InArgument x:TypeArguments="x:Decimal">[if(dtActiveAssignments.Columns.Contains("pse__Planned_Hours__c"),IF(IsNumeric(CurrentRow("pse__Planned_Hours__c").ToString),cdec(CurrentRow("pse__Planned_Hours__c").ToString),0),0)]</InArgument>
+                                    </udam:DynamicEntityField.ArgumentValue>
+                                  </udam:DynamicEntityField>
+                                  <udam:DynamicEntityField Id="bb0a1f7e-4d19-ef11-96f5-002248095c31" Name="AssignmentEndDate">
+                                    <udam:DynamicEntityField.ArgumentValue>
+                                      <InArgument x:TypeArguments="s:DateTime">[cdate(CurrentRow("pse__End_Date__c").ToString)]</InArgument>
+                                    </udam:DynamicEntityField.ArgumentValue>
+                                  </udam:DynamicEntityField>
+                                  <udam:DynamicEntityField Id="ba0a1f7e-4d19-ef11-96f5-002248095c31" Name="AssignmentStartDate">
+                                    <udam:DynamicEntityField.ArgumentValue>
+                                      <InArgument x:TypeArguments="s:DateTime">[cdate(CurrentRow("pse__Start_Date__c").ToString)]</InArgument>
+                                    </udam:DynamicEntityField.ArgumentValue>
+                                  </udam:DynamicEntityField>
+                                  <udam:DynamicEntityField Id="38ad8f28-4d19-ef11-96f5-002248095c31" Name="ProjectType">
+                                    <udam:DynamicEntityField.ArgumentValue>
+                                      <InArgument x:TypeArguments="x:String">Active</InArgument>
+                                    </udam:DynamicEntityField.ArgumentValue>
+                                  </udam:DynamicEntityField>
+                                  <udam:DynamicEntityField Id="6b0bf762-5d19-ef11-96f5-002248095c31" Name="RemainingHours">
+                                    <udam:DynamicEntityField.ArgumentValue>
+                                      <InArgument x:TypeArguments="x:Decimal">[If(dtActiveAssignments.Columns.Contains("Remaining_Hours__c"),If(IsNumeric(CurrentRow("Remaining_Hours__c").ToString),CDec(CurrentRow("Remaining_Hours__c").ToString),0),0)]</InArgument>
+                                    </udam:DynamicEntityField.ArgumentValue>
+                                  </udam:DynamicEntityField>
+                                  <udam:DynamicEntityField Id="26a28198-6019-ef11-96f5-002248095c31" Name="SubmittedHours">
+                                    <udam:DynamicEntityField.ArgumentValue>
+                                      <InArgument x:TypeArguments="x:Decimal">[If(dtActiveAssignments.Columns.Contains("pse__Billable_Hours_Submitted__c"),If(IsNumeric(CurrentRow("pse__Billable_Hours_Submitted__c").ToString),CDec(CurrentRow("pse__Billable_Hours_Submitted__c").ToString),0),0)]</InArgument>
+                                    </udam:DynamicEntityField.ArgumentValue>
+                                  </udam:DynamicEntityField>
+                                </scg:List>
+                              </udam:RecordState.SelectedFields>
+                            </udam:RecordState>
+                          </uda:CreateEntityRecord.State>
+                        </uda:CreateEntityRecord>
+                      </Sequence>
+                    </If.Else>
+                  </If>
+                </Sequence>
+              </ActivityAction>
+            </ui:ForEachRow.Body>
+          </ui:ForEachRow>
+        </Sequence>
+      </If.Then>
+      <If.Else>
+        <Sequence sap2010:WorkflowViewState.IdRef="Sequence_21" />
+      </If.Else>
+    </If>
+    <If Condition="[in_Update_Type = &quot;Past&quot;]" sap:VirtualizedContainerService.HintSize="510,182" sap2010:WorkflowViewState.IdRef="If_6">
+      <If.Then>
+        <Sequence sap:VirtualizedContainerService.HintSize="528,1909" sap2010:WorkflowViewState.IdRef="Sequence_22">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[dtPastAssignments]" DisplayName="For Each Row in Data Table" sap:VirtualizedContainerService.HintSize="486,1821" sap2010:WorkflowViewState.IdRef="ForEachRow_4">
+            <ui:ForEachRow.Body>
+              <ActivityAction x:TypeArguments="sd:DataRow">
+                <ActivityAction.Argument>
+                  <DelegateInArgument x:TypeArguments="sd:DataRow" Name="CurrentRow" />
+                </ActivityAction.Argument>
+                <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="452,1635" sap2010:WorkflowViewState.IdRef="Sequence_12">
+                  <Sequence.Variables>
+                    <Variable x:TypeArguments="x:Int64" Name="int_RecCnt" />
+                    <Variable x:TypeArguments="scg:IList(t:TTAssignments)" Name="obj_UpdateRecord" />
+                  </Sequence.Variables>
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <uda:QueryEntityRecords x:TypeArguments="t:TTAssignments" ContinueOnError="False" DisplayName="Query Entity Records" EntityId="e6ce2e0c-af18-ef11-96f5-002248095c31" ExpansionDepth="2" sap:VirtualizedContainerService.HintSize="410,140" sap2010:WorkflowViewState.IdRef="QueryEntityRecords`1_2" OutputRecords="[obj_UpdateRecord]" QueriedEntityId="e6ce2e0c-af18-ef11-96f5-002248095c31" Skip="0" SortAscending="True" SortByField="Id" TimeoutInMs="30000" Top="100" TotalRecords="[int_RecCnt]">
+                    <uda:QueryEntityRecords.FilterArguments>
+                      <uda:FilterArgument FilterActivityType="{x:Null}">
+                        <uda:FilterArgument.Filter>
+                          <uda:GroupFilter Index="0" Operator="AND">
+                            <uda:GroupFilter.Filters>
+                              <scg:List x:TypeArguments="uda:SimpleFilter" Capacity="4">
+                                <uda:SimpleFilter ExpressionValue="{x:Null}" FieldName="UserEmail" FieldType="UiPath.DataService.Core.Models.EntityField" Operator="=" ValueIndex="0" />
+                                <uda:SimpleFilter ExpressionValue="{x:Null}" FieldName="AssignmentID" FieldType="UiPath.DataService.Core.Models.EntityField" Operator="=" ValueIndex="1" />
+                                <uda:SimpleFilter ExpressionValue="{x:Null}" FieldName="ProjectType" FieldType="UiPath.DataService.Core.Models.EntityField" Operator="=" ValueIndex="2" />
+                              </scg:List>
+                            </uda:GroupFilter.Filters>
+                            <uda:GroupFilter.Groups>
+                              <scg:List x:TypeArguments="uda:GroupFilter" Capacity="0" />
+                            </uda:GroupFilter.Groups>
+                          </uda:GroupFilter>
+                        </uda:FilterArgument.Filter>
+                      </uda:FilterArgument>
+                    </uda:QueryEntityRecords.FilterArguments>
+                    <uda:QueryEntityRecords.FilterValues>
+                      <scg:List x:TypeArguments="InArgument" Capacity="4">
+                        <InArgument x:TypeArguments="x:String">[in_UserEmail]</InArgument>
+                        <InArgument x:TypeArguments="x:String">[CurrentRow("Id").ToString]</InArgument>
+                        <InArgument x:TypeArguments="x:String">Past</InArgument>
+                      </scg:List>
+                    </uda:QueryEntityRecords.FilterValues>
+                  </uda:QueryEntityRecords>
+                  <If Condition="[int_RecCnt &gt;0]" sap:VirtualizedContainerService.HintSize="410,1367" sap2010:WorkflowViewState.IdRef="If_3">
+                    <If.Then>
+                      <Sequence sap:VirtualizedContainerService.HintSize="376,516" sap2010:WorkflowViewState.IdRef="Sequence_16">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <uda:UpdateEntityRecord x:TypeArguments="t:TTAssignments" InputEntity="{x:Null}" OutputEntity="{x:Null}" VisibleDynamicPropertiesInfo="{x:Null}" ContinueOnError="False" DisplayName="Update Entity Record" EntityId="e6ce2e0c-af18-ef11-96f5-002248095c31" ExpansionDepth="2" sap:VirtualizedContainerService.HintSize="334,428" sap2010:WorkflowViewState.IdRef="UpdateEntityRecord`1_2" InputEntityInFieldView="[new Time_Tracker.TTAssignments() With {  .AssignedHours = if(dtPastAssignments.Columns.Contains(&quot;pse__Planned_Hours__c&quot;),IF(IsNumeric(CurrentRow(&quot;pse__Planned_Hours__c&quot;).ToString),cdec(CurrentRow(&quot;pse__Planned_Hours__c&quot;).ToString),0),0),  .AssignmentEndDate = cdate(CurrentRow(&quot;pse__End_Date__c&quot;).ToString),  .AssignmentStartDate = cdate(CurrentRow(&quot;pse__Start_Date__c&quot;).ToString),  .RemainingHours = If(dtPastAssignments.Columns.Contains(&quot;Remaining_Hours__c&quot;),If(IsNumeric(CurrentRow(&quot;Remaining_Hours__c&quot;).ToString),CDec(CurrentRow(&quot;Remaining_Hours__c&quot;).ToString),0),0),  .SubmittedHours = If(dtPastAssignments.Columns.Contains(&quot;pse__Billable_Hours_Submitted__c&quot;),If(IsNumeric(CurrentRow(&quot;pse__Billable_Hours_Submitted__c&quot;).ToString),CDec(CurrentRow(&quot;pse__Billable_Hours_Submitted__c&quot;).ToString),0),0), .Id = obj_UpdateRecord(0).Id }]" IsInRecordView="False" RecordId="[obj_UpdateRecord(0).Id]" TimeoutInMs="30000">
+                          <uda:UpdateEntityRecord.State>
+                            <udam:RecordState RequiredFieldCount="3">
+                              <udam:RecordState.SelectedFields>
+                                <scg:List x:TypeArguments="udam:DynamicEntityField" Capacity="5">
+                                  <udam:DynamicEntityField Id="2f54271f-4919-ef11-96f5-002248095c31" Name="AssignedHours">
+                                    <udam:DynamicEntityField.ArgumentValue>
+                                      <InArgument x:TypeArguments="x:Decimal">[if(dtPastAssignments.Columns.Contains("pse__Planned_Hours__c"),IF(IsNumeric(CurrentRow("pse__Planned_Hours__c").ToString),cdec(CurrentRow("pse__Planned_Hours__c").ToString),0),0)]</InArgument>
+                                    </udam:DynamicEntityField.ArgumentValue>
+                                  </udam:DynamicEntityField>
+                                  <udam:DynamicEntityField Id="bb0a1f7e-4d19-ef11-96f5-002248095c31" Name="AssignmentEndDate">
+                                    <udam:DynamicEntityField.ArgumentValue>
+                                      <InArgument x:TypeArguments="s:DateTime">[cdate(CurrentRow("pse__End_Date__c").ToString)]</InArgument>
+                                    </udam:DynamicEntityField.ArgumentValue>
+                                  </udam:DynamicEntityField>
+                                  <udam:DynamicEntityField Id="ba0a1f7e-4d19-ef11-96f5-002248095c31" Name="AssignmentStartDate">
+                                    <udam:DynamicEntityField.ArgumentValue>
+                                      <InArgument x:TypeArguments="s:DateTime">[cdate(CurrentRow("pse__Start_Date__c").ToString)]</InArgument>
+                                    </udam:DynamicEntityField.ArgumentValue>
+                                  </udam:DynamicEntityField>
+                                  <udam:DynamicEntityField Id="6b0bf762-5d19-ef11-96f5-002248095c31" Name="RemainingHours">
+                                    <udam:DynamicEntityField.ArgumentValue>
+                                      <InArgument x:TypeArguments="x:Decimal">[If(dtPastAssignments.Columns.Contains("Remaining_Hours__c"),If(IsNumeric(CurrentRow("Remaining_Hours__c").ToString),CDec(CurrentRow("Remaining_Hours__c").ToString),0),0)]</InArgument>
+                                    </udam:DynamicEntityField.ArgumentValue>
+                                  </udam:DynamicEntityField>
+                                  <udam:DynamicEntityField Id="26a28198-6019-ef11-96f5-002248095c31" Name="SubmittedHours">
+                                    <udam:DynamicEntityField.ArgumentValue>
+                                      <InArgument x:TypeArguments="x:Decimal">[If(dtPastAssignments.Columns.Contains("pse__Billable_Hours_Submitted__c"),If(IsNumeric(CurrentRow("pse__Billable_Hours_Submitted__c").ToString),CDec(CurrentRow("pse__Billable_Hours_Submitted__c").ToString),0),0)]</InArgument>
+                                    </udam:DynamicEntityField.ArgumentValue>
+                                  </udam:DynamicEntityField>
+                                </scg:List>
+                              </udam:RecordState.SelectedFields>
+                            </udam:RecordState>
+                          </uda:UpdateEntityRecord.State>
+                        </uda:UpdateEntityRecord>
+                      </Sequence>
+                    </If.Then>
+                    <If.Else>
+                      <Sequence sap:VirtualizedContainerService.HintSize="376,669" sap2010:WorkflowViewState.IdRef="Sequence_17">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <uda:CreateEntityRecord x:TypeArguments="t:TTAssignments" InputEntity="{x:Null}" IsInRecordView="{x:Null}" OutputEntity="{x:Null}" VisibleDynamicPropertiesInfo="{x:Null}" ContinueOnError="False" DisplayName="Create Entity Record" EntityId="e6ce2e0c-af18-ef11-96f5-002248095c31" ExpansionDepth="2" sap:VirtualizedContainerService.HintSize="334,581" sap2010:WorkflowViewState.IdRef="CreateEntityRecord`1_2" InputEntityInFieldView="[new Time_Tracker.TTAssignments() With {  .AssignmentID = CurrentRow(&quot;Id&quot;).ToString,  .Project = CurrentRow(&quot;Name&quot;).ToString,  .UserEmail = in_UserEmail,  .AssignedHours = if(dtPastAssignments.Columns.Contains(&quot;pse__Planned_Hours__c&quot;),IF(IsNumeric(CurrentRow(&quot;pse__Planned_Hours__c&quot;).ToString),cdec(CurrentRow(&quot;pse__Planned_Hours__c&quot;).ToString),0),0),  .AssignmentEndDate = cdate(CurrentRow(&quot;pse__End_Date__c&quot;).ToString),  .AssignmentStartDate = cdate(CurrentRow(&quot;pse__Start_Date__c&quot;).ToString),  .ProjectType = &quot;Past&quot;,  .RemainingHours = If(dtPastAssignments.Columns.Contains(&quot;Remaining_Hours__c&quot;),If(IsNumeric(CurrentRow(&quot;Remaining_Hours__c&quot;).ToString),CDec(CurrentRow(&quot;Remaining_Hours__c&quot;).ToString),0),0),  .SubmittedHours = If(dtPastAssignments.Columns.Contains(&quot;pse__Billable_Hours_Submitted__c&quot;),If(IsNumeric(CurrentRow(&quot;pse__Billable_Hours_Submitted__c&quot;).ToString),CDec(CurrentRow(&quot;pse__Billable_Hours_Submitted__c&quot;).ToString),0),0) }]" TimeoutInMs="30000">
+                          <uda:CreateEntityRecord.State>
+                            <udam:RecordState RequiredFieldCount="3">
+                              <udam:RecordState.SelectedFields>
+                                <scg:List x:TypeArguments="udam:DynamicEntityField" Capacity="9">
+                                  <udam:DynamicEntityField Id="2297686c-5d19-ef11-96f5-002248095c31" IsRequired="True" Name="AssignmentID">
+                                    <udam:DynamicEntityField.ArgumentValue>
+                                      <InArgument x:TypeArguments="x:String">[CurrentRow("Id").ToString]</InArgument>
+                                    </udam:DynamicEntityField.ArgumentValue>
+                                  </udam:DynamicEntityField>
+                                  <udam:DynamicEntityField Id="421e79c9-b018-ef11-96f5-002248095c31" IsRequired="True" Name="Project">
+                                    <udam:DynamicEntityField.ArgumentValue>
+                                      <InArgument x:TypeArguments="x:String">[CurrentRow("Name").ToString]</InArgument>
+                                    </udam:DynamicEntityField.ArgumentValue>
+                                  </udam:DynamicEntityField>
+                                  <udam:DynamicEntityField Id="3eb73c67-b318-ef11-96f5-002248095c31" IsRequired="True" Name="UserEmail">
+                                    <udam:DynamicEntityField.ArgumentValue>
+                                      <InArgument x:TypeArguments="x:String">[in_UserEmail]</InArgument>
+                                    </udam:DynamicEntityField.ArgumentValue>
+                                  </udam:DynamicEntityField>
+                                  <udam:DynamicEntityField Id="2f54271f-4919-ef11-96f5-002248095c31" Name="AssignedHours">
+                                    <udam:DynamicEntityField.ArgumentValue>
+                                      <InArgument x:TypeArguments="x:Decimal">[if(dtPastAssignments.Columns.Contains("pse__Planned_Hours__c"),IF(IsNumeric(CurrentRow("pse__Planned_Hours__c").ToString),cdec(CurrentRow("pse__Planned_Hours__c").ToString),0),0)]</InArgument>
+                                    </udam:DynamicEntityField.ArgumentValue>
+                                  </udam:DynamicEntityField>
+                                  <udam:DynamicEntityField Id="bb0a1f7e-4d19-ef11-96f5-002248095c31" Name="AssignmentEndDate">
+                                    <udam:DynamicEntityField.ArgumentValue>
+                                      <InArgument x:TypeArguments="s:DateTime">[cdate(CurrentRow("pse__End_Date__c").ToString)]</InArgument>
+                                    </udam:DynamicEntityField.ArgumentValue>
+                                  </udam:DynamicEntityField>
+                                  <udam:DynamicEntityField Id="ba0a1f7e-4d19-ef11-96f5-002248095c31" Name="AssignmentStartDate">
+                                    <udam:DynamicEntityField.ArgumentValue>
+                                      <InArgument x:TypeArguments="s:DateTime">[cdate(CurrentRow("pse__Start_Date__c").ToString)]</InArgument>
+                                    </udam:DynamicEntityField.ArgumentValue>
+                                  </udam:DynamicEntityField>
+                                  <udam:DynamicEntityField Id="38ad8f28-4d19-ef11-96f5-002248095c31" Name="ProjectType">
+                                    <udam:DynamicEntityField.ArgumentValue>
+                                      <InArgument x:TypeArguments="x:String">Past</InArgument>
+                                    </udam:DynamicEntityField.ArgumentValue>
+                                  </udam:DynamicEntityField>
+                                  <udam:DynamicEntityField Id="6b0bf762-5d19-ef11-96f5-002248095c31" Name="RemainingHours">
+                                    <udam:DynamicEntityField.ArgumentValue>
+                                      <InArgument x:TypeArguments="x:Decimal">[If(dtPastAssignments.Columns.Contains("Remaining_Hours__c"),If(IsNumeric(CurrentRow("Remaining_Hours__c").ToString),CDec(CurrentRow("Remaining_Hours__c").ToString),0),0)]</InArgument>
+                                    </udam:DynamicEntityField.ArgumentValue>
+                                  </udam:DynamicEntityField>
+                                  <udam:DynamicEntityField Id="26a28198-6019-ef11-96f5-002248095c31" Name="SubmittedHours">
+                                    <udam:DynamicEntityField.ArgumentValue>
+                                      <InArgument x:TypeArguments="x:Decimal">[If(dtPastAssignments.Columns.Contains("pse__Billable_Hours_Submitted__c"),If(IsNumeric(CurrentRow("pse__Billable_Hours_Submitted__c").ToString),CDec(CurrentRow("pse__Billable_Hours_Submitted__c").ToString),0),0)]</InArgument>
+                                    </udam:DynamicEntityField.ArgumentValue>
+                                  </udam:DynamicEntityField>
+                                </scg:List>
+                              </udam:RecordState.SelectedFields>
+                            </udam:RecordState>
+                          </uda:CreateEntityRecord.State>
+                        </uda:CreateEntityRecord>
+                      </Sequence>
+                    </If.Else>
+                  </If>
+                </Sequence>
+              </ActivityAction>
+            </ui:ForEachRow.Body>
+          </ui:ForEachRow>
+        </Sequence>
+      </If.Then>
+      <If.Else>
+        <Sequence sap2010:WorkflowViewState.IdRef="Sequence_23" />
+      </If.Else>
+    </If>
+    <If Condition="[in_Update_Type = &quot;Global&quot;]" sap:VirtualizedContainerService.HintSize="510,182" sap2010:WorkflowViewState.IdRef="If_7">
+      <If.Then>
+        <Sequence sap:VirtualizedContainerService.HintSize="528,1909" sap2010:WorkflowViewState.IdRef="Sequence_24">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[dtGlobal]" DisplayName="For Each Row in Data Table" sap:VirtualizedContainerService.HintSize="486,1821" sap2010:WorkflowViewState.IdRef="ForEachRow_5">
+            <ui:ForEachRow.Body>
+              <ActivityAction x:TypeArguments="sd:DataRow">
+                <ActivityAction.Argument>
+                  <DelegateInArgument x:TypeArguments="sd:DataRow" Name="CurrentRow" />
+                </ActivityAction.Argument>
+                <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="452,1635" sap2010:WorkflowViewState.IdRef="Sequence_13">
+                  <Sequence.Variables>
+                    <Variable x:TypeArguments="x:Int64" Name="int_RecCnt" />
+                    <Variable x:TypeArguments="scg:IList(t:TTAssignments)" Name="obj_UpdateRecord" />
+                  </Sequence.Variables>
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <uda:QueryEntityRecords x:TypeArguments="t:TTAssignments" ContinueOnError="False" DisplayName="Query Entity Records" EntityId="e6ce2e0c-af18-ef11-96f5-002248095c31" ExpansionDepth="2" sap:VirtualizedContainerService.HintSize="410,140" sap2010:WorkflowViewState.IdRef="QueryEntityRecords`1_3" OutputRecords="[obj_UpdateRecord]" QueriedEntityId="e6ce2e0c-af18-ef11-96f5-002248095c31" Skip="0" SortAscending="True" SortByField="Id" TimeoutInMs="30000" Top="100" TotalRecords="[int_RecCnt]">
+                    <uda:QueryEntityRecords.FilterArguments>
+                      <uda:FilterArgument FilterActivityType="{x:Null}">
+                        <uda:FilterArgument.Filter>
+                          <uda:GroupFilter Index="0" Operator="AND">
+                            <uda:GroupFilter.Filters>
+                              <scg:List x:TypeArguments="uda:SimpleFilter" Capacity="4">
+                                <uda:SimpleFilter ExpressionValue="{x:Null}" FieldName="UserEmail" FieldType="UiPath.DataService.Core.Models.EntityField" Operator="=" ValueIndex="0" />
+                                <uda:SimpleFilter ExpressionValue="{x:Null}" FieldName="AssignmentID" FieldType="UiPath.DataService.Core.Models.EntityField" Operator="=" ValueIndex="1" />
+                                <uda:SimpleFilter ExpressionValue="{x:Null}" FieldName="ProjectType" FieldType="UiPath.DataService.Core.Models.EntityField" Operator="=" ValueIndex="2" />
+                              </scg:List>
+                            </uda:GroupFilter.Filters>
+                            <uda:GroupFilter.Groups>
+                              <scg:List x:TypeArguments="uda:GroupFilter" Capacity="0" />
+                            </uda:GroupFilter.Groups>
+                          </uda:GroupFilter>
+                        </uda:FilterArgument.Filter>
+                      </uda:FilterArgument>
+                    </uda:QueryEntityRecords.FilterArguments>
+                    <uda:QueryEntityRecords.FilterValues>
+                      <scg:List x:TypeArguments="InArgument" Capacity="4">
+                        <InArgument x:TypeArguments="x:String">[in_UserEmail]</InArgument>
+                        <InArgument x:TypeArguments="x:String">[CurrentRow("Id").ToString]</InArgument>
+                        <InArgument x:TypeArguments="x:String">Global</InArgument>
+                      </scg:List>
+                    </uda:QueryEntityRecords.FilterValues>
+                  </uda:QueryEntityRecords>
+                  <If Condition="[int_RecCnt &gt; 0]" sap:VirtualizedContainerService.HintSize="410,1367" sap2010:WorkflowViewState.IdRef="If_4">
+                    <If.Then>
+                      <Sequence sap:VirtualizedContainerService.HintSize="376,516" sap2010:WorkflowViewState.IdRef="Sequence_18">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <uda:UpdateEntityRecord x:TypeArguments="t:TTAssignments" InputEntity="{x:Null}" OutputEntity="{x:Null}" VisibleDynamicPropertiesInfo="{x:Null}" ContinueOnError="False" DisplayName="Update Entity Record" EntityId="e6ce2e0c-af18-ef11-96f5-002248095c31" ExpansionDepth="2" sap:VirtualizedContainerService.HintSize="334,428" sap2010:WorkflowViewState.IdRef="UpdateEntityRecord`1_3" InputEntityInFieldView="[new Time_Tracker.TTAssignments() With {  .AssignedHours = if(dtGlobal.Columns.Contains(&quot;pse__Planned_Hours__c&quot;),IF(IsNumeric(CurrentRow(&quot;pse__Planned_Hours__c&quot;).ToString),cdec(CurrentRow(&quot;pse__Planned_Hours__c&quot;).ToString),0),0),  .AssignmentEndDate = cdate(CurrentRow(&quot;pse__End_Date__c&quot;).ToString),  .AssignmentStartDate = cdate(CurrentRow(&quot;pse__Start_Date__c&quot;).ToString),  .RemainingHours = If(dtGlobal.Columns.Contains(&quot;Remaining_Hours__c&quot;),If(IsNumeric(CurrentRow(&quot;Remaining_Hours__c&quot;).ToString),CDec(CurrentRow(&quot;Remaining_Hours__c&quot;).ToString),0),0),  .SubmittedHours = If(dtGlobal.Columns.Contains(&quot;pse__Billable_Hours_Submitted__c&quot;),If(IsNumeric(CurrentRow(&quot;pse__Billable_Hours_Submitted__c&quot;).ToString),CDec(CurrentRow(&quot;pse__Billable_Hours_Submitted__c&quot;).ToString),0),0), .Id = obj_UpdateRecord(0).Id }]" IsInRecordView="False" RecordId="[obj_UpdateRecord(0).Id]" TimeoutInMs="30000">
+                          <uda:UpdateEntityRecord.State>
+                            <udam:RecordState RequiredFieldCount="3">
+                              <udam:RecordState.SelectedFields>
+                                <scg:List x:TypeArguments="udam:DynamicEntityField" Capacity="5">
+                                  <udam:DynamicEntityField Id="2f54271f-4919-ef11-96f5-002248095c31" Name="AssignedHours">
+                                    <udam:DynamicEntityField.ArgumentValue>
+                                      <InArgument x:TypeArguments="x:Decimal">[if(dtGlobal.Columns.Contains("pse__Planned_Hours__c"),IF(IsNumeric(CurrentRow("pse__Planned_Hours__c").ToString),cdec(CurrentRow("pse__Planned_Hours__c").ToString),0),0)]</InArgument>
+                                    </udam:DynamicEntityField.ArgumentValue>
+                                  </udam:DynamicEntityField>
+                                  <udam:DynamicEntityField Id="bb0a1f7e-4d19-ef11-96f5-002248095c31" Name="AssignmentEndDate">
+                                    <udam:DynamicEntityField.ArgumentValue>
+                                      <InArgument x:TypeArguments="s:DateTime">[cdate(CurrentRow("pse__End_Date__c").ToString)]</InArgument>
+                                    </udam:DynamicEntityField.ArgumentValue>
+                                  </udam:DynamicEntityField>
+                                  <udam:DynamicEntityField Id="ba0a1f7e-4d19-ef11-96f5-002248095c31" Name="AssignmentStartDate">
+                                    <udam:DynamicEntityField.ArgumentValue>
+                                      <InArgument x:TypeArguments="s:DateTime">[cdate(CurrentRow("pse__Start_Date__c").ToString)]</InArgument>
+                                    </udam:DynamicEntityField.ArgumentValue>
+                                  </udam:DynamicEntityField>
+                                  <udam:DynamicEntityField Id="6b0bf762-5d19-ef11-96f5-002248095c31" Name="RemainingHours">
+                                    <udam:DynamicEntityField.ArgumentValue>
+                                      <InArgument x:TypeArguments="x:Decimal">[If(dtGlobal.Columns.Contains("Remaining_Hours__c"),If(IsNumeric(CurrentRow("Remaining_Hours__c").ToString),CDec(CurrentRow("Remaining_Hours__c").ToString),0),0)]</InArgument>
+                                    </udam:DynamicEntityField.ArgumentValue>
+                                  </udam:DynamicEntityField>
+                                  <udam:DynamicEntityField Id="26a28198-6019-ef11-96f5-002248095c31" Name="SubmittedHours">
+                                    <udam:DynamicEntityField.ArgumentValue>
+                                      <InArgument x:TypeArguments="x:Decimal">[If(dtGlobal.Columns.Contains("pse__Billable_Hours_Submitted__c"),If(IsNumeric(CurrentRow("pse__Billable_Hours_Submitted__c").ToString),CDec(CurrentRow("pse__Billable_Hours_Submitted__c").ToString),0),0)]</InArgument>
+                                    </udam:DynamicEntityField.ArgumentValue>
+                                  </udam:DynamicEntityField>
+                                </scg:List>
+                              </udam:RecordState.SelectedFields>
+                            </udam:RecordState>
+                          </uda:UpdateEntityRecord.State>
+                        </uda:UpdateEntityRecord>
+                      </Sequence>
+                    </If.Then>
+                    <If.Else>
+                      <Sequence sap:VirtualizedContainerService.HintSize="376,669" sap2010:WorkflowViewState.IdRef="Sequence_19">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <uda:CreateEntityRecord x:TypeArguments="t:TTAssignments" InputEntity="{x:Null}" IsInRecordView="{x:Null}" OutputEntity="{x:Null}" VisibleDynamicPropertiesInfo="{x:Null}" ContinueOnError="False" DisplayName="Create Entity Record" EntityId="e6ce2e0c-af18-ef11-96f5-002248095c31" ExpansionDepth="2" sap:VirtualizedContainerService.HintSize="334,581" sap2010:WorkflowViewState.IdRef="CreateEntityRecord`1_3" InputEntityInFieldView="[new Time_Tracker.TTAssignments() With {  .AssignmentID = CurrentRow(&quot;Id&quot;).ToString,  .Project = CurrentRow(&quot;Name&quot;).ToString,  .UserEmail = in_UserEmail,  .AssignedHours = if(dtGlobal.Columns.Contains(&quot;pse__Planned_Hours__c&quot;),IF(IsNumeric(CurrentRow(&quot;pse__Planned_Hours__c&quot;).ToString),cdec(CurrentRow(&quot;pse__Planned_Hours__c&quot;).ToString),0),0),  .AssignmentEndDate = cdate(CurrentRow(&quot;pse__End_Date__c&quot;).ToString),  .AssignmentStartDate = cdate(CurrentRow(&quot;pse__Start_Date__c&quot;).ToString),  .ProjectType = &quot;Global&quot;,  .RemainingHours = If(dtGlobal.Columns.Contains(&quot;Remaining_Hours__c&quot;),If(IsNumeric(CurrentRow(&quot;Remaining_Hours__c&quot;).ToString),CDec(CurrentRow(&quot;Remaining_Hours__c&quot;).ToString),0),0),  .SubmittedHours = If(dtGlobal.Columns.Contains(&quot;pse__Billable_Hours_Submitted__c&quot;),If(IsNumeric(CurrentRow(&quot;pse__Billable_Hours_Submitted__c&quot;).ToString),CDec(CurrentRow(&quot;pse__Billable_Hours_Submitted__c&quot;).ToString),0),0) }]" TimeoutInMs="30000">
+                          <uda:CreateEntityRecord.State>
+                            <udam:RecordState RequiredFieldCount="3">
+                              <udam:RecordState.SelectedFields>
+                                <scg:List x:TypeArguments="udam:DynamicEntityField" Capacity="9">
+                                  <udam:DynamicEntityField Id="2297686c-5d19-ef11-96f5-002248095c31" IsRequired="True" Name="AssignmentID">
+                                    <udam:DynamicEntityField.ArgumentValue>
+                                      <InArgument x:TypeArguments="x:String">[CurrentRow("Id").ToString]</InArgument>
+                                    </udam:DynamicEntityField.ArgumentValue>
+                                  </udam:DynamicEntityField>
+                                  <udam:DynamicEntityField Id="421e79c9-b018-ef11-96f5-002248095c31" IsRequired="True" Name="Project">
+                                    <udam:DynamicEntityField.ArgumentValue>
+                                      <InArgument x:TypeArguments="x:String">[CurrentRow("Name").ToString]</InArgument>
+                                    </udam:DynamicEntityField.ArgumentValue>
+                                  </udam:DynamicEntityField>
+                                  <udam:DynamicEntityField Id="3eb73c67-b318-ef11-96f5-002248095c31" IsRequired="True" Name="UserEmail">
+                                    <udam:DynamicEntityField.ArgumentValue>
+                                      <InArgument x:TypeArguments="x:String">[in_UserEmail]</InArgument>
+                                    </udam:DynamicEntityField.ArgumentValue>
+                                  </udam:DynamicEntityField>
+                                  <udam:DynamicEntityField Id="2f54271f-4919-ef11-96f5-002248095c31" Name="AssignedHours">
+                                    <udam:DynamicEntityField.ArgumentValue>
+                                      <InArgument x:TypeArguments="x:Decimal">[if(dtGlobal.Columns.Contains("pse__Planned_Hours__c"),IF(IsNumeric(CurrentRow("pse__Planned_Hours__c").ToString),cdec(CurrentRow("pse__Planned_Hours__c").ToString),0),0)]</InArgument>
+                                    </udam:DynamicEntityField.ArgumentValue>
+                                  </udam:DynamicEntityField>
+                                  <udam:DynamicEntityField Id="bb0a1f7e-4d19-ef11-96f5-002248095c31" Name="AssignmentEndDate">
+                                    <udam:DynamicEntityField.ArgumentValue>
+                                      <InArgument x:TypeArguments="s:DateTime">[cdate(CurrentRow("pse__End_Date__c").ToString)]</InArgument>
+                                    </udam:DynamicEntityField.ArgumentValue>
+                                  </udam:DynamicEntityField>
+                                  <udam:DynamicEntityField Id="ba0a1f7e-4d19-ef11-96f5-002248095c31" Name="AssignmentStartDate">
+                                    <udam:DynamicEntityField.ArgumentValue>
+                                      <InArgument x:TypeArguments="s:DateTime">[cdate(CurrentRow("pse__Start_Date__c").ToString)]</InArgument>
+                                    </udam:DynamicEntityField.ArgumentValue>
+                                  </udam:DynamicEntityField>
+                                  <udam:DynamicEntityField Id="38ad8f28-4d19-ef11-96f5-002248095c31" Name="ProjectType">
+                                    <udam:DynamicEntityField.ArgumentValue>
+                                      <InArgument x:TypeArguments="x:String">Global</InArgument>
+                                    </udam:DynamicEntityField.ArgumentValue>
+                                  </udam:DynamicEntityField>
+                                  <udam:DynamicEntityField Id="6b0bf762-5d19-ef11-96f5-002248095c31" Name="RemainingHours">
+                                    <udam:DynamicEntityField.ArgumentValue>
+                                      <InArgument x:TypeArguments="x:Decimal">[If(dtGlobal.Columns.Contains("Remaining_Hours__c"),If(IsNumeric(CurrentRow("Remaining_Hours__c").ToString),CDec(CurrentRow("Remaining_Hours__c").ToString),0),0)]</InArgument>
+                                    </udam:DynamicEntityField.ArgumentValue>
+                                  </udam:DynamicEntityField>
+                                  <udam:DynamicEntityField Id="26a28198-6019-ef11-96f5-002248095c31" Name="SubmittedHours">
+                                    <udam:DynamicEntityField.ArgumentValue>
+                                      <InArgument x:TypeArguments="x:Decimal">[If(dtGlobal.Columns.Contains("pse__Billable_Hours_Submitted__c"),If(IsNumeric(CurrentRow("pse__Billable_Hours_Submitted__c").ToString),CDec(CurrentRow("pse__Billable_Hours_Submitted__c").ToString),0),0)]</InArgument>
+                                    </udam:DynamicEntityField.ArgumentValue>
+                                  </udam:DynamicEntityField>
+                                </scg:List>
+                              </udam:RecordState.SelectedFields>
+                            </udam:RecordState>
+                          </uda:CreateEntityRecord.State>
+                        </uda:CreateEntityRecord>
+                      </Sequence>
+                    </If.Else>
+                  </If>
+                </Sequence>
+              </ActivityAction>
+            </ui:ForEachRow.Body>
+          </ui:ForEachRow>
+        </Sequence>
+      </If.Then>
+      <If.Else>
+        <Sequence sap2010:WorkflowViewState.IdRef="Sequence_25" />
+      </If.Else>
+    </If>
     <Assign DisplayName="Assign serialize show datatable to json" sap:VirtualizedContainerService.HintSize="510,82" sap2010:WorkflowViewState.IdRef="Assign_1">
       <Assign.To>
         <OutArgument x:TypeArguments="x:String">[out_responseData]</OutArgument>
