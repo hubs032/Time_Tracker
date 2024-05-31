@@ -5,7 +5,7 @@
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1381,4567</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>2819,5796</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>GetOutlookCategories_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -119,7 +119,7 @@
       <AssemblyReference>WindowsBase</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="GetOutlookCategories" sap:VirtualizedContainerService.HintSize="688,4502" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="GetOutlookCategories" sap:VirtualizedContainerService.HintSize="800,5731" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="sd:DataTable" Name="dt_OutlookCategories" />
     </Sequence.Variables>
@@ -128,7 +128,7 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ueab:ExcelProcessScopeX ExistingProcessAction="{x:Null}" FileConflictResolution="{x:Null}" LaunchTimeout="{x:Null}" ProcessMode="{x:Null}" DisplayAlerts="False" DisplayName="Get All Active Categories from User's Outlook" sap:VirtualizedContainerService.HintSize="626,1174" sap2010:WorkflowViewState.IdRef="ExcelProcessScopeX_1" LaunchMethod="Automation" MacroSettings="EnableAll" ShowExcelWindow="False">
+    <ueab:ExcelProcessScopeX ExistingProcessAction="{x:Null}" FileConflictResolution="{x:Null}" LaunchTimeout="{x:Null}" ProcessMode="{x:Null}" DisplayAlerts="False" DisplayName="Get All Active Categories from User's Outlook" sap:VirtualizedContainerService.HintSize="738,1174" sap2010:WorkflowViewState.IdRef="ExcelProcessScopeX_1" LaunchMethod="Automation" MacroSettings="EnableAll" ShowExcelWindow="False">
       <ueab:ExcelProcessScopeX.Body>
         <ActivityAction x:TypeArguments="ui:IExcelProcess">
           <ActivityAction.Argument>
@@ -203,13 +203,13 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ueab:ExcelProcessScopeX>
-    <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[dt_OutlookCategories]" DisplayName="Add Missing Categories" sap:VirtualizedContainerService.HintSize="626,1775" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
+    <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[dt_OutlookCategories]" DisplayName="Add Missing Categories" sap:VirtualizedContainerService.HintSize="738,3004" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
       <ui:ForEachRow.Body>
         <ActivityAction x:TypeArguments="sd:DataRow">
           <ActivityAction.Argument>
             <DelegateInArgument x:TypeArguments="sd:DataRow" Name="CurrentRow" />
           </ActivityAction.Argument>
-          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="452,1589" sap2010:WorkflowViewState.IdRef="Sequence_4">
+          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="704,2818" sap2010:WorkflowViewState.IdRef="Sequence_4">
             <Sequence.Variables>
               <Variable x:TypeArguments="x:Int64" Name="int_recordsFound" />
             </Sequence.Variables>
@@ -218,7 +218,7 @@
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <uda:QueryEntityRecords x:TypeArguments="t:TTOutlookCategories" OutputRecords="{x:Null}" ContinueOnError="False" DisplayName="Query Entity Records" EntityId="028a0c05-af18-ef11-96f5-002248095c31" ExpansionDepth="2" sap:VirtualizedContainerService.HintSize="410,140" sap2010:WorkflowViewState.IdRef="QueryEntityRecords`1_1" QueriedEntityId="028a0c05-af18-ef11-96f5-002248095c31" Skip="0" SortAscending="True" SortByField="Id" TimeoutInMs="30000" Top="100" TotalRecords="[int_recordsFound]">
+            <uda:QueryEntityRecords x:TypeArguments="t:TTOutlookCategories" OutputRecords="{x:Null}" ContinueOnError="False" DisplayName="Query Entity Records" EntityId="028a0c05-af18-ef11-96f5-002248095c31" ExpansionDepth="2" sap:VirtualizedContainerService.HintSize="662,140" sap2010:WorkflowViewState.IdRef="QueryEntityRecords`1_1" QueriedEntityId="028a0c05-af18-ef11-96f5-002248095c31" Skip="0" SortAscending="True" SortByField="Id" TimeoutInMs="30000" Top="100" TotalRecords="[int_recordsFound]">
               <uda:QueryEntityRecords.FilterArguments>
                 <uda:FilterArgument FilterActivityType="{x:Null}">
                   <uda:FilterArgument.Filter>
@@ -243,7 +243,7 @@
                 </scg:List>
               </uda:QueryEntityRecords.FilterValues>
             </uda:QueryEntityRecords>
-            <If Condition="[int_recordsFound &gt; 0]" sap:VirtualizedContainerService.HintSize="410,1321" sap2010:WorkflowViewState.IdRef="If_1">
+            <If Condition="[int_recordsFound &gt; 0]" sap:VirtualizedContainerService.HintSize="662,2550" sap2010:WorkflowViewState.IdRef="If_1">
               <If.Then>
                 <Sequence sap:VirtualizedContainerService.HintSize="376,229" sap2010:WorkflowViewState.IdRef="Sequence_6">
                   <sap:WorkflowViewStateService.ViewState>
@@ -255,17 +255,19 @@
                 </Sequence>
               </If.Then>
               <If.Else>
-                <Sequence sap:VirtualizedContainerService.HintSize="376,910" sap2010:WorkflowViewState.IdRef="Sequence_7">
+                <Sequence sap:VirtualizedContainerService.HintSize="628,2139" sap2010:WorkflowViewState.IdRef="Sequence_7">
                   <Sequence.Variables>
                     <Variable x:TypeArguments="t:TTOutlookCategories" Name="obj_NewCat" />
+                    <Variable x:TypeArguments="scg:IList(t:TTMilestones)" Name="arr_CustomerMilestones" />
+                    <Variable x:TypeArguments="s:Guid" Name="guid_MilestoneId" />
                   </Sequence.Variables>
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
-                  <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,141" sap2010:WorkflowViewState.IdRef="LogMessage_2" Message="[&quot;Need to add Category&quot;]" />
-                  <uda:CreateEntityRecord x:TypeArguments="t:TTOutlookCategories" InputEntity="{x:Null}" IsInRecordView="{x:Null}" VisibleDynamicPropertiesInfo="{x:Null}" ContinueOnError="False" DisplayName="Create Entity Record" EntityId="028a0c05-af18-ef11-96f5-002248095c31" ExpansionDepth="2" sap:VirtualizedContainerService.HintSize="334,275" sap2010:WorkflowViewState.IdRef="CreateEntityRecord`1_1" InputEntityInFieldView="[new Time_Tracker.TTOutlookCategories() With {  .Active = true,  .CategoryName = CurrentRow(&quot;Categories&quot;).ToString,  .UserEmail = in_str_CurrentUser_Email }]" OutputEntity="[obj_NewCat]" TimeoutInMs="30000">
+                  <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="586,141" sap2010:WorkflowViewState.IdRef="LogMessage_2" Message="[&quot;Need to add Category&quot;]" />
+                  <uda:CreateEntityRecord x:TypeArguments="t:TTOutlookCategories" InputEntity="{x:Null}" IsInRecordView="{x:Null}" VisibleDynamicPropertiesInfo="{x:Null}" ContinueOnError="False" DisplayName="Create Entity Record" EntityId="028a0c05-af18-ef11-96f5-002248095c31" ExpansionDepth="2" sap:VirtualizedContainerService.HintSize="586,275" sap2010:WorkflowViewState.IdRef="CreateEntityRecord`1_1" InputEntityInFieldView="[new Time_Tracker.TTOutlookCategories() With {  .Active = true,  .CategoryName = CurrentRow(&quot;Categories&quot;).ToString,  .UserEmail = in_str_CurrentUser_Email }]" OutputEntity="[obj_NewCat]" TimeoutInMs="30000">
                     <uda:CreateEntityRecord.State>
                       <udam:RecordState RequiredFieldCount="3">
                         <udam:RecordState.SelectedFields>
@@ -290,7 +292,83 @@
                       </udam:RecordState>
                     </uda:CreateEntityRecord.State>
                   </uda:CreateEntityRecord>
-                  <uda:CreateEntityRecord x:TypeArguments="t:TTMapping" InputEntity="{x:Null}" IsInRecordView="{x:Null}" OutputEntity="{x:Null}" VisibleDynamicPropertiesInfo="{x:Null}" ContinueOnError="False" DisplayName="Create Entity Record" EntityId="4d660213-af18-ef11-96f5-002248095c31" ExpansionDepth="2" sap:VirtualizedContainerService.HintSize="334,326" sap2010:WorkflowViewState.IdRef="CreateEntityRecord`1_2" InputEntityInFieldView="[new Time_Tracker.TTMapping() With {  .CategoryName = new TTOutlookCategories() With { .Id = obj_NewCat.Id },  .UserEmail = in_str_CurrentUser_Email }]" TimeoutInMs="30000">
+                  <uda:QueryEntityRecords x:TypeArguments="t:TTMilestones" TotalRecords="{x:Null}" ContinueOnError="False" DisplayName="Query Entity Records" EntityId="3f02c3d1-b018-ef11-96f5-002248095c31" ExpansionDepth="2" sap:VirtualizedContainerService.HintSize="586,140" sap2010:WorkflowViewState.IdRef="QueryEntityRecords`1_3" OutputRecords="[arr_CustomerMilestones]" QueriedEntityId="3f02c3d1-b018-ef11-96f5-002248095c31" Skip="0" SortAscending="True" SortByField="Id" TimeoutInMs="30000" Top="100">
+                    <uda:QueryEntityRecords.FilterArguments>
+                      <uda:FilterArgument FilterActivityType="{x:Null}">
+                        <uda:FilterArgument.Filter>
+                          <uda:GroupFilter Index="0" Operator="AND">
+                            <uda:GroupFilter.Filters>
+                              <scg:List x:TypeArguments="uda:SimpleFilter" Capacity="4">
+                                <uda:SimpleFilter ExpressionValue="{x:Null}" FieldName="ProjectCorrelation" FieldType="UiPath.DataService.Core.Models.EntityField" Operator="=" ValueIndex="0" />
+                              </scg:List>
+                            </uda:GroupFilter.Filters>
+                            <uda:GroupFilter.Groups>
+                              <scg:List x:TypeArguments="uda:GroupFilter" Capacity="0" />
+                            </uda:GroupFilter.Groups>
+                          </uda:GroupFilter>
+                        </uda:FilterArgument.Filter>
+                      </uda:FilterArgument>
+                    </uda:QueryEntityRecords.FilterArguments>
+                    <uda:QueryEntityRecords.FilterValues>
+                      <scg:List x:TypeArguments="InArgument" Capacity="4">
+                        <InArgument x:TypeArguments="x:String">Customer</InArgument>
+                      </scg:List>
+                    </uda:QueryEntityRecords.FilterValues>
+                  </uda:QueryEntityRecords>
+                  <Assign sap:VirtualizedContainerService.HintSize="586,82" sap2010:WorkflowViewState.IdRef="Assign_6">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="s:Guid">[guid_MilestoneId]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="s:Guid">[nothing]</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                  <ui:ForEach x:TypeArguments="t:TTMilestones" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="586,887" sap2010:WorkflowViewState.IdRef="ForEach`1_2" Values="[arr_CustomerMilestones]">
+                    <ui:ForEach.Body>
+                      <ActivityAction x:TypeArguments="t:TTMilestones">
+                        <ActivityAction.Argument>
+                          <DelegateInArgument x:TypeArguments="t:TTMilestones" Name="currentItem" />
+                        </ActivityAction.Argument>
+                        <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="552,701" sap2010:WorkflowViewState.IdRef="Sequence_12">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                          <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="510,141" sap2010:WorkflowViewState.IdRef="LogMessage_3" Message="[CurrentRow(&quot;Categories&quot;).ToString &amp; Environment.NewLine &amp; currentItem.MilestoneName.ToString.Substring(0,5)]" />
+                          <If Condition="[CurrentRow(&quot;Categories&quot;).ToString.Contains(currentItem.MilestoneName.ToString.Substring(0,5))]" sap:VirtualizedContainerService.HintSize="510,432" sap2010:WorkflowViewState.IdRef="If_4">
+                            <If.Then>
+                              <Sequence sap:VirtualizedContainerService.HintSize="476,170" sap2010:WorkflowViewState.IdRef="Sequence_15">
+                                <sap:WorkflowViewStateService.ViewState>
+                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                  </scg:Dictionary>
+                                </sap:WorkflowViewStateService.ViewState>
+                                <Assign sap:VirtualizedContainerService.HintSize="434,82" sap2010:WorkflowViewState.IdRef="Assign_5">
+                                  <Assign.To>
+                                    <OutArgument x:TypeArguments="s:Guid">[guid_MilestoneId]</OutArgument>
+                                  </Assign.To>
+                                  <Assign.Value>
+                                    <InArgument x:TypeArguments="s:Guid">[currentItem.Id]</InArgument>
+                                  </Assign.Value>
+                                </Assign>
+                              </Sequence>
+                            </If.Then>
+                            <If.Else>
+                              <Sequence sap:VirtualizedContainerService.HintSize="300,80" sap2010:WorkflowViewState.IdRef="Sequence_16">
+                                <sap:WorkflowViewStateService.ViewState>
+                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                  </scg:Dictionary>
+                                </sap:WorkflowViewStateService.ViewState>
+                              </Sequence>
+                            </If.Else>
+                          </If>
+                        </Sequence>
+                      </ActivityAction>
+                    </ui:ForEach.Body>
+                  </ui:ForEach>
+                  <uda:CreateEntityRecord x:TypeArguments="t:TTMapping" InputEntity="{x:Null}" IsInRecordView="{x:Null}" OutputEntity="{x:Null}" VisibleDynamicPropertiesInfo="{x:Null}" ContinueOnError="False" DisplayName="Create Entity Record" EntityId="4d660213-af18-ef11-96f5-002248095c31" ExpansionDepth="2" sap:VirtualizedContainerService.HintSize="586,326" sap2010:WorkflowViewState.IdRef="CreateEntityRecord`1_2" InputEntityInFieldView="[new Time_Tracker.TTMapping() With {  .CategoryName = new TTOutlookCategories() With { .Id = obj_NewCat.Id },  .UserEmail = in_str_CurrentUser_Email,  .MilestoneName = new TTMilestones() With { .Id = guid_MilestoneId } }]" TimeoutInMs="30000">
                     <uda:CreateEntityRecord.State>
                       <udam:RecordState RequiredFieldCount="2">
                         <udam:RecordState.SelectedFields>
@@ -307,7 +385,7 @@
                             </udam:DynamicEntityField>
                             <udam:DynamicEntityField Id="8e875709-b218-ef11-96f5-002248095c31" Name="MilestoneName">
                               <udam:DynamicEntityField.ArgumentValue>
-                                <InArgument x:TypeArguments="s:Guid" />
+                                <InArgument x:TypeArguments="s:Guid">[guid_MilestoneId]</InArgument>
                               </udam:DynamicEntityField.ArgumentValue>
                             </udam:DynamicEntityField>
                             <udam:DynamicEntityField Id="1b465ffb-b118-ef11-96f5-002248095c31" Name="ProjectName">
@@ -333,7 +411,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:ForEachRow>
-    <Sequence sap:VirtualizedContainerService.HintSize="626,1362" sap2010:WorkflowViewState.IdRef="Sequence_8">
+    <Sequence sap:VirtualizedContainerService.HintSize="738,1362" sap2010:WorkflowViewState.IdRef="Sequence_8">
       <Sequence.Variables>
         <Variable x:TypeArguments="scg:IList(t:TTOutlookCategories)" Name="out_Known_Categories" />
       </Sequence.Variables>
@@ -435,7 +513,13 @@
                   </Sequence>
                 </If.Then>
                 <If.Else>
-                  <Sequence sap2010:WorkflowViewState.IdRef="Sequence_11" />
+                  <Sequence sap:VirtualizedContainerService.HintSize="300,80" sap2010:WorkflowViewState.IdRef="Sequence_11">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </Sequence>
                 </If.Else>
               </If>
             </Sequence>
