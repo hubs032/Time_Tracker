@@ -11,8 +11,9 @@
 	
 ## PSA
 1. ~~Get current assignments (including open ended assignments) - DONE~~
-2. Load time entries as draft
+2. ~~Load time entries as draft - DONE~~
 3. Submit Entries
+4. Mark entries in Data Service as saved/submitted to PSA.
 
 ## Apps
 1. ~~Allow for manual entries - DONE~~
