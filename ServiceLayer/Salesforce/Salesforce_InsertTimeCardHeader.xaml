@@ -45,7 +45,7 @@
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1050,3233</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1544,3222</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>Salesforce_InsertTimeCardHeader_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="68">
@@ -149,7 +149,7 @@
       <AssemblyReference>System.Private.Xml</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Salesforce_InsertTimeCardHeader" sap:VirtualizedContainerService.HintSize="617,3168" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Salesforce_InsertTimeCardHeader" sap:VirtualizedContainerService.HintSize="617,3157" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="mondayHours" />
       <Variable x:TypeArguments="x:String" Name="wednesdayHours" />
@@ -436,7 +436,7 @@
         </Sequence>
       </If.Else>
     </If>
-    <If Condition="[in_isGlobal]" DisplayName="If is global, then add project else add assignment" sap:VirtualizedContainerService.HintSize="555,1559" sap2010:WorkflowViewState.IdRef="If_2">
+    <If Condition="[in_isGlobal]" DisplayName="If is global, then add project else add assignment" sap:VirtualizedContainerService.HintSize="555,1548" sap2010:WorkflowViewState.IdRef="If_2">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -447,34 +447,14 @@
         <cs:InsertGlobalTimecardHeaderWithEncryptedResource AssignmentId="[in_assignmentId]" EncryptedResourceId="[in_encryptedResourceId]" FridayHours="[fridayHours]" FridayNotes="[fridayNotes]" sap:VirtualizedContainerService.HintSize="334,1314" sap2010:WorkflowViewState.IdRef="InsertGlobalTimecardHeaderWithEncryptedResource_1" IsBillable="[in_isBillable]" MilestoneId="[in_milestoneId]" MondayHours="[mondayHours]" MondayNotes="[mondayNotes]" ProjectId="[in_projectId]" SaturdayHours="[saturdayHours]" SaturdayNotes="[saturdayNotes]" SfdcConnection="[io_sfdcConnection]" Status="[in_status]" SundayHours="[sundayHours]" SundayNotes="[sundayNotes]" ThursdayHours="[thursdayHours]" ThursdayNotes="[thursdayNotes]" TimeExcluded="[in_timeExcluded]" TimecardNotes="[timecardNotes]" TuesdayHours="[tuesdayHours]" TuesdayNotes="[tuesdayNotes]" WednesdayHours="[wednesdayHours]" WednesdayNotes="[wednesdayNotes]" WeekSaturdayEndDate="[in_weekSaturdayEndDate]" WeekSundayStartDate="[in_weekSundayStartDate]" />
       </If.Then>
       <If.Else>
-        <If Condition="[in_projectId &lt;&gt; &quot;a8A5b000000pDBTEA2&quot;]" sap:VirtualizedContainerService.HintSize="410,1584" sap2010:WorkflowViewState.IdRef="If_4">
+        <cs:InsertNonGlobalTimecardHeaderWithEncryptedResourceId AssignmentId="[in_assignmentId]" EncryptedResourceId="[in_encryptedResourceId]" FridayHours="[fridayHours]" FridayNotes="[fridayNotes]" sap:VirtualizedContainerService.HintSize="200,52" sap2010:WorkflowViewState.IdRef="InsertNonGlobalTimecardHeaderWithEncryptedResourceId_1" IsBillable="[in_isBillable]" MilestoneId="[in_milestoneId]" MondayHours="[mondayHours]" MondayNotes="[mondayNotes]" ProjectId="[in_projectId]" SaturdayHours="[saturdayHours]" SaturdayNotes="[saturdayNotes]" SfdcConnection="[io_sfdcConnection]" Status="[in_status]" SundayHours="[sundayHours]" SundayNotes="[sundayNotes]" ThursdayHours="[thursdayHours]" ThursdayNotes="[thursdayNotes]" TimeExcluded="[in_timeExcluded]" TimecardNotes="[timecardNotes]" TuesdayHours="[tuesdayHours]" TuesdayNotes="[tuesdayNotes]" WednesdayHours="[wednesdayHours]" WednesdayNotes="[wednesdayNotes]" WeekSaturdayEndDate="[in_weekSaturdayEndDate]" WeekSundayStartDate="[in_weekSundayStartDate]">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
-              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
               <x:Boolean x:Key="IsPinned">False</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <If.Then>
-            <Sequence sap:VirtualizedContainerService.HintSize="376,1402" sap2010:WorkflowViewState.IdRef="Sequence_4">
-              <sap:WorkflowViewStateService.ViewState>
-                <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                </scg:Dictionary>
-              </sap:WorkflowViewStateService.ViewState>
-              <cs:InsertNonGlobalTimecardHeaderWithEncryptedResourceId AssignmentId="[in_assignmentId]" EncryptedResourceId="[in_encryptedResourceId]" FridayHours="[fridayHours]" FridayNotes="[fridayNotes]" sap:VirtualizedContainerService.HintSize="334,1314" sap2010:WorkflowViewState.IdRef="InsertNonGlobalTimecardHeaderWithEncryptedResourceId_1" IsBillable="[in_isBillable]" MilestoneId="[in_milestoneId]" MondayHours="[mondayHours]" MondayNotes="[mondayNotes]" ProjectId="[in_projectId]" SaturdayHours="[saturdayHours]" SaturdayNotes="[saturdayNotes]" SfdcConnection="[io_sfdcConnection]" Status="[in_status]" SundayHours="[sundayHours]" SundayNotes="[sundayNotes]" ThursdayHours="[thursdayHours]" ThursdayNotes="[thursdayNotes]" TimeExcluded="[in_timeExcluded]" TimecardNotes="[timecardNotes]" TuesdayHours="[tuesdayHours]" TuesdayNotes="[tuesdayNotes]" WednesdayHours="[wednesdayHours]" WednesdayNotes="[wednesdayNotes]" WeekSaturdayEndDate="[in_weekSaturdayEndDate]" WeekSundayStartDate="[in_weekSundayStartDate]">
-                <sap:WorkflowViewStateService.ViewState>
-                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                  </scg:Dictionary>
-                </sap:WorkflowViewStateService.ViewState>
-              </cs:InsertNonGlobalTimecardHeaderWithEncryptedResourceId>
-            </Sequence>
-          </If.Then>
-          <If.Else>
-            <Sequence sap2010:WorkflowViewState.IdRef="Sequence_5" />
-          </If.Else>
-        </If>
+        </cs:InsertNonGlobalTimecardHeaderWithEncryptedResourceId>
       </If.Else>
     </If>
   </Sequence>

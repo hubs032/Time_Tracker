@@ -1,4 +1,4 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Main" this:Main.in_str_Activity="SubmitPSAData" this:Main.in_UserEmail="aaron.hubbart@uipath.com" this:Main.in_str_TimesheetDate="6/1/2024" this:Main.in_str_customerPrefix="C-" this:Main.in_str_milestonePrefix="O-" this:Main.in_str_internalPrefix="I-" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:t="clr-namespace:Time_Tracker;assembly=DataService.Time_Tracker" xmlns:this="clr-namespace:" xmlns:uda="clr-namespace:UiPath.DataService.Activities;assembly=UiPath.DataService.Activities.Core" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:usc="clr-namespace:UiPath.Salesforce.ConnectionService;assembly=UiPath.Salesforce" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Main" this:Main.in_str_Activity="SubmitPSAData" this:Main.in_UserEmail="aaron.hubbart@uipath.com" this:Main.in_str_Update_Type="Submit" this:Main.in_str_TimesheetDate="6/1/2024" this:Main.in_str_customerPrefix="C-" this:Main.in_str_milestonePrefix="O-" this:Main.in_str_internalPrefix="I-" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:t="clr-namespace:Time_Tracker;assembly=DataService.Time_Tracker" xmlns:this="clr-namespace:" xmlns:uda="clr-namespace:UiPath.DataService.Activities;assembly=UiPath.DataService.Activities.Core" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:usc="clr-namespace:UiPath.Salesforce.ConnectionService;assembly=UiPath.Salesforce" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property Name="in_str_QA_Asset_Suffix" Type="InArgument(x:String)" />
     <x:Property Name="in_OrchestratorFolderPath" Type="InArgument(x:String)" />
@@ -73,6 +73,7 @@
       <x:String>UiPath.Shared.Activities</x:String>
       <x:String>Time_Tracker</x:String>
       <x:String>UiPath.Excel</x:String>
+      <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -157,6 +158,8 @@
       <AssemblyReference>DataService.Time_Tracker</AssemblyReference>
       <AssemblyReference>UiPath.Excel</AssemblyReference>
       <AssemblyReference>System.Data.SqlClient</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic.Forms</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic.Core</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
   <Sequence DisplayName="Main Sequence" sap:VirtualizedContainerService.HintSize="559,893" sap2010:WorkflowViewState.IdRef="Sequence_1">
@@ -174,7 +177,7 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <Switch x:TypeArguments="x:String" DisplayName="Switch" Expression="[in_str_Activity]" sap:VirtualizedContainerService.HintSize="497,782" sap2010:WorkflowViewState.IdRef="Switch`1_1">
+    <Switch x:TypeArguments="x:String" DisplayName="Switch" Expression="[in_str_Activity]" sap:VirtualizedContainerService.HintSize="512,1475" sap2010:WorkflowViewState.IdRef="Switch`1_1">
       <Switch.Default>
         <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,141" sap2010:WorkflowViewState.IdRef="LogMessage_1" Message="[&quot;No Activity Selected&quot;]" />
       </Switch.Default>
@@ -220,7 +223,7 @@
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
-        <Sequence DisplayName="Make sure all categories have mapping" sap:VirtualizedContainerService.HintSize="472,847" sap2010:WorkflowViewState.IdRef="Sequence_5">
+        <Sequence DisplayName="Make sure all categories have mapping" sap:VirtualizedContainerService.HintSize="472,472" sap2010:WorkflowViewState.IdRef="Sequence_5">
           <Sequence.Variables>
             <Variable x:TypeArguments="x:Int64" Name="int_MissingMappingCnt" />
           </Sequence.Variables>
@@ -229,7 +232,7 @@
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <uda:QueryEntityRecords x:TypeArguments="t:TTMapping" OutputRecords="{x:Null}" ContinueOnError="False" DisplayName="Query Entity Records" EntityId="4d660213-af18-ef11-96f5-002248095c31" ExpansionDepth="2" sap:VirtualizedContainerService.HintSize="410,140" sap2010:WorkflowViewState.IdRef="QueryEntityRecords`1_1" QueriedEntityId="4d660213-af18-ef11-96f5-002248095c31" Skip="0" SortAscending="True" SortByField="Id" TimeoutInMs="30000" Top="100" TotalRecords="[int_MissingMappingCnt]">
+          <uda:QueryEntityRecords x:TypeArguments="t:TTMapping" OutputRecords="{x:Null}" ContinueOnError="False" DisplayName="Query Entity Records" EntityId="4d660213-af18-ef11-96f5-002248095c31" ExpansionDepth="2" sap:VirtualizedContainerService.HintSize="388,139" sap2010:WorkflowViewState.IdRef="QueryEntityRecords`1_1" QueriedEntityId="4d660213-af18-ef11-96f5-002248095c31" Skip="0" SortAscending="True" SortByField="Id" TimeoutInMs="30000" Top="100" TotalRecords="[int_MissingMappingCnt]">
             <uda:QueryEntityRecords.FilterArguments>
               <uda:FilterArgument FilterActivityType="{x:Null}">
                 <uda:FilterArgument.Filter>
@@ -254,7 +257,7 @@
               </scg:List>
             </uda:QueryEntityRecords.FilterValues>
           </uda:QueryEntityRecords>
-          <If Condition="[int_MissingMappingCnt &gt; 0]" sap:VirtualizedContainerService.HintSize="410,556" sap2010:WorkflowViewState.IdRef="If_1">
+          <If Condition="[int_MissingMappingCnt &gt; 0]" sap:VirtualizedContainerService.HintSize="388,182" sap2010:WorkflowViewState.IdRef="If_1">
             <If.Then>
               <Sequence sap:VirtualizedContainerService.HintSize="376,173" sap2010:WorkflowViewState.IdRef="Sequence_6">
                 <sap:WorkflowViewStateService.ViewState>
@@ -291,7 +294,7 @@
           </If>
         </Sequence>
       </Sequence>
-      <Sequence x:Key="SubmitPSAData" sap:VirtualizedContainerService.HintSize="450,530" sap2010:WorkflowViewState.IdRef="Sequence_8">
+      <Sequence x:Key="SubmitPSAData" sap:VirtualizedContainerService.HintSize="472,1223" sap2010:WorkflowViewState.IdRef="Sequence_8">
         <Sequence.Variables>
           <Variable x:TypeArguments="sd:DataTable" Default="[new system.data.DataTable]" Name="dt_ProjectAssigAndGlobal" />
           <Variable x:TypeArguments="sd:DataTable" Default="[new system.data.DataTable]" Name="dtAllProjects" />
@@ -302,7 +305,7 @@
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
-        <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="SetupConnection.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="388,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_8" UnSafe="False" WorkflowFileName="SetupConnection.xaml">
+        <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="SetupConnection.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="410,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_8" UnSafe="False" WorkflowFileName="SetupConnection.xaml">
           <ui:InvokeWorkflowFile.Arguments>
             <InOutArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="Config">[Config]</InOutArgument>
             <InArgument x:TypeArguments="x:String" x:Key="in_OrchestratorFolderPath">[in_OrchestratorFolderPath]</InArgument>
@@ -314,7 +317,7 @@
             <OutArgument x:TypeArguments="x:String" x:Key="resourceRole">[resourceRole]</OutArgument>
           </ui:InvokeWorkflowFile.Arguments>
         </ui:InvokeWorkflowFile>
-        <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Data Layer\GetDataForAssignmentsAndProjects.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="388,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_9" UnSafe="False" WorkflowFileName="Data Layer\GetDataForAssignmentsAndProjects.xaml">
+        <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Data Layer\GetDataForAssignmentsAndProjects.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="410,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_9" UnSafe="False" WorkflowFileName="Data Layer\GetDataForAssignmentsAndProjects.xaml">
           <ui:InvokeWorkflowFile.Arguments>
             <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_config">[Config]</InArgument>
             <InOutArgument x:TypeArguments="usc:IConnectionService" x:Key="io_sfdcConnection">[io_sfdcConnection]</InOutArgument>
@@ -325,41 +328,110 @@
             <InArgument x:TypeArguments="x:String" x:Key="in_encryptedeResourceId">[encryptedResourceId]</InArgument>
           </ui:InvokeWorkflowFile.Arguments>
         </ui:InvokeWorkflowFile>
-        <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Data Layer\CopyFromDataServicelToPSA.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="388,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_7" UnSafe="False" WorkflowFileName="Data Layer\CopyFromDataServicelToPSA.xaml">
-          <ui:InvokeWorkflowFile.Arguments>
-            <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_propertiesDictionary">
-              <VisualBasicValue x:TypeArguments="scg:Dictionary(x:String, x:Object)" ExpressionText="new Dictionary(of string,object)" />
-            </InArgument>
-            <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_config">
-              <VisualBasicValue x:TypeArguments="scg:Dictionary(x:String, x:Object)" ExpressionText="Config" />
-            </InArgument>
-            <InArgument x:TypeArguments="usc:IConnectionService" x:Key="io_sfdcConnection">
-              <VisualBasicValue x:TypeArguments="usc:IConnectionService" ExpressionText="io_sfdcConnection" />
-            </InArgument>
-            <InArgument x:TypeArguments="x:String" x:Key="in_encryptedResourceId">
-              <VisualBasicValue x:TypeArguments="x:String" ExpressionText="encryptedResourceId" />
-            </InArgument>
-            <InArgument x:TypeArguments="sd:DataTable" x:Key="in_dtAllAssignmentsAndProjects">
-              <VisualBasicValue x:TypeArguments="sd:DataTable" ExpressionText="dt_ProjectAssigAndGlobal" />
-            </InArgument>
-            <InArgument x:TypeArguments="sd:DataTable" x:Key="in_dtMilestones" />
-            <InArgument x:TypeArguments="sd:DataTable" x:Key="in_dtGlobalProjects">
-              <VisualBasicValue x:TypeArguments="sd:DataTable" ExpressionText="dtAllProjects" />
-            </InArgument>
-            <InArgument x:TypeArguments="sd:DataTable" x:Key="in_dtWeekDailyNotes">
-              <VisualBasicValue x:TypeArguments="sd:DataTable" ExpressionText="new system.data.DataTable" />
-            </InArgument>
-            <InArgument x:TypeArguments="x:String" x:Key="in_resourceRole">
-              <VisualBasicValue x:TypeArguments="x:String" ExpressionText="resourceRole" />
-            </InArgument>
-            <InArgument x:TypeArguments="x:String" x:Key="in_str_TimesheetDate">
-              <VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_str_TimesheetDate" />
-            </InArgument>
-            <InArgument x:TypeArguments="x:String" x:Key="in_str_UserEmail">
-              <VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_UserEmail" />
-            </InArgument>
-          </ui:InvokeWorkflowFile.Arguments>
-        </ui:InvokeWorkflowFile>
+        <If Condition="[in_str_Update_Type = &quot;Save&quot; or in_str_Update_Type = &quot;Both&quot;]" sap:VirtualizedContainerService.HintSize="410,383" sap2010:WorkflowViewState.IdRef="If_2">
+          <If.Then>
+            <Sequence sap:VirtualizedContainerService.HintSize="376,201" sap2010:WorkflowViewState.IdRef="Sequence_9">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Data Layer\CopyFromDataServicelToPSA.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="334,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_7" UnSafe="False" WorkflowFileName="Data Layer\CopyFromDataServicelToPSA.xaml">
+                <ui:InvokeWorkflowFile.Arguments>
+                  <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_propertiesDictionary">
+                    <VisualBasicValue x:TypeArguments="scg:Dictionary(x:String, x:Object)" ExpressionText="new Dictionary(of string,object)" />
+                  </InArgument>
+                  <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_config">
+                    <VisualBasicValue x:TypeArguments="scg:Dictionary(x:String, x:Object)" ExpressionText="Config" />
+                  </InArgument>
+                  <InArgument x:TypeArguments="usc:IConnectionService" x:Key="io_sfdcConnection">
+                    <VisualBasicValue x:TypeArguments="usc:IConnectionService" ExpressionText="io_sfdcConnection" />
+                  </InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="in_encryptedResourceId">
+                    <VisualBasicValue x:TypeArguments="x:String" ExpressionText="encryptedResourceId" />
+                  </InArgument>
+                  <InArgument x:TypeArguments="sd:DataTable" x:Key="in_dtAllAssignmentsAndProjects">
+                    <VisualBasicValue x:TypeArguments="sd:DataTable" ExpressionText="dt_ProjectAssigAndGlobal" />
+                  </InArgument>
+                  <InArgument x:TypeArguments="sd:DataTable" x:Key="in_dtMilestones" />
+                  <InArgument x:TypeArguments="sd:DataTable" x:Key="in_dtGlobalProjects">
+                    <VisualBasicValue x:TypeArguments="sd:DataTable" ExpressionText="dtAllProjects" />
+                  </InArgument>
+                  <InArgument x:TypeArguments="sd:DataTable" x:Key="in_dtWeekDailyNotes">
+                    <VisualBasicValue x:TypeArguments="sd:DataTable" ExpressionText="new system.data.DataTable" />
+                  </InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="in_resourceRole">
+                    <VisualBasicValue x:TypeArguments="x:String" ExpressionText="resourceRole" />
+                  </InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="in_str_TimesheetDate">
+                    <VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_str_TimesheetDate" />
+                  </InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="in_str_UserEmail">
+                    <VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_UserEmail" />
+                  </InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="in_status">
+                    <VisualBasicValue x:TypeArguments="x:String" ExpressionText="config(&quot;status_saved&quot;).ToString" />
+                  </InArgument>
+                </ui:InvokeWorkflowFile.Arguments>
+              </ui:InvokeWorkflowFile>
+            </Sequence>
+          </If.Then>
+          <If.Else>
+            <Sequence sap2010:WorkflowViewState.IdRef="Sequence_10" />
+          </If.Else>
+        </If>
+        <If Condition="[in_str_Update_Type = &quot;Submit&quot; or in_str_Update_Type = &quot;Both&quot;]" sap:VirtualizedContainerService.HintSize="410,383" sap2010:WorkflowViewState.IdRef="If_3">
+          <If.Then>
+            <Sequence sap:VirtualizedContainerService.HintSize="376,201" sap2010:WorkflowViewState.IdRef="Sequence_11">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Data Layer\CopyFromDataServicelToPSA.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="334,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_11" UnSafe="False" WorkflowFileName="Data Layer\CopyFromDataServicelToPSA.xaml">
+                <ui:InvokeWorkflowFile.Arguments>
+                  <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_propertiesDictionary">
+                    <VisualBasicValue x:TypeArguments="scg:Dictionary(x:String, x:Object)" ExpressionText="new Dictionary(of string,object)" />
+                  </InArgument>
+                  <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_config">
+                    <VisualBasicValue x:TypeArguments="scg:Dictionary(x:String, x:Object)" ExpressionText="Config" />
+                  </InArgument>
+                  <InArgument x:TypeArguments="usc:IConnectionService" x:Key="io_sfdcConnection">
+                    <VisualBasicValue x:TypeArguments="usc:IConnectionService" ExpressionText="io_sfdcConnection" />
+                  </InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="in_encryptedResourceId">
+                    <VisualBasicValue x:TypeArguments="x:String" ExpressionText="encryptedResourceId" />
+                  </InArgument>
+                  <InArgument x:TypeArguments="sd:DataTable" x:Key="in_dtAllAssignmentsAndProjects">
+                    <VisualBasicValue x:TypeArguments="sd:DataTable" ExpressionText="dt_ProjectAssigAndGlobal" />
+                  </InArgument>
+                  <InArgument x:TypeArguments="sd:DataTable" x:Key="in_dtMilestones" />
+                  <InArgument x:TypeArguments="sd:DataTable" x:Key="in_dtGlobalProjects">
+                    <VisualBasicValue x:TypeArguments="sd:DataTable" ExpressionText="dtAllProjects" />
+                  </InArgument>
+                  <InArgument x:TypeArguments="sd:DataTable" x:Key="in_dtWeekDailyNotes">
+                    <VisualBasicValue x:TypeArguments="sd:DataTable" ExpressionText="new system.data.DataTable" />
+                  </InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="in_resourceRole">
+                    <VisualBasicValue x:TypeArguments="x:String" ExpressionText="resourceRole" />
+                  </InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="in_str_TimesheetDate">
+                    <VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_str_TimesheetDate" />
+                  </InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="in_str_UserEmail">
+                    <VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_UserEmail" />
+                  </InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="in_status">
+                    <VisualBasicValue x:TypeArguments="x:String" ExpressionText="config(&quot;status_submitted&quot;).ToString" />
+                  </InArgument>
+                </ui:InvokeWorkflowFile.Arguments>
+              </ui:InvokeWorkflowFile>
+            </Sequence>
+          </If.Then>
+          <If.Else>
+            <Sequence sap2010:WorkflowViewState.IdRef="Sequence_12" />
+          </If.Else>
+        </If>
       </Sequence>
     </Switch>
   </Sequence>
