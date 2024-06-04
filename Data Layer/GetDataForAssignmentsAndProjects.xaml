@@ -1,6 +1,5 @@
 <Activity mc:Ignorable="sap sap2010" x:Class="GetDataForNewAssignment" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:cs="clr-namespace:COE6168_FFTimeCards_Library.Salesforce;assembly=COE6168_FFTimeCards_Library" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:usc="clr-namespace:UiPath.Salesforce.ConnectionService;assembly=UiPath.Salesforce" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
-    <x:Property Name="in_propertiesDictionary" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
     <x:Property Name="in_config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
     <x:Property Name="io_sfdcConnection" Type="InOutArgument(usc:IConnectionService)" />
     <x:Property Name="out_dtAllAssigOpenForTimeEntry" Type="OutArgument(sd:DataTable)" />
@@ -9,9 +8,6 @@
     <x:Property Name="in_weekDate" Type="InArgument(x:String)" />
     <x:Property Name="in_encryptedeResourceId" Type="InArgument(x:String)" />
   </x:Members>
-  <this:GetDataForNewAssignment.in_propertiesDictionary>
-    <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" />
-  </this:GetDataForNewAssignment.in_propertiesDictionary>
   <this:GetDataForNewAssignment.in_weekDate>
     <InArgument x:TypeArguments="x:String" />
   </this:GetDataForNewAssignment.in_weekDate>
@@ -21,7 +17,7 @@
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1381,3316</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1544,3347</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>GetDataForNewAssignment_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="64">
@@ -121,9 +117,10 @@
       <AssemblyReference>WindowsBase</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="Gets data for eligible projects/assignments." DisplayName="GetDataForAssignmentsAndProjects" sap:VirtualizedContainerService.HintSize="606,3251" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="Gets data for eligible projects/assignments." DisplayName="GetDataForAssignmentsAndProjects" sap:VirtualizedContainerService.HintSize="606,3282" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="weekStartDate" />
+      <Variable x:TypeArguments="x:String" Name="weekEndDate" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -133,7 +130,7 @@
     </sap:WorkflowViewStateService.ViewState>
     <ui:LogMessage DisplayName="Log Message Start " sap:VirtualizedContainerService.HintSize="544,141" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Start GetDataForAssignmentsAndProjects.&quot;]" />
     <ui:LogMessage DisplayName="Log Message info week" sap:VirtualizedContainerService.HintSize="544,141" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;Extract data for week: &quot;+ in_weekDate]" />
-    <ui:MultipleAssign DisplayName="Multiple Assign week start, end, and tablle json from interface" sap:VirtualizedContainerService.HintSize="544,116" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
+    <ui:MultipleAssign DisplayName="Multiple Assign week start, end, and tablle json from interface" sap:VirtualizedContainerService.HintSize="544,147" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
       <ui:MultipleAssign.AssignOperations>
         <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
           <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_1">
@@ -141,7 +138,15 @@
               <OutArgument x:TypeArguments="x:String">[weekStartDate]</OutArgument>
             </ui:AssignOperation.To>
             <ui:AssignOperation.Value>
-              <InArgument x:TypeArguments="x:String" xml:space="preserve">[( Datetime.ParseExact(  in_weekDate,"yyyy-MM-dd", Globalization.CultureInfo.InvariantCulture).AddDays(-6)).toString("yyyy-MM-dd")]</InArgument>
+              <InArgument x:TypeArguments="x:String" xml:space="preserve">[( Datetime.ParseExact(  in_weekDate,"M/d/yyyy", Globalization.CultureInfo.InvariantCulture).AddDays(-6)).toString("yyyy-MM-dd")]</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_2">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:String">[weekEndDate]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:String" xml:space="preserve">[( Datetime.ParseExact(  in_weekDate,"M/d/yyyy", Globalization.CultureInfo.InvariantCulture)).toString("yyyy-MM-dd")]</InArgument>
             </ui:AssignOperation.Value>
           </ui:AssignOperation>
         </scg:List>
@@ -153,7 +158,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:MultipleAssign>
-    <cs:ExecuteSfdcQueryWithEncryptedData DisplayName=" (ExecuteSfdcQu0eryWithEncryptedData)" DtResult="[out_dtAllAssigOpenForTimeEntry]" EncryptedTextFromQuery="[in_encryptedeResourceId]" sap:VirtualizedContainerService.HintSize="544,243" sap2010:WorkflowViewState.IdRef="ExecuteSfdcQueryWithEncryptedData_1" QueryToExecute="[String.Format(in_config(&quot;sfdcQuery_GetOpenForTimeEntryAssignments&quot;).ToString, in_weekDate, weekStartDate, in_encryptedeResourceId)]" SfdcConnection="[io_sfdcConnection]" />
+    <cs:ExecuteSfdcQueryWithEncryptedData DisplayName=" (ExecuteSfdcQu0eryWithEncryptedData)" DtResult="[out_dtAllAssigOpenForTimeEntry]" EncryptedTextFromQuery="[in_encryptedeResourceId]" sap:VirtualizedContainerService.HintSize="544,243" sap2010:WorkflowViewState.IdRef="ExecuteSfdcQueryWithEncryptedData_1" QueryToExecute="[String.Format(in_config(&quot;sfdcQuery_GetOpenForTimeEntryAssignments&quot;).ToString, weekEndDate, weekStartDate, in_encryptedeResourceId)]" SfdcConnection="[io_sfdcConnection]" />
     <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[out_dtAllAssigOpenForTimeEntry]" DisplayName="For Each Row in assignemtns, add name proj-&gt;assignments" sap:VirtualizedContainerService.HintSize="544,268" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
       <ui:ForEachRow.Body>
         <ActivityAction x:TypeArguments="sd:DataRow">

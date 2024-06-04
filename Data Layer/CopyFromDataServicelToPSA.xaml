@@ -1,4 +1,4 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="CopyFromExcelToPSA" this:CopyFromExcelToPSA.in_str_UserEmail="aaron.hubbart@uipath.com" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:sc="clr-namespace:System.Collections;assembly=System.Private.CoreLib" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:t="clr-namespace:Time_Tracker;assembly=DataService.Time_Tracker" xmlns:this="clr-namespace:" xmlns:uda="clr-namespace:UiPath.DataService.Activities;assembly=UiPath.DataService.Activities.Core" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:usc="clr-namespace:UiPath.Salesforce.ConnectionService;assembly=UiPath.Salesforce" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="CopyFromExcelToPSA" this:CopyFromExcelToPSA.in_propertiesDictionary="[new Dictionary(of string,object)]" this:CopyFromExcelToPSA.in_dtWeekDailyNotes="[new system.data.DataTable]" this:CopyFromExcelToPSA.in_str_UserEmail="aaron.hubbart@uipath.com" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:cs="clr-namespace:COE6168_FFTimeCards_Library.Salesforce;assembly=COE6168_FFTimeCards_Library" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:t="clr-namespace:Time_Tracker;assembly=DataService.Time_Tracker" xmlns:this="clr-namespace:" xmlns:uda="clr-namespace:UiPath.DataService.Activities;assembly=UiPath.DataService.Activities.Core" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:usc="clr-namespace:UiPath.Salesforce.ConnectionService;assembly=UiPath.Salesforce" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property Name="in_propertiesDictionary" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
     <x:Property Name="in_config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
@@ -18,7 +18,7 @@
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1544,7581</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1544,8409</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>CopyFromExcelToPSA_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -64,6 +64,10 @@
       <x:String>UiPath.Shared.Activities</x:String>
       <x:String>Time_Tracker</x:String>
       <x:String>System.Globalization</x:String>
+      <x:String>COE6168_FFTimeCards_Library.Salesforce</x:String>
+      <x:String>System.Security</x:String>
+      <x:String>UiPath.Salesforce.Models</x:String>
+      <x:String>UiPath.Salesforce.Telemetry</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -140,9 +144,11 @@
       <AssemblyReference>System.Linq.Parallel</AssemblyReference>
       <AssemblyReference>System.Linq.Queryable</AssemblyReference>
       <AssemblyReference>System.Private.ServiceModel</AssemblyReference>
+      <AssemblyReference>COE6168_FFTimeCards_Library</AssemblyReference>
+      <AssemblyReference>System.Runtime.InteropServices</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="CopyFromExcelToPSA" sap:VirtualizedContainerService.HintSize="617,7516" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="CopyFromExcelToPSA" sap:VirtualizedContainerService.HintSize="617,8344" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="s:DateTime" Name="dte_FileDate" />
       <Variable x:TypeArguments="x:String" Name="jsonOutput" />
@@ -157,11 +163,9 @@
       <Variable x:TypeArguments="x:String" Name="weekStartDate" />
       <Variable x:TypeArguments="scg:IList(t:TTTimeEntry)" Name="arr_TimeEntries" />
       <Variable x:TypeArguments="sd:DataTable" Name="dt_TimeEntries" />
-      <Variable x:TypeArguments="sd:DataTable" Name="dt_TimeEntries_Summarized">
-        <Variable.Default>
-          <VisualBasicValue x:TypeArguments="sd:DataTable" ExpressionText="new system.data.DataTable" />
-        </Variable.Default>
-      </Variable>
+      <Variable x:TypeArguments="sd:DataTable" Default="[new system.data.DataTable]" Name="dt_TimeEntries_Summarized" />
+      <Variable x:TypeArguments="s:String[]" Name="str_Test" />
+      <Variable x:TypeArguments="x:Object" Name="obj_Test" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -224,7 +228,7 @@
         </scg:List>
       </uda:QueryEntityRecords.FilterValues>
     </uda:QueryEntityRecords>
-    <ui:BuildDataTable DataTable="[dt_TimeEntries]" DisplayName="Build Data Table" sap:VirtualizedContainerService.HintSize="555,60" sap2010:WorkflowViewState.IdRef="BuildDataTable_1" TableInfo="&lt;NewDataSet&gt;&#xD;&#xA;  &lt;xs:schema id=&quot;NewDataSet&quot; xmlns=&quot;&quot; xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:msdata=&quot;urn:schemas-microsoft-com:xml-msdata&quot;&gt;&#xD;&#xA;    &lt;xs:element name=&quot;NewDataSet&quot; msdata:IsDataSet=&quot;true&quot; msdata:MainDataTable=&quot;TableName&quot; msdata:UseCurrentLocale=&quot;true&quot;&gt;&#xD;&#xA;      &lt;xs:complexType&gt;&#xD;&#xA;        &lt;xs:choice minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot;&gt;&#xD;&#xA;          &lt;xs:element name=&quot;TableName&quot;&gt;&#xD;&#xA;            &lt;xs:complexType&gt;&#xD;&#xA;              &lt;xs:sequence&gt;&#xD;&#xA;                &lt;xs:element name=&quot;Project&quot; msdata:Caption=&quot;&quot; minOccurs=&quot;0&quot;&gt;&#xD;&#xA;                  &lt;xs:simpleType&gt;&#xD;&#xA;                    &lt;xs:restriction base=&quot;xs:string&quot;&gt;&#xD;&#xA;                      &lt;xs:maxLength value=&quot;1200&quot; /&gt;&#xD;&#xA;                    &lt;/xs:restriction&gt;&#xD;&#xA;                  &lt;/xs:simpleType&gt;&#xD;&#xA;                &lt;/xs:element&gt;&#xD;&#xA;                &lt;xs:element name=&quot;Milestones&quot; msdata:Caption=&quot;&quot; minOccurs=&quot;0&quot;&gt;&#xD;&#xA;                  &lt;xs:simpleType&gt;&#xD;&#xA;                    &lt;xs:restriction base=&quot;xs:string&quot;&gt;&#xD;&#xA;                      &lt;xs:maxLength value=&quot;1200&quot; /&gt;&#xD;&#xA;                    &lt;/xs:restriction&gt;&#xD;&#xA;                  &lt;/xs:simpleType&gt;&#xD;&#xA;                &lt;/xs:element&gt;&#xD;&#xA;                &lt;xs:element name=&quot;x&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xD;&#xA;                &lt;xs:element name=&quot;Sunday&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xD;&#xA;                &lt;xs:element name=&quot;Monday&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xD;&#xA;                &lt;xs:element name=&quot;Tuesday&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xD;&#xA;                &lt;xs:element name=&quot;Wednesday&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xD;&#xA;                &lt;xs:element name=&quot;Thursday&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xD;&#xA;                &lt;xs:element name=&quot;Friday&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xD;&#xA;                &lt;xs:element name=&quot;Saturday&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xD;&#xA;                &lt;xs:element name=&quot;Total&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xD;&#xA;                &lt;xs:element name=&quot;Comments&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xD;&#xA;              &lt;/xs:sequence&gt;&#xD;&#xA;            &lt;/xs:complexType&gt;&#xD;&#xA;          &lt;/xs:element&gt;&#xD;&#xA;        &lt;/xs:choice&gt;&#xD;&#xA;      &lt;/xs:complexType&gt;&#xD;&#xA;    &lt;/xs:element&gt;&#xD;&#xA;  &lt;/xs:schema&gt;&#xD;&#xA;&lt;/NewDataSet&gt;" />
+    <ui:BuildDataTable DataTable="[dt_TimeEntries]" DisplayName="Build Data Table" sap:VirtualizedContainerService.HintSize="555,60" sap2010:WorkflowViewState.IdRef="BuildDataTable_1" TableInfo="&lt;NewDataSet&gt;&#xA;  &lt;xs:schema id=&quot;NewDataSet&quot; xmlns=&quot;&quot; xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:msdata=&quot;urn:schemas-microsoft-com:xml-msdata&quot;&gt;&#xA;    &lt;xs:element name=&quot;NewDataSet&quot; msdata:IsDataSet=&quot;true&quot; msdata:MainDataTable=&quot;TableName&quot; msdata:UseCurrentLocale=&quot;true&quot;&gt;&#xA;      &lt;xs:complexType&gt;&#xA;        &lt;xs:choice minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot;&gt;&#xA;          &lt;xs:element name=&quot;TableName&quot;&gt;&#xA;            &lt;xs:complexType&gt;&#xA;              &lt;xs:sequence&gt;&#xA;                &lt;xs:element name=&quot;Project&quot; msdata:Caption=&quot;&quot; minOccurs=&quot;0&quot;&gt;&#xA;                  &lt;xs:simpleType&gt;&#xA;                    &lt;xs:restriction base=&quot;xs:string&quot;&gt;&#xA;                      &lt;xs:maxLength value=&quot;1200&quot; /&gt;&#xA;                    &lt;/xs:restriction&gt;&#xA;                  &lt;/xs:simpleType&gt;&#xA;                &lt;/xs:element&gt;&#xA;                &lt;xs:element name=&quot;Milestones&quot; msdata:Caption=&quot;&quot; minOccurs=&quot;0&quot;&gt;&#xA;                  &lt;xs:simpleType&gt;&#xA;                    &lt;xs:restriction base=&quot;xs:string&quot;&gt;&#xA;                      &lt;xs:maxLength value=&quot;1200&quot; /&gt;&#xA;                    &lt;/xs:restriction&gt;&#xA;                  &lt;/xs:simpleType&gt;&#xA;                &lt;/xs:element&gt;&#xA;                &lt;xs:element name=&quot;x&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Sunday&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Monday&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Tuesday&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Wednesday&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Thursday&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Friday&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Saturday&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Total&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Comments&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;              &lt;/xs:sequence&gt;&#xA;            &lt;/xs:complexType&gt;&#xA;          &lt;/xs:element&gt;&#xA;        &lt;/xs:choice&gt;&#xA;      &lt;/xs:complexType&gt;&#xA;    &lt;/xs:element&gt;&#xA;  &lt;/xs:schema&gt;&#xA;&lt;/NewDataSet&gt;" />
     <ui:ForEach x:TypeArguments="t:TTTimeEntry" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="555,1138" sap2010:WorkflowViewState.IdRef="ForEach`1_4" Values="[arr_TimeEntries]">
       <ui:ForEach.Body>
         <ActivityAction x:TypeArguments="t:TTTimeEntry">
@@ -353,8 +357,8 @@
                 </scg:List>
               </ui:MultipleAssign.AssignOperations>
             </ui:MultipleAssign>
-            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="479,141" sap2010:WorkflowViewState.IdRef="LogMessage_5" Message="[&quot;Project: &quot; &amp; str_Temp_Project &amp; &quot;&quot; &amp; Environment.NewLine &amp; _&#xD;&#xA;&quot;Milestone: &quot; &amp; str_Temp_Milestone &amp; &quot;&quot; &amp; Environment.NewLine &amp; _&#xD;&#xA;&quot;Sunday: &quot; &amp; dec_Temp_Sunday.ToString &amp; &quot;&quot; &amp; Environment.NewLine &amp; _&#xD;&#xA;&quot;Monday: &quot; &amp; dec_Temp_Monday.ToString &amp; &quot;&quot; &amp; Environment.NewLine &amp; _&#xD;&#xA;&quot;Tuesday: &quot; &amp; dec_Temp_Tuesday.ToString &amp; &quot;&quot; &amp; Environment.NewLine &amp; _&#xD;&#xA;&quot;Wednesday: &quot; &amp; dec_Temp_Wednesday.ToString &amp; &quot;&quot; &amp; Environment.NewLine &amp; _&#xD;&#xA;&quot;Thursday: &quot; &amp; dec_Temp_Thursday.ToString &amp; &quot;&quot; &amp; Environment.NewLine &amp; _&#xD;&#xA;&quot;Friday: &quot; &amp; dec_Temp_Friday.ToString &amp; &quot;&quot; &amp; Environment.NewLine &amp; _&#xD;&#xA;&quot;Saturday: &quot; &amp; dec_Temp_Saturday.ToString &amp; &quot;&quot; &amp; Environment.NewLine &amp; _&#xD;&#xA;&quot;Total: &quot; &amp; dec_Temp_Sunday.ToString &amp; &quot;&quot; &amp; Environment.NewLine &amp; _&#xD;&#xA;&quot;Comments: &quot; &amp; str_Temp_Comments &amp; &quot;&quot;]" />
-            <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[{str_Temp_Project, str_Temp_Milestone, &quot;&quot;,&#xD;&#xA;dec_Temp_Sunday.ToString, dec_Temp_Monday.ToString, &#xD;&#xA;dec_Temp_Tuesday.ToString, dec_Temp_Wednesday.ToString,&#xD;&#xA;dec_Temp_Thursday.ToString, dec_Temp_Friday.ToString,&#xD;&#xA;dec_Temp_Saturday.ToString, dec_Temp_Sunday.ToString,&#xD;&#xA;str_Temp_Comments}]" DataTable="[dt_TimeEntries]" DisplayName="Add Data Row" sap:VirtualizedContainerService.HintSize="479,186" sap2010:WorkflowViewState.IdRef="AddDataRow_2" />
+            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="479,141" sap2010:WorkflowViewState.IdRef="LogMessage_5" Message="[&quot;Project: &quot; &amp; str_Temp_Project &amp; &quot;&quot; &amp; Environment.NewLine &amp; _&#xA;&quot;Milestone: &quot; &amp; str_Temp_Milestone &amp; &quot;&quot; &amp; Environment.NewLine &amp; _&#xA;&quot;Sunday: &quot; &amp; dec_Temp_Sunday.ToString &amp; &quot;&quot; &amp; Environment.NewLine &amp; _&#xA;&quot;Monday: &quot; &amp; dec_Temp_Monday.ToString &amp; &quot;&quot; &amp; Environment.NewLine &amp; _&#xA;&quot;Tuesday: &quot; &amp; dec_Temp_Tuesday.ToString &amp; &quot;&quot; &amp; Environment.NewLine &amp; _&#xA;&quot;Wednesday: &quot; &amp; dec_Temp_Wednesday.ToString &amp; &quot;&quot; &amp; Environment.NewLine &amp; _&#xA;&quot;Thursday: &quot; &amp; dec_Temp_Thursday.ToString &amp; &quot;&quot; &amp; Environment.NewLine &amp; _&#xA;&quot;Friday: &quot; &amp; dec_Temp_Friday.ToString &amp; &quot;&quot; &amp; Environment.NewLine &amp; _&#xA;&quot;Saturday: &quot; &amp; dec_Temp_Saturday.ToString &amp; &quot;&quot; &amp; Environment.NewLine &amp; _&#xA;&quot;Total: &quot; &amp; dec_Temp_Sunday.ToString &amp; &quot;&quot; &amp; Environment.NewLine &amp; _&#xA;&quot;Comments: &quot; &amp; str_Temp_Comments &amp; &quot;&quot;]" />
+            <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[{str_Temp_Project, str_Temp_Milestone, &quot;&quot;,&#xA;dec_Temp_Sunday.ToString, dec_Temp_Monday.ToString, &#xA;dec_Temp_Tuesday.ToString, dec_Temp_Wednesday.ToString,&#xA;dec_Temp_Thursday.ToString, dec_Temp_Friday.ToString,&#xA;dec_Temp_Saturday.ToString, dec_Temp_Sunday.ToString,&#xA;str_Temp_Comments}]" DataTable="[dt_TimeEntries]" DisplayName="Add Data Row" sap:VirtualizedContainerService.HintSize="479,186" sap2010:WorkflowViewState.IdRef="AddDataRow_2" />
           </Sequence>
         </ActivityAction>
       </ui:ForEach.Body>
@@ -375,7 +379,7 @@ Let f5= grp.sum(Function (x) CDbl(x(7).toString))
 Let f6= grp.sum(Function (x) CDbl(x(8).toString))
 Let f7= grp.sum(Function (x) CDbl(x(9).toString))
 Let fTotal= grp.sum(Function (x) CDbl(x(10).toString))
-Let fComments= String.Join(", ",grp.Select(Function(x) x(11).toString))
+Let fComments= String.Join(" ### ",grp.Select(Function(x) x(11).toString))
 Let ra = New Object(){k1,k2,k3,f1,f2,f3,f4,f5,f6,f7,fTotal,fComments}
 Select dt_TimeEntries_Summarized.rows.add(ra)).copytodatatable]</InArgument>
       </Assign.Value>
@@ -504,7 +508,7 @@ Select dt_TimeEntries_Summarized.rows.add(ra)).copytodatatable]</InArgument>
                       <OutArgument x:TypeArguments="x:String">[var3]</OutArgument>
                     </ui:AssignOperation.To>
                     <ui:AssignOperation.Value>
-                      <InArgument x:TypeArguments="x:String">[CurrentRow(dte_FileDate.adddays(-6).ToShortDateString +" " + dte_FileDate.adddays(-6).ToLongTimeString).ToString]</InArgument>
+                      <InArgument x:TypeArguments="x:String">[CurrentRow("Sunday").ToString]</InArgument>
                     </ui:AssignOperation.Value>
                   </ui:AssignOperation>
                   <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_7">
@@ -512,7 +516,7 @@ Select dt_TimeEntries_Summarized.rows.add(ra)).copytodatatable]</InArgument>
                       <OutArgument x:TypeArguments="x:String">[var4]</OutArgument>
                     </ui:AssignOperation.To>
                     <ui:AssignOperation.Value>
-                      <InArgument x:TypeArguments="x:String">[CurrentRow(dte_FileDate.adddays(-5).ToShortDateString +" " + dte_FileDate.adddays(-5).ToLongTimeString).ToString]</InArgument>
+                      <InArgument x:TypeArguments="x:String">[CurrentRow("Monday").ToString]</InArgument>
                     </ui:AssignOperation.Value>
                   </ui:AssignOperation>
                   <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_8">
@@ -520,7 +524,7 @@ Select dt_TimeEntries_Summarized.rows.add(ra)).copytodatatable]</InArgument>
                       <OutArgument x:TypeArguments="x:String">[var5]</OutArgument>
                     </ui:AssignOperation.To>
                     <ui:AssignOperation.Value>
-                      <InArgument x:TypeArguments="x:String">[CurrentRow(dte_FileDate.adddays(-4).ToShortDateString +" " + dte_FileDate.adddays(-4).ToLongTimeString).ToString]</InArgument>
+                      <InArgument x:TypeArguments="x:String">[CurrentRow("Tuesday").ToString]</InArgument>
                     </ui:AssignOperation.Value>
                   </ui:AssignOperation>
                   <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_9">
@@ -528,7 +532,7 @@ Select dt_TimeEntries_Summarized.rows.add(ra)).copytodatatable]</InArgument>
                       <OutArgument x:TypeArguments="x:String">[var6]</OutArgument>
                     </ui:AssignOperation.To>
                     <ui:AssignOperation.Value>
-                      <InArgument x:TypeArguments="x:String">[CurrentRow(dte_FileDate.adddays(-3).ToShortDateString +" " + dte_FileDate.adddays(-3).ToLongTimeString).ToString]</InArgument>
+                      <InArgument x:TypeArguments="x:String">[CurrentRow("Wednesday").ToString]</InArgument>
                     </ui:AssignOperation.Value>
                   </ui:AssignOperation>
                   <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_10">
@@ -536,7 +540,7 @@ Select dt_TimeEntries_Summarized.rows.add(ra)).copytodatatable]</InArgument>
                       <OutArgument x:TypeArguments="x:String">[var7]</OutArgument>
                     </ui:AssignOperation.To>
                     <ui:AssignOperation.Value>
-                      <InArgument x:TypeArguments="x:String">[CurrentRow(dte_FileDate.adddays(-2).ToShortDateString +" " + dte_FileDate.adddays(-2).ToLongTimeString).ToString]</InArgument>
+                      <InArgument x:TypeArguments="x:String">[CurrentRow("Thursday").ToString]</InArgument>
                     </ui:AssignOperation.Value>
                   </ui:AssignOperation>
                   <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_11">
@@ -544,7 +548,7 @@ Select dt_TimeEntries_Summarized.rows.add(ra)).copytodatatable]</InArgument>
                       <OutArgument x:TypeArguments="x:String">[var8]</OutArgument>
                     </ui:AssignOperation.To>
                     <ui:AssignOperation.Value>
-                      <InArgument x:TypeArguments="x:String">[CurrentRow(dte_FileDate.adddays(-1).ToShortDateString +" " + dte_FileDate.adddays(-1).ToLongTimeString).ToString]</InArgument>
+                      <InArgument x:TypeArguments="x:String">[CurrentRow("Friday").ToString]</InArgument>
                     </ui:AssignOperation.Value>
                   </ui:AssignOperation>
                   <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_12">
@@ -552,7 +556,7 @@ Select dt_TimeEntries_Summarized.rows.add(ra)).copytodatatable]</InArgument>
                       <OutArgument x:TypeArguments="x:String">[var9]</OutArgument>
                     </ui:AssignOperation.To>
                     <ui:AssignOperation.Value>
-                      <InArgument x:TypeArguments="x:String">[CurrentRow(dte_FileDate.ToShortDateString +" " + dte_FileDate.ToLongTimeString).ToString]</InArgument>
+                      <InArgument x:TypeArguments="x:String">[CurrentRow("Saturday").ToString]</InArgument>
                     </ui:AssignOperation.Value>
                   </ui:AssignOperation>
                   <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_13">
@@ -576,7 +580,7 @@ Select dt_TimeEntries_Summarized.rows.add(ra)).copytodatatable]</InArgument>
                       <OutArgument x:TypeArguments="x:String">[var12]</OutArgument>
                     </ui:AssignOperation.To>
                     <ui:AssignOperation.Value>
-                      <InArgument x:TypeArguments="x:String">[CurrentRow("Milestone").ToString]</InArgument>
+                      <InArgument x:TypeArguments="x:String">[CurrentRow("Milestones").ToString]</InArgument>
                     </ui:AssignOperation.Value>
                   </ui:AssignOperation>
                   <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_17">
@@ -621,12 +625,29 @@ Select dt_TimeEntries_Summarized.rows.add(ra)).copytodatatable]</InArgument>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:ForEachRow>
+    <Assign sap:VirtualizedContainerService.HintSize="555,82" sap2010:WorkflowViewState.IdRef="Assign_10">
+      <Assign.To>
+        <OutArgument x:TypeArguments="s:String[]">[str_Test]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="s:String[]">[(dtTimecardEntries.AsEnumerable.Select(Function(a) a("pse__Assignment__r.id").ToString())).ToArray]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <Assign sap:VirtualizedContainerService.HintSize="555,82" sap2010:WorkflowViewState.IdRef="Assign_11">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:Object">[obj_Test]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:Object">[(dtTimecardEntries.AsEnumerable.Select(Function(a) a("pse__Assignment__r.id").ToString())).ToArray]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="555,141" sap2010:WorkflowViewState.IdRef="LogMessage_6" Message="[str_Test.ToString]" />
     <Assign sap:VirtualizedContainerService.HintSize="555,82" sap2010:WorkflowViewState.IdRef="Assign_8">
       <Assign.To>
         <OutArgument x:TypeArguments="x:Object">[in_propertiesDictionary("assignmentId")]</OutArgument>
       </Assign.To>
       <Assign.Value>
-        <InArgument x:TypeArguments="sc:ArrayList">[new ArrayList(dtTimecardEntries.AsEnumerable.Select(Function(a) a.Field(Of String)(“[pse__Assignment__r.id]”).ToString).ToArray())]</InArgument>
+        <InArgument x:TypeArguments="x:Object">[(dtTimecardEntries.AsEnumerable.Select(Function(a) a("pse__Assignment__r.id").ToString())).ToArray()]</InArgument>
       </Assign.Value>
     </Assign>
     <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="GetMilestonesForTableData.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="555,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_6" LogEntry="No" LogExit="No" UnSafe="False" WorkflowFileName="Data Layer\GetMilestonesForTableData.xaml">
@@ -658,6 +679,8 @@ Select dt_TimeEntries_Summarized.rows.add(ra)).copytodatatable]</InArgument>
       </ui:FilterDataTable.SelectColumns>
     </ui:FilterDataTable>
     <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="555,141" sap2010:WorkflowViewState.IdRef="LogMessage_3" Message="[in_dtMilestones.ToString]" />
+    <cs:ExecuteSfdcQueryWithEncryptedData DtResult="[in_dtWeekDailyNotes]" EncryptedTextFromQuery="[in_encryptedResourceId]" sap:VirtualizedContainerService.HintSize="555,243" sap2010:WorkflowViewState.IdRef="ExecuteSfdcQueryWithEncryptedData_1" QueryToExecute="[String.Format(in_config(&quot;sfdcQuery_GetWeekNotes&quot;).toString, in_encryptedResourceId, weekEndDate)]" SfdcConnection="[io_sfdcConnection]" />
+    <ui:SortDataTable ColumnIndex="{x:Null}" DataColumn="{x:Null}" OutputDataTable="{x:Null}" ColumnName="pse__Assignment__r.Name" DataTable="[dtTimecardEntries]" DisplayName="Sort Data Table" sap:VirtualizedContainerService.HintSize="555,80" sap2010:WorkflowViewState.IdRef="SortDataTable_1" Order="Ascending" SortOrder="Ascending" />
     <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[dtTimecardEntries]" DisplayName="For Each Row in Data Table, cehck if need to save and save" sap:VirtualizedContainerService.HintSize="555,481" sap2010:WorkflowViewState.IdRef="ForEachRow_3">
       <ui:ForEachRow.Body>
         <ActivityAction x:TypeArguments="sd:DataRow">

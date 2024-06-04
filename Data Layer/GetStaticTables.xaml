@@ -11,7 +11,7 @@
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1381,6590</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1544,12317</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>GetStaticTables_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="66">
@@ -139,7 +139,7 @@
       <AssemblyReference>Microsoft.VisualBasic.Forms</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="Gets data for my active and past assignments and global projects tables.&#xA;" DisplayName="GetStaticTables" sap:VirtualizedContainerService.HintSize="572,6525" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="Gets data for my active and past assignments and global projects tables.&#xA;" DisplayName="GetStaticTables" sap:VirtualizedContainerService.HintSize="624,12252" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="sd:DataTable" Name="dtActiveAssignments" />
       <Variable x:TypeArguments="sd:DataTable" Name="dtPastAssignments" />
@@ -158,8 +158,8 @@
         <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:LogMessage DisplayName="Log Message Start" sap:VirtualizedContainerService.HintSize="510,141" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Start GetStaticTables.&quot;]" />
-    <ui:MultipleAssign DisplayName="Multiple Assign wee start and end" sap:VirtualizedContainerService.HintSize="510,147" sap2010:WorkflowViewState.IdRef="MultipleAssign_3">
+    <ui:LogMessage DisplayName="Log Message Start" sap:VirtualizedContainerService.HintSize="562,141" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Start GetStaticTables.&quot;]" />
+    <ui:MultipleAssign DisplayName="Multiple Assign wee start and end" sap:VirtualizedContainerService.HintSize="562,147" sap2010:WorkflowViewState.IdRef="MultipleAssign_3">
       <ui:MultipleAssign.AssignOperations>
         <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
           <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_8">
@@ -181,17 +181,17 @@
         </scg:List>
       </ui:MultipleAssign.AssignOperations>
     </ui:MultipleAssign>
-    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke Salesforce_ExecuteQuery workflowglobal" sap:VirtualizedContainerService.HintSize="510,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4" UnSafe="False" WorkflowFileName="ServiceLayer\Salesforce\Salesforce_ExecuteQuery.xaml">
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke Salesforce_ExecuteQuery workflowglobal" sap:VirtualizedContainerService.HintSize="562,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4" UnSafe="False" WorkflowFileName="ServiceLayer\Salesforce\Salesforce_ExecuteQuery.xaml">
       <ui:InvokeWorkflowFile.Arguments>
         <InOutArgument x:TypeArguments="usc:IConnectionService" x:Key="io_sfdcConnection">[io_sfdcConnection]</InOutArgument>
         <InArgument x:TypeArguments="x:String" x:Key="in_query">[in_config("sfdcQuery_GetGlobalProjects").ToString]</InArgument>
         <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_dtResult">[dtGlobal]</OutArgument>
       </ui:InvokeWorkflowFile.Arguments>
     </ui:InvokeWorkflowFile>
-    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="510,141" sap2010:WorkflowViewState.IdRef="LogMessage_2" Message="[String.Format(in_config(&quot;sfdcQuery_GetActiveAssignments&quot;).ToString, weekStart.ToString(&quot;yyyy-MM-dd&quot;),  weekEnd.ToString(&quot;yyyy-MM-dd&quot;) ,in_encryptedResourceId)]" />
-    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="510,141" sap2010:WorkflowViewState.IdRef="LogMessage_3" Message="[String.Format(in_config(&quot;sfdcQuery_GetPastAssignments&quot;).ToString, in_encryptedResourceId)]" />
-    <cs:ExecuteSfdcQueryWithEncryptedData DtResult="[dtActiveAssignments]" EncryptedTextFromQuery="[in_encryptedResourceId]" sap:VirtualizedContainerService.HintSize="510,243" sap2010:WorkflowViewState.IdRef="ExecuteSfdcQueryWithEncryptedData_1" QueryToExecute="[String.Format(in_config(&quot;sfdcQuery_GetActiveAssignments&quot;).ToString, weekStart.ToString(&quot;yyyy-MM-dd&quot;),  weekEnd.ToString(&quot;yyyy-MM-dd&quot;) ,in_encryptedResourceId)]" SfdcConnection="[io_sfdcConnection]" />
-    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="510,52" sap2010:WorkflowViewState.IdRef="CommentOut_1">
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="562,141" sap2010:WorkflowViewState.IdRef="LogMessage_2" Message="[String.Format(in_config(&quot;sfdcQuery_GetActiveAssignments&quot;).ToString, weekStart.ToString(&quot;yyyy-MM-dd&quot;),  weekEnd.ToString(&quot;yyyy-MM-dd&quot;) ,in_encryptedResourceId)]" />
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="562,141" sap2010:WorkflowViewState.IdRef="LogMessage_3" Message="[String.Format(in_config(&quot;sfdcQuery_GetPastAssignments&quot;).ToString, in_encryptedResourceId)]" />
+    <cs:ExecuteSfdcQueryWithEncryptedData DtResult="[dtActiveAssignments]" EncryptedTextFromQuery="[in_encryptedResourceId]" sap:VirtualizedContainerService.HintSize="562,243" sap2010:WorkflowViewState.IdRef="ExecuteSfdcQueryWithEncryptedData_1" QueryToExecute="[String.Format(in_config(&quot;sfdcQuery_GetActiveAssignments&quot;).ToString, weekStart.ToString(&quot;yyyy-MM-dd&quot;),  weekEnd.ToString(&quot;yyyy-MM-dd&quot;) ,in_encryptedResourceId)]" SfdcConnection="[io_sfdcConnection]" />
+    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="562,52" sap2010:WorkflowViewState.IdRef="CommentOut_1">
       <ui:CommentOut.Body>
         <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="450,201" sap2010:WorkflowViewState.IdRef="Sequence_9">
           <sap:WorkflowViewStateService.ViewState>
@@ -209,8 +209,8 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:CommentOut>
-    <cs:ExecuteSfdcQueryWithEncryptedData DtResult="[dtPastAssignments]" EncryptedTextFromQuery="[in_encryptedResourceId]" sap:VirtualizedContainerService.HintSize="510,243" sap2010:WorkflowViewState.IdRef="ExecuteSfdcQueryWithEncryptedData_2" QueryToExecute="[String.Format(in_config(&quot;sfdcQuery_GetPastAssignments&quot;).ToString, in_encryptedResourceId)]" SfdcConnection="[io_sfdcConnection]" />
-    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="510,52" sap2010:WorkflowViewState.IdRef="CommentOut_2">
+    <cs:ExecuteSfdcQueryWithEncryptedData DtResult="[dtPastAssignments]" EncryptedTextFromQuery="[in_encryptedResourceId]" sap:VirtualizedContainerService.HintSize="562,243" sap2010:WorkflowViewState.IdRef="ExecuteSfdcQueryWithEncryptedData_2" QueryToExecute="[String.Format(in_config(&quot;sfdcQuery_GetPastAssignments&quot;).ToString, in_encryptedResourceId)]" SfdcConnection="[io_sfdcConnection]" />
+    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="562,52" sap2010:WorkflowViewState.IdRef="CommentOut_2">
       <ui:CommentOut.Body>
         <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="450,201" sap2010:WorkflowViewState.IdRef="Sequence_10">
           <sap:WorkflowViewStateService.ViewState>
@@ -228,7 +228,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:CommentOut>
-    <ui:MultipleAssign DisplayName="Multiple Assign construct show dt" sap:VirtualizedContainerService.HintSize="510,178" sap2010:WorkflowViewState.IdRef="MultipleAssign_2">
+    <ui:MultipleAssign DisplayName="Multiple Assign construct show dt" sap:VirtualizedContainerService.HintSize="562,178" sap2010:WorkflowViewState.IdRef="MultipleAssign_2">
       <ui:MultipleAssign.AssignOperations>
         <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
           <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_5">
@@ -258,7 +258,7 @@
         </scg:List>
       </ui:MultipleAssign.AssignOperations>
     </ui:MultipleAssign>
-    <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each, column needed, add to show datatable active" sap:VirtualizedContainerService.HintSize="510,372" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[listOfStaticTablesCols]">
+    <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each, column needed, add to show datatable active" sap:VirtualizedContainerService.HintSize="562,372" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[listOfStaticTablesCols]">
       <ui:ForEach.Body>
         <ActivityAction x:TypeArguments="x:String">
           <ActivityAction.Argument>
@@ -274,7 +274,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:ForEach>
-    <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[dtActiveAssignments]" DisplayName="For Each Row in assignments active, complete assignment name" sap:VirtualizedContainerService.HintSize="510,478" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
+    <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[dtActiveAssignments]" DisplayName="For Each Row in assignments active, complete assignment name" sap:VirtualizedContainerService.HintSize="562,478" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
       <ui:ForEachRow.Body>
         <ActivityAction x:TypeArguments="sd:DataRow">
           <ActivityAction.Argument>
@@ -383,8 +383,8 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:ForEachRow>
-    <ui:MergeDataTable Destination="[dtStaticTablesShowData]" DisplayName="Merge Data Table all past data to show data" sap:VirtualizedContainerService.HintSize="510,133" sap2010:WorkflowViewState.IdRef="MergeDataTable_2" MissingSchemaAction="Ignore" Source="[dtPastAssignments]" />
-    <Assign DisplayName="Assign to past assignmetns concat data" sap:VirtualizedContainerService.HintSize="510,82" sap2010:WorkflowViewState.IdRef="Assign_5">
+    <ui:MergeDataTable Destination="[dtStaticTablesShowData]" DisplayName="Merge Data Table all past data to show data" sap:VirtualizedContainerService.HintSize="562,133" sap2010:WorkflowViewState.IdRef="MergeDataTable_2" MissingSchemaAction="Ignore" Source="[dtPastAssignments]" />
+    <Assign DisplayName="Assign to past assignmetns concat data" sap:VirtualizedContainerService.HintSize="562,82" sap2010:WorkflowViewState.IdRef="Assign_5">
       <Assign.To>
         <OutArgument x:TypeArguments="sd:DataTable">[dtPastAssignments]</OutArgument>
       </Assign.To>
@@ -392,7 +392,7 @@
         <InArgument x:TypeArguments="sd:DataTable">[dtStaticTablesShowData]</InArgument>
       </Assign.Value>
     </Assign>
-    <Assign DisplayName="Assign new static dt for global" sap:VirtualizedContainerService.HintSize="510,82" sap2010:WorkflowViewState.IdRef="Assign_8">
+    <Assign DisplayName="Assign new static dt for global" sap:VirtualizedContainerService.HintSize="562,82" sap2010:WorkflowViewState.IdRef="Assign_8">
       <Assign.To>
         <OutArgument x:TypeArguments="sd:DataTable">[dtStaticTablesShowData]</OutArgument>
       </Assign.To>
@@ -400,7 +400,7 @@
         <InArgument x:TypeArguments="sd:DataTable">[new DataTable()]</InArgument>
       </Assign.Value>
     </Assign>
-    <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each, column needed, add to show datatable global" sap:VirtualizedContainerService.HintSize="510,372" sap2010:WorkflowViewState.IdRef="ForEach`1_3" Values="[listOfGlobalTableColumns]">
+    <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each, column needed, add to show datatable global" sap:VirtualizedContainerService.HintSize="562,372" sap2010:WorkflowViewState.IdRef="ForEach`1_3" Values="[listOfGlobalTableColumns]">
       <ui:ForEach.Body>
         <ActivityAction x:TypeArguments="x:String">
           <ActivityAction.Argument>
@@ -416,8 +416,8 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:ForEach>
-    <ui:MergeDataTable Destination="[dtStaticTablesShowData]" DisplayName="Merge Data Table global to temp" sap:VirtualizedContainerService.HintSize="510,133" sap2010:WorkflowViewState.IdRef="MergeDataTable_3" MissingSchemaAction="Ignore" Source="[dtGlobal]" />
-    <Assign DisplayName="Assign to global temp dt" sap:VirtualizedContainerService.HintSize="510,82" sap2010:WorkflowViewState.IdRef="Assign_6">
+    <ui:MergeDataTable Destination="[dtStaticTablesShowData]" DisplayName="Merge Data Table global to temp" sap:VirtualizedContainerService.HintSize="562,133" sap2010:WorkflowViewState.IdRef="MergeDataTable_3" MissingSchemaAction="Ignore" Source="[dtGlobal]" />
+    <Assign DisplayName="Assign to global temp dt" sap:VirtualizedContainerService.HintSize="562,82" sap2010:WorkflowViewState.IdRef="Assign_6">
       <Assign.To>
         <OutArgument x:TypeArguments="sd:DataTable">[dtGlobal]</OutArgument>
       </Assign.To>
@@ -425,7 +425,7 @@
         <InArgument x:TypeArguments="sd:DataTable">[dtStaticTablesShowData]</InArgument>
       </Assign.Value>
     </Assign>
-    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="510,52" sap2010:WorkflowViewState.IdRef="CommentOut_3">
+    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="562,52" sap2010:WorkflowViewState.IdRef="CommentOut_3">
       <ui:CommentOut.Body>
         <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="512,192" sap2010:WorkflowViewState.IdRef="Sequence_11">
           <sap:WorkflowViewStateService.ViewState>
@@ -512,7 +512,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:CommentOut>
-    <ui:MultipleAssign DisplayName="Multiple Assign tables to dictionary" sap:VirtualizedContainerService.HintSize="510,240" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
+    <ui:MultipleAssign DisplayName="Multiple Assign tables to dictionary" sap:VirtualizedContainerService.HintSize="562,240" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
       <ui:MultipleAssign.AssignOperations>
         <scg:List x:TypeArguments="ui:AssignOperation" Capacity="8">
           <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_1">
@@ -558,7 +558,7 @@
         </scg:List>
       </ui:MultipleAssign.AssignOperations>
     </ui:MultipleAssign>
-    <If Condition="[in_Update_Type = &quot;Active&quot;]" sap:VirtualizedContainerService.HintSize="510,182" sap2010:WorkflowViewState.IdRef="If_5">
+    <If Condition="[in_Update_Type = &quot;Active&quot;]" sap:VirtualizedContainerService.HintSize="562,2091" sap2010:WorkflowViewState.IdRef="If_5">
       <If.Then>
         <Sequence sap:VirtualizedContainerService.HintSize="528,1909" sap2010:WorkflowViewState.IdRef="Sequence_20">
           <sap:WorkflowViewStateService.ViewState>
@@ -735,7 +735,7 @@
         <Sequence sap2010:WorkflowViewState.IdRef="Sequence_21" />
       </If.Else>
     </If>
-    <If Condition="[in_Update_Type = &quot;Past&quot;]" sap:VirtualizedContainerService.HintSize="510,182" sap2010:WorkflowViewState.IdRef="If_6">
+    <If Condition="[in_Update_Type = &quot;Past&quot;]" sap:VirtualizedContainerService.HintSize="562,2091" sap2010:WorkflowViewState.IdRef="If_6">
       <If.Then>
         <Sequence sap:VirtualizedContainerService.HintSize="528,1909" sap2010:WorkflowViewState.IdRef="Sequence_22">
           <sap:WorkflowViewStateService.ViewState>
@@ -906,7 +906,7 @@
         <Sequence sap2010:WorkflowViewState.IdRef="Sequence_23" />
       </If.Else>
     </If>
-    <If Condition="[in_Update_Type = &quot;Global&quot;]" sap:VirtualizedContainerService.HintSize="510,182" sap2010:WorkflowViewState.IdRef="If_7">
+    <If Condition="[in_Update_Type = &quot;Global&quot;]" sap:VirtualizedContainerService.HintSize="562,2091" sap2010:WorkflowViewState.IdRef="If_7">
       <If.Then>
         <Sequence sap:VirtualizedContainerService.HintSize="528,1909" sap2010:WorkflowViewState.IdRef="Sequence_24">
           <sap:WorkflowViewStateService.ViewState>
@@ -1077,7 +1077,7 @@
         <Sequence sap2010:WorkflowViewState.IdRef="Sequence_25" />
       </If.Else>
     </If>
-    <Assign DisplayName="Assign serialize show datatable to json" sap:VirtualizedContainerService.HintSize="510,82" sap2010:WorkflowViewState.IdRef="Assign_1">
+    <Assign DisplayName="Assign serialize show datatable to json" sap:VirtualizedContainerService.HintSize="562,82" sap2010:WorkflowViewState.IdRef="Assign_1">
       <Assign.To>
         <OutArgument x:TypeArguments="x:String">[out_responseData]</OutArgument>
       </Assign.To>

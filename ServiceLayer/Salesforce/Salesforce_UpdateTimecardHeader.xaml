@@ -24,10 +24,10 @@
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>906.4,1440</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1544,1558</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>Salesforce_UpdateTimecardHeader_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
-    <scg:List x:TypeArguments="x:String" Capacity="34">
+    <scg:List x:TypeArguments="x:String" Capacity="68">
       <x:String>Microsoft.VisualBasic</x:String>
       <x:String>Microsoft.VisualBasic.Activities</x:String>
       <x:String>System</x:String>
@@ -61,6 +61,8 @@
       <x:String>UiPath.Salesforce.ConnectionService</x:String>
       <x:String>UiPath.Salesforce.Models</x:String>
       <x:String>UiPath.Salesforce.Telemetry</x:String>
+      <x:String>GlobalVariablesNamespace</x:String>
+      <x:String>GlobalConstantsNamespace</x:String>
     </scg:List>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -103,9 +105,10 @@
       <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
       <AssemblyReference>UiPath.Workflow</AssemblyReference>
       <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Salesforce_UpdateTimecardHeader" sap:VirtualizedContainerService.HintSize="524.8,1375.2" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Salesforce_UpdateTimecardHeader" sap:VirtualizedContainerService.HintSize="541,1493" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="mondayHours" />
       <Variable x:TypeArguments="x:String" Name="tuesdayHours" />
@@ -129,7 +132,7 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:LogMessage DisplayName="Log Message Start" sap:VirtualizedContainerService.HintSize="483.2,92.8" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Start Salesforce_UpdateTimecardHeader&quot;]">
+    <ui:LogMessage DisplayName="Log Message Start" sap:VirtualizedContainerService.HintSize="479,141" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Start Salesforce_UpdateTimecardHeader&quot;]">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -137,7 +140,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:LogMessage>
-    <ui:MultipleAssign DisplayName="Multiple Assign timecard header values" sap:VirtualizedContainerService.HintSize="483.2,288.8" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
+    <ui:MultipleAssign DisplayName="Multiple Assign timecard header values" sap:VirtualizedContainerService.HintSize="479,302" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
       <ui:MultipleAssign.AssignOperations>
         <scg:List x:TypeArguments="ui:AssignOperation" Capacity="16">
           <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_1">
@@ -205,7 +208,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:MultipleAssign>
-    <ui:MultipleAssign DisplayName="Multiple Assign varible for week daily notes" sap:VirtualizedContainerService.HintSize="483.2,319.2" sap2010:WorkflowViewState.IdRef="MultipleAssign_2">
+    <ui:MultipleAssign DisplayName="Multiple Assign varible for week daily notes" sap:VirtualizedContainerService.HintSize="479,333" sap2010:WorkflowViewState.IdRef="MultipleAssign_2">
       <ui:MultipleAssign.AssignOperations>
         <scg:List x:TypeArguments="ui:AssignOperation" Capacity="8">
           <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_9">
@@ -275,13 +278,13 @@
         </scg:List>
       </ui:MultipleAssign.AssignOperations>
     </ui:MultipleAssign>
-    <usa:SalesforceApplicationScope ConsumerKey="{x:Null}" ConsumerSecret="{x:Null}" CustomServer="{x:Null}" Password="{x:Null}" Port="{x:Null}" ProxyPassword="{x:Null}" ProxyServer="{x:Null}" ProxyUser="{x:Null}" SecurityToken="{x:Null}" ServerType="{x:Null}" Sforce_Auto_Assign="{x:Null}" Username="{x:Null}" DisplayName="Salesforce Application Scope for timecard" ExistingConnectionService="[io_sfdcConnection]" sap:VirtualizedContainerService.HintSize="483.2,172.8" sap2010:WorkflowViewState.IdRef="SalesforceApplicationScope_1" ReportApiErrorAsException="True" SalesforceConnection="[io_sfdcConnection]" TelemetryEnabled="False" UseStrongDataTyping="False">
+    <usa:SalesforceApplicationScope ConsumerKey="{x:Null}" ConsumerSecret="{x:Null}" CustomServer="{x:Null}" Password="{x:Null}" Port="{x:Null}" ProxyPassword="{x:Null}" ProxyServer="{x:Null}" ProxyUser="{x:Null}" SecurityToken="{x:Null}" ServerType="{x:Null}" Sforce_Auto_Assign="{x:Null}" Username="{x:Null}" DisplayName="Salesforce Application Scope for timecard" ExistingConnectionService="[io_sfdcConnection]" sap:VirtualizedContainerService.HintSize="479,174" sap2010:WorkflowViewState.IdRef="SalesforceApplicationScope_1" ReportApiErrorAsException="True" SalesforceConnection="[io_sfdcConnection]" TelemetryEnabled="True" UseStrongDataTyping="False">
       <usa:SalesforceApplicationScope.Body>
         <ActivityAction x:TypeArguments="usc:IConnectionService">
           <ActivityAction.Argument>
             <DelegateInArgument x:TypeArguments="usc:IConnectionService" Name="SalesforceConnection" />
           </ActivityAction.Argument>
-          <usa:UpdateRecord AdditionalFields="{x:Null}" DisplayName="Update Record - pse__Timecard_Header__c" sap:VirtualizedContainerService.HintSize="333.6,61.6" Id="[in_entryId]" sap2010:WorkflowViewState.IdRef="UpdateRecord_1" SalesforceObject="pse__Timecard_Header__c" SalesforceObjectSelected="True" SalesforceStatus="[sfdcStatus]" SampleId="a9E7h000000Gq4BEAS">
+          <usa:UpdateRecord AdditionalFields="{x:Null}" DisplayName="Update Record - pse__Timecard_Header__c" sap:VirtualizedContainerService.HintSize="334,62" Id="[in_entryId]" sap2010:WorkflowViewState.IdRef="UpdateRecord_1" SalesforceObject="pse__Timecard_Header__c" SalesforceObjectSelected="True" SalesforceStatus="[sfdcStatus]" SampleId="a9E7h000000Gq4BEAS">
             <usa:UpdateRecord.AllParameters>
               <scg:List x:TypeArguments="usawm:EntityFieldUiModel" Capacity="86">
                 <usawm:EntityFieldUiModel x:TypeArguments="x:String" ArgumentValue="{x:Null}" InArgumentValue="{x:Null}" InOutArgumentValue="{x:Null}" OutArgumentValue="{x:Null}" x:Name="__ReferenceID0" ArgumentDirection="In" DataType="reference" DisplayName="Owner ID" ExternalId="False" IsSelected="False" Mandatory="False" Name="OwnerId" SampleData="0051Q00000M1MqKQAV" />
@@ -605,7 +608,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </usa:SalesforceApplicationScope>
-    <If Condition="[not  sfdcStatus.Success]" DisplayName="If salesforce sttus is not succes, throw message" sap:VirtualizedContainerService.HintSize="483.2,248.8" sap2010:WorkflowViewState.IdRef="If_1">
+    <If Condition="[not  sfdcStatus.Success]" DisplayName="If salesforce sttus is not succes, throw message" sap:VirtualizedContainerService.HintSize="479,272" sap2010:WorkflowViewState.IdRef="If_1">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -613,8 +616,11 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
       <If.Then>
-        <Throw DisplayName="Throw errro message" Exception="[new exception(  sfdcStatus.Message)]" sap:VirtualizedContainerService.HintSize="200,22.4" sap2010:WorkflowViewState.IdRef="Throw_1" />
+        <Throw DisplayName="Throw errro message" Exception="[new exception(  sfdcStatus.Message)]" sap:VirtualizedContainerService.HintSize="334,90" sap2010:WorkflowViewState.IdRef="Throw_1" />
       </If.Then>
+      <If.Else>
+        <Sequence DisplayName="" sap2010:WorkflowViewState.IdRef="Sequence_2" />
+      </If.Else>
     </If>
   </Sequence>
 </Activity>
