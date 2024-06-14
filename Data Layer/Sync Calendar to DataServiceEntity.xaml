@@ -10,11 +10,13 @@
     <x:Property Name="in_str_internalPrefix" Type="InArgument(x:String)" />
     <x:Property Name="in_str_TimesheetDate" Type="InArgument(x:String)" />
     <x:Property Name="in_str_UserEmail" Type="InArgument(x:String)" />
+    <x:Property Name="in_str_CalendarName" Type="InArgument(x:String)" />
+    <x:Property Name="BreakTriggerScopeInArgument" Type="InArgument(x:String)" />
   </x:Members>
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1544,18222</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1131,19676</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>Sync_Calendar_to_Excel_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="110">
@@ -168,7 +170,7 @@
       <AssemblyReference>UiPath.Web</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Sync_Calendar_to_DataServiceEntity" sap:VirtualizedContainerService.HintSize="1068,18157" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Sync_Calendar_to_DataServiceEntity" sap:VirtualizedContainerService.HintSize="1068,19611" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="s:DateTime" Name="tsDateStart" />
       <Variable x:TypeArguments="s:DateTime" Name="tsDateEnd" />
@@ -602,7 +604,7 @@
         </Assign.Value>
       </Assign>
     </Sequence>
-    <Sequence DisplayName="Get Calendar Events from Outlook" sap:VirtualizedContainerService.HintSize="1006,14827" sap2010:WorkflowViewState.IdRef="Sequence_4">
+    <Sequence DisplayName="Get Calendar Events from Outlook" sap:VirtualizedContainerService.HintSize="1006,16281" sap2010:WorkflowViewState.IdRef="Sequence_4">
       <Sequence.Variables>
         <Variable x:TypeArguments="mg:Calendar" Name="str_Calendar" />
       </Sequence.Variables>
@@ -611,33 +613,94 @@
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-      <uma:Office365ApplicationScope ApplicationId="{x:Null}" ApplicationSecret="{x:Null}" CertificateAsBase64="{x:Null}" CertificatePassword="{x:Null}" ContinueOnError="{x:Null}" OAuth2Username="{x:Null}" Password="{x:Null}" SecureApplicationSecret="{x:Null}" SecurePassword="{x:Null}" Tenant="{x:Null}" Timeout="{x:Null}" Username="{x:Null}" AuthenticationType="InteractiveToken" DisplayName="Microsoft Office 365 Scope" Environment="Global" sap:VirtualizedContainerService.HintSize="944,14716" sap2010:WorkflowViewState.IdRef="Office365ApplicationScope_1" OAuthApplication="UiPath" Services="Calendar">
+      <uma:Office365ApplicationScope ApplicationId="{x:Null}" ApplicationSecret="{x:Null}" CertificateAsBase64="{x:Null}" CertificatePassword="{x:Null}" ContinueOnError="{x:Null}" OAuth2Username="{x:Null}" Password="{x:Null}" SecureApplicationSecret="{x:Null}" SecurePassword="{x:Null}" Tenant="{x:Null}" Timeout="{x:Null}" Username="{x:Null}" AuthenticationType="InteractiveToken" DisplayName="Microsoft Office 365 Scope" Environment="Global" sap:VirtualizedContainerService.HintSize="944,16170" sap2010:WorkflowViewState.IdRef="Office365ApplicationScope_1" OAuthApplication="UiPath" Services="Calendar">
         <uma:Office365ApplicationScope.Body>
           <ActivityAction x:TypeArguments="mg:GraphServiceClient">
             <ActivityAction.Argument>
               <DelegateInArgument x:TypeArguments="mg:GraphServiceClient" Name="ParentScope" />
             </ActivityAction.Argument>
-            <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="910,14629" sap2010:WorkflowViewState.IdRef="Sequence_5">
+            <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="910,16083" sap2010:WorkflowViewState.IdRef="Sequence_5">
               <Sequence.Variables>
                 <Variable x:TypeArguments="mg:Calendar" Name="cal_Outlook" />
                 <Variable x:TypeArguments="x:Int32" Name="int_Counter" />
                 <Variable x:TypeArguments="x:String" Name="str_Test" />
+                <Variable x:TypeArguments="mg:Calendar[]" Name="arr_Cals" />
               </Sequence.Variables>
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                   <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
-              <umac:GetCalendars Account="{x:Null}" Calendars="{x:Null}" UserEmail="{x:Null}" DefaultCalendar="[cal_Outlook]" DisplayName="Get Calendars" sap:VirtualizedContainerService.HintSize="848,87" sap2010:WorkflowViewState.IdRef="GetCalendars_1" />
+              <If Condition="[string.IsNullOrEmpty(in_str_CalendarName)]" sap:VirtualizedContainerService.HintSize="848,1259" sap2010:WorkflowViewState.IdRef="If_26">
+                <If.Then>
+                  <Sequence sap:VirtualizedContainerService.HintSize="376,173" sap2010:WorkflowViewState.IdRef="Sequence_108">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <umac:GetCalendars Account="{x:Null}" UserEmail="{x:Null}" Calendars="[arr_Cals]" DefaultCalendar="[cal_Outlook]" DisplayName="Get Calendars" sap:VirtualizedContainerService.HintSize="334,85" sap2010:WorkflowViewState.IdRef="GetCalendars_1" />
+                  </Sequence>
+                </If.Then>
+                <If.Else>
+                  <Sequence sap:VirtualizedContainerService.HintSize="628,904" sap2010:WorkflowViewState.IdRef="Sequence_109">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <umac:GetCalendars Account="{x:Null}" UserEmail="{x:Null}" Calendars="[arr_Cals]" DefaultCalendar="[cal_Outlook]" DisplayName="Get Calendars" sap:VirtualizedContainerService.HintSize="586,85" sap2010:WorkflowViewState.IdRef="GetCalendars_2" />
+                    <ui:ForEach x:TypeArguments="mg:Calendar" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="586,691" sap2010:WorkflowViewState.IdRef="ForEach`1_8" Values="[arr_Cals]">
+                      <ui:ForEach.Body>
+                        <ActivityAction x:TypeArguments="mg:Calendar">
+                          <ActivityAction.Argument>
+                            <DelegateInArgument x:TypeArguments="mg:Calendar" Name="currentCalendar" />
+                          </ActivityAction.Argument>
+                          <Sequence DisplayName="" sap:VirtualizedContainerService.HintSize="552,505" sap2010:WorkflowViewState.IdRef="Sequence_110">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                            <If Condition="[currentCalendar.Name = in_str_CalendarName]" sap:VirtualizedContainerService.HintSize="510,417" sap2010:WorkflowViewState.IdRef="If_27">
+                              <If.Then>
+                                <Sequence sap:VirtualizedContainerService.HintSize="476,235" sap2010:WorkflowViewState.IdRef="Sequence_111">
+                                  <sap:WorkflowViewStateService.ViewState>
+                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                    </scg:Dictionary>
+                                  </sap:WorkflowViewStateService.ViewState>
+                                  <Assign sap:VirtualizedContainerService.HintSize="434,82" sap2010:WorkflowViewState.IdRef="Assign_59">
+                                    <Assign.To>
+                                      <OutArgument x:TypeArguments="mg:Calendar">[cal_Outlook]</OutArgument>
+                                    </Assign.To>
+                                    <Assign.Value>
+                                      <InArgument x:TypeArguments="mg:Calendar">[currentCalendar]</InArgument>
+                                    </Assign.Value>
+                                  </Assign>
+                                  <ui:Break sap:VirtualizedContainerService.HintSize="434,25" sap2010:WorkflowViewState.IdRef="Break_1" />
+                                </Sequence>
+                              </If.Then>
+                              <If.Else>
+                                <Sequence sap2010:WorkflowViewState.IdRef="Sequence_112" />
+                              </If.Else>
+                            </If>
+                          </Sequence>
+                        </ActivityAction>
+                      </ui:ForEach.Body>
+                    </ui:ForEach>
+                  </Sequence>
+                </If.Else>
+              </If>
               <umac:SearchEvents Account="{x:Null}" EventId="{x:Null}" SearchQuery="{x:Null}" Calendar="[cal_Outlook]" DisplayName="Search Events" EndDate="[tsDateEnd]" Events="[arr_Events]" sap:VirtualizedContainerService.HintSize="848,87" sap2010:WorkflowViewState.IdRef="SearchEvents_1" MaxResults="500" ReturnRecurring="True" StartDate="[tsDateStart]" />
               <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="848,141" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Processing &quot; &amp; arr_Events.Count.ToString &amp; &quot; Events&quot;]" />
-              <ui:ForEach x:TypeArguments="mg:Event" CurrentIndex="[int_Counter]" DisplayName="For Each Event" sap:VirtualizedContainerService.HintSize="848,13186" sap2010:WorkflowViewState.IdRef="ForEach`1_3" Values="[arr_Events]">
+              <ui:ForEach x:TypeArguments="mg:Event" CurrentIndex="[int_Counter]" DisplayName="For Each Event" sap:VirtualizedContainerService.HintSize="848,13468" sap2010:WorkflowViewState.IdRef="ForEach`1_3" Values="[arr_Events]">
                 <ui:ForEach.Body>
                   <ActivityAction x:TypeArguments="mg:Event">
                     <ActivityAction.Argument>
                       <DelegateInArgument x:TypeArguments="mg:Event" Name="item" />
                     </ActivityAction.Argument>
-                    <Sequence DisplayName="For each item - Body" sap:VirtualizedContainerService.HintSize="814,13000" sap2010:WorkflowViewState.IdRef="Sequence_7">
+                    <Sequence DisplayName="For each item - Body" sap:VirtualizedContainerService.HintSize="814,13282" sap2010:WorkflowViewState.IdRef="Sequence_7">
                       <Sequence.Variables>
                         <Variable x:TypeArguments="x:String" Name="str_Project" />
                         <Variable x:TypeArguments="x:String" Name="str_Entry" />
@@ -856,13 +919,13 @@
                           <InArgument x:TypeArguments="scg:IEnumerable(x:String)">[item.Categories]</InArgument>
                         </Assign.Value>
                       </Assign>
-                      <ui:ForEach x:TypeArguments="x:Object" CurrentIndex="{x:Null}" DisplayName="For Each Cat" sap:VirtualizedContainerService.HintSize="772,8255" sap2010:WorkflowViewState.IdRef="ForEach`1_5" Values="[item.Categories]">
+                      <ui:ForEach x:TypeArguments="x:Object" CurrentIndex="{x:Null}" DisplayName="For Each Cat" sap:VirtualizedContainerService.HintSize="772,8537" sap2010:WorkflowViewState.IdRef="ForEach`1_5" Values="[item.Categories]">
                         <ui:ForEach.Body>
                           <ActivityAction x:TypeArguments="x:Object">
                             <ActivityAction.Argument>
                               <DelegateInArgument x:TypeArguments="x:Object" Name="item2" />
                             </ActivityAction.Argument>
-                            <Sequence DisplayName="For each Cat - Body" sap:VirtualizedContainerService.HintSize="738,8069" sap2010:WorkflowViewState.IdRef="Sequence_9">
+                            <Sequence DisplayName="For each Cat - Body" sap:VirtualizedContainerService.HintSize="738,8351" sap2010:WorkflowViewState.IdRef="Sequence_9">
                               <Sequence.Variables>
                                 <Variable x:TypeArguments="sd:DataTable" Name="dt_Mapping_Filtered" />
                                 <Variable x:TypeArguments="x:Boolean" Name="bln_Skip" />
@@ -1014,7 +1077,7 @@
                                   </Sequence>
                                 </If.Else>
                               </If>
-                              <If Condition="[bln_Skip]" sap:VirtualizedContainerService.HintSize="696,5248" sap2010:WorkflowViewState.IdRef="If_6">
+                              <If Condition="[bln_Skip]" sap:VirtualizedContainerService.HintSize="696,5530" sap2010:WorkflowViewState.IdRef="If_6">
                                 <If.Then>
                                   <Sequence DisplayName="" sap:VirtualizedContainerService.HintSize="300,80" sap2010:WorkflowViewState.IdRef="Sequence_91">
                                     <sap:WorkflowViewStateService.ViewState>
@@ -1025,9 +1088,9 @@
                                   </Sequence>
                                 </If.Then>
                                 <If.Else>
-                                  <If Condition="[(dt_Mapping_Filtered.Rows.Count &gt; 0)  orelse (cstr(jobj_FormOut(&quot;txt_categoryName&quot;).ToString).StartsWith(in_str_customerPrefix) and  jobj_FormOut(&quot;cbo_Customer&quot;).ToString &lt;&gt; &quot;skip&quot;)]" sap:VirtualizedContainerService.HintSize="662,4986" sap2010:WorkflowViewState.IdRef="If_9">
+                                  <If Condition="[(dt_Mapping_Filtered.Rows.Count &gt; 0)  orelse (cstr(jobj_FormOut(&quot;txt_categoryName&quot;).ToString).StartsWith(in_str_customerPrefix) and  jobj_FormOut(&quot;cbo_Customer&quot;).ToString &lt;&gt; &quot;skip&quot;)]" sap:VirtualizedContainerService.HintSize="662,5268" sap2010:WorkflowViewState.IdRef="If_9">
                                     <If.Then>
-                                      <Sequence sap:VirtualizedContainerService.HintSize="628,4804" sap2010:WorkflowViewState.IdRef="Sequence_35">
+                                      <Sequence sap:VirtualizedContainerService.HintSize="628,5086" sap2010:WorkflowViewState.IdRef="Sequence_35">
                                         <Sequence.Variables>
                                           <Variable x:TypeArguments="x:String" Name="str_Status" />
                                           <Variable x:TypeArguments="x:String" Name="variable1" />
@@ -1315,7 +1378,7 @@
                                             </scg:List>
                                           </uda:QueryEntityRecords.FilterValues>
                                         </uda:QueryEntityRecords>
-                                        <If Condition="[arr_Projects.Count = 0 or arr_Milestones.Count = 0]" sap:VirtualizedContainerService.HintSize="586,1029" sap2010:WorkflowViewState.IdRef="If_25">
+                                        <If Condition="[arr_Projects.Count = 0 or arr_Milestones.Count = 0]" sap:VirtualizedContainerService.HintSize="586,1311" sap2010:WorkflowViewState.IdRef="If_25">
                                           <If.Then>
                                             <Sequence sap:VirtualizedContainerService.HintSize="376,229" sap2010:WorkflowViewState.IdRef="Sequence_106">
                                               <sap:WorkflowViewStateService.ViewState>
@@ -1327,17 +1390,43 @@
                                             </Sequence>
                                           </If.Then>
                                           <If.Else>
-                                            <Sequence sap:VirtualizedContainerService.HintSize="376,618" sap2010:WorkflowViewState.IdRef="Sequence_107">
+                                            <Sequence sap:VirtualizedContainerService.HintSize="376,900" sap2010:WorkflowViewState.IdRef="Sequence_107">
+                                              <Sequence.Variables>
+                                                <Variable x:TypeArguments="scg:IList(t:TTPSAStatus)" Name="arr_TTStatus" />
+                                              </Sequence.Variables>
                                               <sap:WorkflowViewStateService.ViewState>
                                                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                                   <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                                 </scg:Dictionary>
                                               </sap:WorkflowViewStateService.ViewState>
-                                              <uda:CreateEntityRecord x:TypeArguments="t:TTTimeEntry" InputEntity="{x:Null}" IsInRecordView="{x:Null}" OutputEntity="{x:Null}" VisibleDynamicPropertiesInfo="{x:Null}" ContinueOnError="False" DisplayName="Create Entity Record" EntityId="e3b6a8f1-ae18-ef11-96f5-002248095c31" ExpansionDepth="2" sap:VirtualizedContainerService.HintSize="334,530" sap2010:WorkflowViewState.IdRef="CreateEntityRecord`1_1" InputEntityInFieldView="[new Time_Tracker.TTTimeEntry() With {  .DateEntry = cdate(str_DateStart),  .Hours = cdec(str_Duration),  .MilestoneName = new TTMilestones() With { .Id = arr_Milestones(0).Id },  .ProjectName = new TTAssignments() With { .Id = arr_Projects(0).Id },  .UserEmail = in_str_UserEmail,  .Comment = item.Subject,  .PSAStatus = Time_Tracker.PSAStatus.NotSubmitted,  .PSAUpdateTime = cdate(&quot;1901-01-01&quot;) }]" TimeoutInMs="30000">
+                                              <uda:QueryEntityRecords x:TypeArguments="t:TTPSAStatus" TotalRecords="{x:Null}" ContinueOnError="False" DisplayName="Query Entity Records" EntityId="94276808-f928-ef11-86d2-0022480a1d20" ExpansionDepth="2" sap:VirtualizedContainerService.HintSize="334,140" sap2010:WorkflowViewState.IdRef="QueryEntityRecords`1_4" OutputRecords="[arr_TTStatus]" QueriedEntityId="94276808-f928-ef11-86d2-0022480a1d20" Skip="0" SortAscending="True" SortByField="Id" TimeoutInMs="30000" Top="1">
+                                                <uda:QueryEntityRecords.FilterArguments>
+                                                  <uda:FilterArgument FilterActivityType="{x:Null}">
+                                                    <uda:FilterArgument.Filter>
+                                                      <uda:GroupFilter Index="0" Operator="AND">
+                                                        <uda:GroupFilter.Filters>
+                                                          <scg:List x:TypeArguments="uda:SimpleFilter" Capacity="4">
+                                                            <uda:SimpleFilter ExpressionValue="{x:Null}" FieldName="Status" FieldType="UiPath.DataService.Core.Models.EntityField" Operator="=" ValueIndex="0" />
+                                                          </scg:List>
+                                                        </uda:GroupFilter.Filters>
+                                                        <uda:GroupFilter.Groups>
+                                                          <scg:List x:TypeArguments="uda:GroupFilter" Capacity="0" />
+                                                        </uda:GroupFilter.Groups>
+                                                      </uda:GroupFilter>
+                                                    </uda:FilterArgument.Filter>
+                                                  </uda:FilterArgument>
+                                                </uda:QueryEntityRecords.FilterArguments>
+                                                <uda:QueryEntityRecords.FilterValues>
+                                                  <scg:List x:TypeArguments="InArgument" Capacity="4">
+                                                    <InArgument x:TypeArguments="x:String">Not Submitted</InArgument>
+                                                  </scg:List>
+                                                </uda:QueryEntityRecords.FilterValues>
+                                              </uda:QueryEntityRecords>
+                                              <uda:CreateEntityRecord x:TypeArguments="t:TTTimeEntry" InputEntity="{x:Null}" IsInRecordView="{x:Null}" OutputEntity="{x:Null}" VisibleDynamicPropertiesInfo="{x:Null}" ContinueOnError="False" DisplayName="Create Entity Record" EntityId="e3b6a8f1-ae18-ef11-96f5-002248095c31" ExpansionDepth="2" sap:VirtualizedContainerService.HintSize="334,632" sap2010:WorkflowViewState.IdRef="CreateEntityRecord`1_1" InputEntityInFieldView="[new Time_Tracker.TTTimeEntry() With {  .DateEntry = cdate(str_DateStart),  .Hours = cdec(str_Duration),  .MilestoneName = new TTMilestones() With { .Id = arr_Milestones(0).Id },  .ProjectName = new TTAssignments() With { .Id = arr_Projects(0).Id },  .UserEmail = in_str_UserEmail,  .Comment = item.Subject,  .EntrySource = &quot;Outlook&quot;,  .PSAStatus = Time_Tracker.PSAStatus.NotSubmitted,  .PSAStatusRel = new TTPSAStatus() With { .Id = arr_TTStatus(0).Id },  .PSAUpdateTime = cdate(&quot;1901-01-01&quot;) }]" TimeoutInMs="30000">
                                                 <uda:CreateEntityRecord.State>
                                                   <udam:RecordState RequiredFieldCount="5">
                                                     <udam:RecordState.SelectedFields>
-                                                      <scg:List x:TypeArguments="udam:DynamicEntityField" Capacity="8">
+                                                      <scg:List x:TypeArguments="udam:DynamicEntityField" Capacity="10">
                                                         <udam:DynamicEntityField Id="fc6263bc-b018-ef11-96f5-002248095c31" IsRequired="True" Name="DateEntry">
                                                           <udam:DynamicEntityField.ArgumentValue>
                                                             <InArgument x:TypeArguments="s:DateTime">[cdate(str_DateStart)]</InArgument>
@@ -1368,9 +1457,19 @@
                                                             <InArgument x:TypeArguments="x:String">[item.Subject]</InArgument>
                                                           </udam:DynamicEntityField.ArgumentValue>
                                                         </udam:DynamicEntityField>
+                                                        <udam:DynamicEntityField Id="80e999bc-0e29-ef11-86d2-0022480a1d20" Name="EntrySource">
+                                                          <udam:DynamicEntityField.ArgumentValue>
+                                                            <InArgument x:TypeArguments="x:String">Outlook</InArgument>
+                                                          </udam:DynamicEntityField.ArgumentValue>
+                                                        </udam:DynamicEntityField>
                                                         <udam:DynamicEntityField Id="82202050-3923-ef11-86d2-0022480a1d20" Name="PSAStatus">
                                                           <udam:DynamicEntityField.ArgumentValue>
                                                             <InArgument x:TypeArguments="t:PSAStatus">[Time_Tracker.PSAStatus.NotSubmitted]</InArgument>
+                                                          </udam:DynamicEntityField.ArgumentValue>
+                                                        </udam:DynamicEntityField>
+                                                        <udam:DynamicEntityField Id="ae52a143-f928-ef11-86d2-0022480a1d20" Name="PSAStatusRel">
+                                                          <udam:DynamicEntityField.ArgumentValue>
+                                                            <InArgument x:TypeArguments="s:Guid">[arr_TTStatus(0).Id]</InArgument>
                                                           </udam:DynamicEntityField.ArgumentValue>
                                                         </udam:DynamicEntityField>
                                                         <udam:DynamicEntityField Id="462e4511-3923-ef11-86d2-0022480a1d20" Name="PSAUpdateTime">

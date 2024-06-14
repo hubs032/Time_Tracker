@@ -11,7 +11,7 @@
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>614,12317</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1131,12317</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>GetStaticTables_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="66">
@@ -312,8 +312,8 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:ForEachRow>
-    <ui:MergeDataTable Destination="[dtStaticTablesShowData]" DisplayName="Merge Data Table active to temp" sap:VirtualizedContainerService.HintSize="510,133" sap2010:WorkflowViewState.IdRef="MergeDataTable_1" MissingSchemaAction="Ignore" Source="[dtActiveAssignments]" />
-    <Assign DisplayName="Assign to assignmetns active concat data" sap:VirtualizedContainerService.HintSize="510,82" sap2010:WorkflowViewState.IdRef="Assign_3">
+    <ui:MergeDataTable Destination="[dtStaticTablesShowData]" DisplayName="Merge Data Table active to temp" sap:VirtualizedContainerService.HintSize="562,133" sap2010:WorkflowViewState.IdRef="MergeDataTable_1" MissingSchemaAction="Ignore" Source="[dtActiveAssignments]" />
+    <Assign DisplayName="Assign to assignmetns active concat data" sap:VirtualizedContainerService.HintSize="562,82" sap2010:WorkflowViewState.IdRef="Assign_3">
       <Assign.To>
         <OutArgument x:TypeArguments="sd:DataTable">[dtActiveAssignments]</OutArgument>
       </Assign.To>
@@ -321,7 +321,7 @@
         <InArgument x:TypeArguments="sd:DataTable">[dtStaticTablesShowData]</InArgument>
       </Assign.Value>
     </Assign>
-    <Assign DisplayName="Assign new static dt for past" sap:VirtualizedContainerService.HintSize="510,82" sap2010:WorkflowViewState.IdRef="Assign_7">
+    <Assign DisplayName="Assign new static dt for past" sap:VirtualizedContainerService.HintSize="562,82" sap2010:WorkflowViewState.IdRef="Assign_7">
       <Assign.To>
         <OutArgument x:TypeArguments="sd:DataTable">[dtStaticTablesShowData]</OutArgument>
       </Assign.To>
@@ -329,7 +329,7 @@
         <InArgument x:TypeArguments="sd:DataTable">[new DataTable()]</InArgument>
       </Assign.Value>
     </Assign>
-    <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each, column needed, add to show datatable past" sap:VirtualizedContainerService.HintSize="510,372" sap2010:WorkflowViewState.IdRef="ForEach`1_2" Values="[listOfStaticTablesCols]">
+    <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each, column needed, add to show datatable past" sap:VirtualizedContainerService.HintSize="562,372" sap2010:WorkflowViewState.IdRef="ForEach`1_2" Values="[listOfStaticTablesCols]">
       <ui:ForEach.Body>
         <ActivityAction x:TypeArguments="x:String">
           <ActivityAction.Argument>
@@ -345,7 +345,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:ForEach>
-    <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[dtPastAssignments]" DisplayName="For Each Row in past assignments, complete assignment name" sap:VirtualizedContainerService.HintSize="510,478" sap2010:WorkflowViewState.IdRef="ForEachRow_2">
+    <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[dtPastAssignments]" DisplayName="For Each Row in past assignments, complete assignment name" sap:VirtualizedContainerService.HintSize="562,478" sap2010:WorkflowViewState.IdRef="ForEachRow_2">
       <ui:ForEachRow.Body>
         <ActivityAction x:TypeArguments="sd:DataRow">
           <ActivityAction.Argument>

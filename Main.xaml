@@ -1,4 +1,4 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Main" this:Main.in_str_Activity="GetOutlookData" this:Main.in_UserEmail="aaron.hubbart@uipath.com" this:Main.in_str_TimesheetDate="6/8/2024" this:Main.in_str_customerPrefix="C-" this:Main.in_str_milestonePrefix="O-" this:Main.in_str_internalPrefix="I-" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:t="clr-namespace:Time_Tracker;assembly=DataService.Time_Tracker" xmlns:this="clr-namespace:" xmlns:uda="clr-namespace:UiPath.DataService.Activities;assembly=UiPath.DataService.Activities.Core" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:usc="clr-namespace:UiPath.Salesforce.ConnectionService;assembly=UiPath.Salesforce" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Main" this:Main.in_str_customerPrefix="C-" this:Main.in_str_milestonePrefix="O-" this:Main.in_str_internalPrefix="I-" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:t="clr-namespace:Time_Tracker;assembly=DataService.Time_Tracker" xmlns:this="clr-namespace:" xmlns:uda="clr-namespace:UiPath.DataService.Activities;assembly=UiPath.DataService.Activities.Core" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:usc="clr-namespace:UiPath.Salesforce.ConnectionService;assembly=UiPath.Salesforce" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property Name="in_str_QA_Asset_Suffix" Type="InArgument(x:String)" />
     <x:Property Name="in_OrchestratorFolderPath" Type="InArgument(x:String)" />
@@ -9,6 +9,13 @@
     <x:Property Name="in_str_customerPrefix" Type="InArgument(x:String)" />
     <x:Property Name="in_str_milestonePrefix" Type="InArgument(x:String)" />
     <x:Property Name="in_str_internalPrefix" Type="InArgument(x:String)" />
+    <x:Property Name="out_arr_Cals" Type="InArgument(s:String[])" />
+    <x:Property Name="out_cal_Default" Type="InArgument(x:String)" />
+    <x:Property Name="in_str_CalendarName" Type="InArgument(x:String)" />
+    <x:Property Name="out_str_Cals" Type="InArgument(x:String)" />
+    <x:Property Name="in_recordIds" Type="InArgument(s:String[])" />
+    <x:Property Name="in_recordId" Type="InArgument(x:String)" />
+    <x:Property Name="in_PSAId" Type="InArgument(x:String)" />
   </x:Members>
   <this:Main.in_str_QA_Asset_Suffix>
     <InArgument x:TypeArguments="x:String" />
@@ -16,10 +23,16 @@
   <this:Main.in_OrchestratorFolderPath>
     <InArgument x:TypeArguments="x:String" />
   </this:Main.in_OrchestratorFolderPath>
+  <this:Main.out_arr_Cals>
+    <InArgument x:TypeArguments="s:String[]" />
+  </this:Main.out_arr_Cals>
+  <this:Main.out_cal_Default>
+    <InArgument x:TypeArguments="x:String" />
+  </this:Main.out_cal_Default>
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1544,1386</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1773,1002</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>ActivityBuilder_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -74,6 +87,7 @@
       <x:String>Time_Tracker</x:String>
       <x:String>UiPath.Excel</x:String>
       <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
+      <x:String>Microsoft.Graph</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -160,9 +174,18 @@
       <AssemblyReference>System.Data.SqlClient</AssemblyReference>
       <AssemblyReference>Microsoft.VisualBasic.Forms</AssemblyReference>
       <AssemblyReference>Microsoft.VisualBasic.Core</AssemblyReference>
+      <AssemblyReference>Microsoft.Graph</AssemblyReference>
+      <AssemblyReference>Microsoft.Graph.Core</AssemblyReference>
+      <AssemblyReference>UiPath.MicrosoftOffice365</AssemblyReference>
+      <AssemblyReference>System.Linq.Async.Queryable</AssemblyReference>
+      <AssemblyReference>System.Linq.Expressions</AssemblyReference>
+      <AssemblyReference>System.Linq.Parallel</AssemblyReference>
+      <AssemblyReference>System.Collections.Immutable</AssemblyReference>
+      <AssemblyReference>System.Linq.Queryable</AssemblyReference>
+      <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Main Sequence" sap:VirtualizedContainerService.HintSize="636,1321" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Main Sequence" sap:VirtualizedContainerService.HintSize="559,937" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="scg:Dictionary(x:String, x:Object)" Name="Config" />
       <Variable x:TypeArguments="x:String" Name="userEmailAddress" />
@@ -171,13 +194,19 @@
       <Variable x:TypeArguments="x:String" Name="resourceManager" />
       <Variable x:TypeArguments="x:String" Name="encryptedResourceId" />
       <Variable x:TypeArguments="x:String" Name="jsonOutput" />
+      <Variable x:TypeArguments="scg:Dictionary(x:String, s:Guid)" Name="dict_PSA_Status" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <Switch x:TypeArguments="x:String" DisplayName="Switch" Expression="[in_str_Activity]" sap:VirtualizedContainerService.HintSize="574,1210" sap2010:WorkflowViewState.IdRef="Switch`1_1">
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Data Layer\GetPSAStatus.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="497,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_16" UnSafe="False" WorkflowFileName="Data Layer\GetPSAStatus.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <OutArgument x:TypeArguments="scg:Dictionary(x:String, s:Guid)" x:Key="arr_PSA_Status_Dict">[dict_PSA_Status]</OutArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+    </ui:InvokeWorkflowFile>
+    <Switch x:TypeArguments="x:String" DisplayName="Switch" Expression="[in_str_Activity]" sap:VirtualizedContainerService.HintSize="497,673" sap2010:WorkflowViewState.IdRef="Switch`1_1">
       <Switch.Default>
         <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,141" sap2010:WorkflowViewState.IdRef="LogMessage_1" Message="[&quot;No Activity Selected&quot;]" />
       </Switch.Default>
@@ -186,7 +215,7 @@
           <InArgument x:TypeArguments="x:String" x:Key="in_str_CurrentUser_Email">[in_UserEmail]</InArgument>
         </ui:InvokeWorkflowFile.Arguments>
       </ui:InvokeWorkflowFile>
-      <Sequence x:Key="GetAssignments" sap:VirtualizedContainerService.HintSize="450,472" sap2010:WorkflowViewState.IdRef="Sequence_3">
+      <Sequence x:Key="GetAssignments" sap:VirtualizedContainerService.HintSize="450,558" sap2010:WorkflowViewState.IdRef="Sequence_3">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -217,13 +246,13 @@
         </ui:InvokeWorkflowFile>
         <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="388,141" sap2010:WorkflowViewState.IdRef="LogMessage_2" Message="[jsonOutput]" />
       </Sequence>
-      <Sequence x:Key="GetOutlookData" sap:VirtualizedContainerService.HintSize="534,958" sap2010:WorkflowViewState.IdRef="Sequence_4">
+      <Sequence x:Key="GetOutlookData" sap:VirtualizedContainerService.HintSize="786,2654" sap2010:WorkflowViewState.IdRef="Sequence_4">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
-        <Sequence DisplayName="Make sure all categories have mapping" sap:VirtualizedContainerService.HintSize="472,847" sap2010:WorkflowViewState.IdRef="Sequence_5">
+        <Sequence DisplayName="Make sure all categories have mapping" sap:VirtualizedContainerService.HintSize="724,2543" sap2010:WorkflowViewState.IdRef="Sequence_5">
           <Sequence.Variables>
             <Variable x:TypeArguments="x:Int64" Name="int_MissingMappingCnt" />
           </Sequence.Variables>
@@ -232,7 +261,7 @@
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <uda:QueryEntityRecords x:TypeArguments="t:TTMapping" OutputRecords="{x:Null}" ContinueOnError="False" DisplayName="Query Entity Records" EntityId="4d660213-af18-ef11-96f5-002248095c31" ExpansionDepth="2" sap:VirtualizedContainerService.HintSize="410,140" sap2010:WorkflowViewState.IdRef="QueryEntityRecords`1_1" QueriedEntityId="4d660213-af18-ef11-96f5-002248095c31" Skip="0" SortAscending="True" SortByField="Id" TimeoutInMs="30000" Top="100" TotalRecords="[int_MissingMappingCnt]">
+          <uda:QueryEntityRecords x:TypeArguments="t:TTMapping" OutputRecords="{x:Null}" ContinueOnError="False" DisplayName="Query Entity Records" EntityId="4d660213-af18-ef11-96f5-002248095c31" ExpansionDepth="2" sap:VirtualizedContainerService.HintSize="662,140" sap2010:WorkflowViewState.IdRef="QueryEntityRecords`1_1" QueriedEntityId="4d660213-af18-ef11-96f5-002248095c31" Skip="0" SortAscending="True" SortByField="Id" TimeoutInMs="30000" Top="100" TotalRecords="[int_MissingMappingCnt]">
             <uda:QueryEntityRecords.FilterArguments>
               <uda:FilterArgument FilterActivityType="{x:Null}">
                 <uda:FilterArgument.Filter>
@@ -257,7 +286,7 @@
               </scg:List>
             </uda:QueryEntityRecords.FilterValues>
           </uda:QueryEntityRecords>
-          <If Condition="[int_MissingMappingCnt &gt; 0]" sap:VirtualizedContainerService.HintSize="410,556" sap2010:WorkflowViewState.IdRef="If_1">
+          <If Condition="[int_MissingMappingCnt &gt; 0]" sap:VirtualizedContainerService.HintSize="662,2252" sap2010:WorkflowViewState.IdRef="If_1">
             <If.Then>
               <Sequence sap:VirtualizedContainerService.HintSize="376,173" sap2010:WorkflowViewState.IdRef="Sequence_6">
                 <sap:WorkflowViewStateService.ViewState>
@@ -269,13 +298,165 @@
               </Sequence>
             </If.Then>
             <If.Else>
-              <Sequence sap:VirtualizedContainerService.HintSize="376,201" sap2010:WorkflowViewState.IdRef="Sequence_7">
+              <Sequence sap:VirtualizedContainerService.HintSize="628,1897" sap2010:WorkflowViewState.IdRef="Sequence_7">
+                <Sequence.Variables>
+                  <Variable x:TypeArguments="x:String" Name="weekStartDate" />
+                  <Variable x:TypeArguments="x:String" Name="weekEndDate" />
+                  <Variable x:TypeArguments="scg:IList(t:TTTimeEntry)" Name="arr_TimeEntries" />
+                  <Variable x:TypeArguments="scg:IList(t:TTTimeEntry)" Name="arr_TimeEntries_Manual" />
+                </Sequence.Variables>
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                   </scg:Dictionary>
                 </sap:WorkflowViewStateService.ViewState>
-                <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Data Layer\Sync Calendar to DataServiceEntity.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="334,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_6" UnSafe="False" WorkflowFileName="Data Layer\Sync Calendar to DataServiceEntity.xaml">
+                <ui:MultipleAssign DisplayName="Multiple Assign week start, end, and tablle json from interface" sap:VirtualizedContainerService.HintSize="586,147" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
+                  <ui:MultipleAssign.AssignOperations>
+                    <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
+                      <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_1">
+                        <ui:AssignOperation.To>
+                          <OutArgument x:TypeArguments="x:String">[weekEndDate]</OutArgument>
+                        </ui:AssignOperation.To>
+                        <ui:AssignOperation.Value>
+                          <InArgument x:TypeArguments="x:String">[( Datetime.ParseExact( in_str_TimesheetDate,"M/d/yyyy", Globalization.CultureInfo.InvariantCulture)).toString("yyyy-MM-dd")]</InArgument>
+                        </ui:AssignOperation.Value>
+                      </ui:AssignOperation>
+                      <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_2">
+                        <ui:AssignOperation.To>
+                          <OutArgument x:TypeArguments="x:String">[weekStartDate]</OutArgument>
+                        </ui:AssignOperation.To>
+                        <ui:AssignOperation.Value>
+                          <InArgument x:TypeArguments="x:String">[( Datetime.ParseExact( in_str_TimesheetDate,"M/d/yyyy", Globalization.CultureInfo.InvariantCulture).AddDays(-6)).toString("yyyy-MM-dd")]</InArgument>
+                        </ui:AssignOperation.Value>
+                      </ui:AssignOperation>
+                    </scg:List>
+                  </ui:MultipleAssign.AssignOperations>
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                </ui:MultipleAssign>
+                <uda:QueryEntityRecords x:TypeArguments="t:TTTimeEntry" TotalRecords="{x:Null}" ContinueOnError="False" DisplayName="Query Entity Records" EntityId="e3b6a8f1-ae18-ef11-96f5-002248095c31" ExpansionDepth="2" sap:VirtualizedContainerService.HintSize="586,140" sap2010:WorkflowViewState.IdRef="QueryEntityRecords`1_3" OutputRecords="[arr_TimeEntries]" QueriedEntityId="e3b6a8f1-ae18-ef11-96f5-002248095c31" Skip="0" SortAscending="True" SortByField="Id" TimeoutInMs="30000" Top="100">
+                  <uda:QueryEntityRecords.FilterArguments>
+                    <uda:FilterArgument FilterActivityType="{x:Null}">
+                      <uda:FilterArgument.Filter>
+                        <uda:GroupFilter Index="0" Operator="AND">
+                          <uda:GroupFilter.Filters>
+                            <scg:List x:TypeArguments="uda:SimpleFilter" Capacity="4">
+                              <uda:SimpleFilter ExpressionValue="{x:Null}" FieldName="DateEntry" FieldType="UiPath.DataService.Core.Models.EntityField" Operator="&gt;" ValueIndex="0" />
+                              <uda:SimpleFilter ExpressionValue="{x:Null}" FieldName="DateEntry" FieldType="UiPath.DataService.Core.Models.EntityField" Operator="&lt;" ValueIndex="1" />
+                              <uda:SimpleFilter ExpressionValue="{x:Null}" FieldName="UserEmail" FieldType="UiPath.DataService.Core.Models.EntityField" Operator="=" ValueIndex="2" />
+                              <uda:SimpleFilter ExpressionValue="{x:Null}" FieldName="EntrySource" FieldType="UiPath.DataService.Core.Models.EntityField" Operator="=" ValueIndex="3" />
+                            </scg:List>
+                          </uda:GroupFilter.Filters>
+                          <uda:GroupFilter.Groups>
+                            <scg:List x:TypeArguments="uda:GroupFilter" Capacity="0" />
+                          </uda:GroupFilter.Groups>
+                        </uda:GroupFilter>
+                      </uda:FilterArgument.Filter>
+                    </uda:FilterArgument>
+                  </uda:QueryEntityRecords.FilterArguments>
+                  <uda:QueryEntityRecords.FilterValues>
+                    <scg:List x:TypeArguments="InArgument" Capacity="4">
+                      <InArgument x:TypeArguments="s:DateTime">[cdate(weekStartDate)]</InArgument>
+                      <InArgument x:TypeArguments="s:DateTime">[cdate(weekEndDate)]</InArgument>
+                      <InArgument x:TypeArguments="x:String">[in_UserEmail]</InArgument>
+                      <InArgument x:TypeArguments="x:String">Outlook</InArgument>
+                    </scg:List>
+                  </uda:QueryEntityRecords.FilterValues>
+                </uda:QueryEntityRecords>
+                <uda:QueryEntityRecords x:TypeArguments="t:TTTimeEntry" TotalRecords="{x:Null}" ContinueOnError="False" DisplayName="Query Entity Records" EntityId="e3b6a8f1-ae18-ef11-96f5-002248095c31" ExpansionDepth="2" sap:VirtualizedContainerService.HintSize="586,140" sap2010:WorkflowViewState.IdRef="QueryEntityRecords`1_4" OutputRecords="[arr_TimeEntries_Manual]" QueriedEntityId="e3b6a8f1-ae18-ef11-96f5-002248095c31" Skip="0" SortAscending="True" SortByField="Id" TimeoutInMs="30000" Top="100">
+                  <uda:QueryEntityRecords.FilterArguments>
+                    <uda:FilterArgument FilterActivityType="{x:Null}">
+                      <uda:FilterArgument.Filter>
+                        <uda:GroupFilter Index="0" Operator="AND">
+                          <uda:GroupFilter.Filters>
+                            <scg:List x:TypeArguments="uda:SimpleFilter" Capacity="4">
+                              <uda:SimpleFilter ExpressionValue="{x:Null}" FieldName="DateEntry" FieldType="UiPath.DataService.Core.Models.EntityField" Operator="&gt;" ValueIndex="0" />
+                              <uda:SimpleFilter ExpressionValue="{x:Null}" FieldName="DateEntry" FieldType="UiPath.DataService.Core.Models.EntityField" Operator="&lt;" ValueIndex="1" />
+                              <uda:SimpleFilter ExpressionValue="{x:Null}" FieldName="UserEmail" FieldType="UiPath.DataService.Core.Models.EntityField" Operator="=" ValueIndex="2" />
+                              <uda:SimpleFilter ExpressionValue="{x:Null}" FieldName="EntrySource" FieldType="UiPath.DataService.Core.Models.EntityField" Operator="!=" ValueIndex="3" />
+                            </scg:List>
+                          </uda:GroupFilter.Filters>
+                          <uda:GroupFilter.Groups>
+                            <scg:List x:TypeArguments="uda:GroupFilter" Capacity="0" />
+                          </uda:GroupFilter.Groups>
+                        </uda:GroupFilter>
+                      </uda:FilterArgument.Filter>
+                    </uda:FilterArgument>
+                  </uda:QueryEntityRecords.FilterArguments>
+                  <uda:QueryEntityRecords.FilterValues>
+                    <scg:List x:TypeArguments="InArgument" Capacity="4">
+                      <InArgument x:TypeArguments="s:DateTime">[cdate(weekStartDate)]</InArgument>
+                      <InArgument x:TypeArguments="s:DateTime">[cdate(weekEndDate)]</InArgument>
+                      <InArgument x:TypeArguments="x:String">[in_UserEmail]</InArgument>
+                      <InArgument x:TypeArguments="x:String">Outlook</InArgument>
+                    </scg:List>
+                  </uda:QueryEntityRecords.FilterValues>
+                </uda:QueryEntityRecords>
+                <If Condition="[arr_TimeEntries.Count &gt;0]" sap:VirtualizedContainerService.HintSize="586,1109" sap2010:WorkflowViewState.IdRef="If_5">
+                  <If.Then>
+                    <Sequence sap:VirtualizedContainerService.HintSize="552,927" sap2010:WorkflowViewState.IdRef="Sequence_16">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <If Condition="[arr_TimeEntries_Manual.count = 0]" sap:VirtualizedContainerService.HintSize="510,839" sap2010:WorkflowViewState.IdRef="If_6">
+                        <If.Then>
+                          <Sequence sap:VirtualizedContainerService.HintSize="476,657" sap2010:WorkflowViewState.IdRef="Sequence_18">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                            <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="SetupConnection.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="434,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_17" UnSafe="False" WorkflowFileName="SetupConnection.xaml">
+                              <ui:InvokeWorkflowFile.Arguments>
+                                <InOutArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="Config">[Config]</InOutArgument>
+                                <InArgument x:TypeArguments="x:String" x:Key="in_OrchestratorFolderPath">[in_OrchestratorFolderPath]</InArgument>
+                                <InArgument x:TypeArguments="x:String" x:Key="in_str_QA_Asset_Suffix">[in_str_QA_Asset_Suffix]</InArgument>
+                                <InOutArgument x:TypeArguments="x:String" x:Key="userEmailAddress">[userEmailAddress]</InOutArgument>
+                                <OutArgument x:TypeArguments="usc:IConnectionService" x:Key="io_sfdcConnection">[io_sfdcConnection]</OutArgument>
+                                <OutArgument x:TypeArguments="x:String" x:Key="encryptedResourceId">[encryptedResourceId]</OutArgument>
+                                <OutArgument x:TypeArguments="x:String" x:Key="resourceManager">[resourceManager]</OutArgument>
+                                <OutArgument x:TypeArguments="x:String" x:Key="resourceRole">[resourceRole]</OutArgument>
+                              </ui:InvokeWorkflowFile.Arguments>
+                            </ui:InvokeWorkflowFile>
+                            <Assign sap:VirtualizedContainerService.HintSize="434,82" sap2010:WorkflowViewState.IdRef="Assign_3">
+                              <Assign.To>
+                                <OutArgument x:TypeArguments="s:String[]">[in_recordIds]</OutArgument>
+                              </Assign.To>
+                              <Assign.Value>
+                                <InArgument x:TypeArguments="s:String[]">[arr_TimeEntries.DistinctBy(Function(x) x.PSAId).ToArray().Select(Function(y) y.PSAId).ToArray()]</InArgument>
+                              </Assign.Value>
+                            </Assign>
+                            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="434,141" sap2010:WorkflowViewState.IdRef="LogMessage_3" Message="[string.Join(&quot; ## &quot;,in_recordIds)]" />
+                            <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Data Layer\DeleteTimecardRecord.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="434,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_18" UnSafe="False" WorkflowFileName="Data Layer\DeleteTimecardRecord.xaml">
+                              <ui:InvokeWorkflowFile.Arguments>
+                                <InOutArgument x:TypeArguments="usc:IConnectionService" x:Key="io_sfdcConnection">[io_sfdcConnection]</InOutArgument>
+                                <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_config">[Config]</InArgument>
+                                <InArgument x:TypeArguments="x:String" x:Key="in_RecordId">[in_recordId]</InArgument>
+                                <InArgument x:TypeArguments="s:String[]" x:Key="in_RecordIds">[in_recordIds]</InArgument>
+                                <InArgument x:TypeArguments="x:String" x:Key="in_str_UserEmail">[in_UserEmail]</InArgument>
+                                <InArgument x:TypeArguments="x:String" x:Key="in_str_TimesheetDate">[in_str_TimesheetDate]</InArgument>
+                                <InArgument x:TypeArguments="x:String" x:Key="in_str_PSAId">[in_PSAId]</InArgument>
+                              </ui:InvokeWorkflowFile.Arguments>
+                            </ui:InvokeWorkflowFile>
+                          </Sequence>
+                        </If.Then>
+                        <If.Else>
+                          <Sequence sap2010:WorkflowViewState.IdRef="Sequence_19" />
+                        </If.Else>
+                      </If>
+                    </Sequence>
+                  </If.Then>
+                  <If.Else>
+                    <Sequence sap2010:WorkflowViewState.IdRef="Sequence_17" />
+                  </If.Else>
+                </If>
+                <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Data Layer\Sync Calendar to DataServiceEntity.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="586,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_6" UnSafe="False" WorkflowFileName="Data Layer\Sync Calendar to DataServiceEntity.xaml">
                   <ui:InvokeWorkflowFile.Arguments>
                     <InArgument x:TypeArguments="x:Boolean" x:Key="in_IncludeTentative">False</InArgument>
                     <InArgument x:TypeArguments="x:Boolean" x:Key="in_IgnoreDoneLabel">True</InArgument>
@@ -294,7 +475,7 @@
           </If>
         </Sequence>
       </Sequence>
-      <Sequence x:Key="SubmitPSAData" sap:VirtualizedContainerService.HintSize="472,1223" sap2010:WorkflowViewState.IdRef="Sequence_8">
+      <Sequence x:Key="SubmitPSAData" sap:VirtualizedContainerService.HintSize="472,1646" sap2010:WorkflowViewState.IdRef="Sequence_8">
         <Sequence.Variables>
           <Variable x:TypeArguments="sd:DataTable" Default="[new system.data.DataTable]" Name="dt_ProjectAssigAndGlobal" />
           <Variable x:TypeArguments="sd:DataTable" Default="[new system.data.DataTable]" Name="dtAllProjects" />
@@ -328,7 +509,7 @@
             <InArgument x:TypeArguments="x:String" x:Key="in_encryptedeResourceId">[encryptedResourceId]</InArgument>
           </ui:InvokeWorkflowFile.Arguments>
         </ui:InvokeWorkflowFile>
-        <If Condition="[in_str_Update_Type = &quot;Save&quot; or in_str_Update_Type = &quot;Both&quot;]" sap:VirtualizedContainerService.HintSize="410,383" sap2010:WorkflowViewState.IdRef="If_2">
+        <If Condition="[in_str_Update_Type = &quot;Save&quot;]" sap:VirtualizedContainerService.HintSize="410,383" sap2010:WorkflowViewState.IdRef="If_2">
           <If.Then>
             <Sequence sap:VirtualizedContainerService.HintSize="376,201" sap2010:WorkflowViewState.IdRef="Sequence_9">
               <sap:WorkflowViewStateService.ViewState>
@@ -350,6 +531,11 @@
                   <InArgument x:TypeArguments="x:String" x:Key="in_str_TimesheetDate">[in_str_TimesheetDate]</InArgument>
                   <InArgument x:TypeArguments="x:String" x:Key="in_str_UserEmail">[in_UserEmail]</InArgument>
                   <InArgument x:TypeArguments="x:String" x:Key="in_status">Saved</InArgument>
+                  <InArgument x:TypeArguments="x:Boolean" x:Key="in_bool_Update">False</InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="in_recordId" />
+                  <InArgument x:TypeArguments="x:String" x:Key="in_PSAId" />
+                  <InArgument x:TypeArguments="x:String" x:Key="in_PSA_Operation">[in_str_Update_Type]</InArgument>
+                  <InArgument x:TypeArguments="scg:Dictionary(x:String, s:Guid)" x:Key="in_dict_PSA_Status">[dict_PSA_Status]</InArgument>
                 </ui:InvokeWorkflowFile.Arguments>
               </ui:InvokeWorkflowFile>
             </Sequence>
@@ -358,7 +544,42 @@
             <Sequence sap2010:WorkflowViewState.IdRef="Sequence_10" />
           </If.Else>
         </If>
-        <If Condition="[in_str_Update_Type = &quot;Submit&quot; or in_str_Update_Type = &quot;Both&quot;]" sap:VirtualizedContainerService.HintSize="410,383" sap2010:WorkflowViewState.IdRef="If_3">
+        <If Condition="[in_str_Update_Type = &quot;Update&quot;]" sap:VirtualizedContainerService.HintSize="410,383" sap2010:WorkflowViewState.IdRef="If_4">
+          <If.Then>
+            <Sequence sap:VirtualizedContainerService.HintSize="376,201" sap2010:WorkflowViewState.IdRef="Sequence_14">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Data Layer\CopyFromDataServicelToPSA.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="334,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_15" UnSafe="False" WorkflowFileName="Data Layer\CopyFromDataServicelToPSA.xaml">
+                <ui:InvokeWorkflowFile.Arguments>
+                  <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_propertiesDictionary">[new Dictionary(of string,object)]</InArgument>
+                  <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_config">[Config]</InArgument>
+                  <InArgument x:TypeArguments="usc:IConnectionService" x:Key="io_sfdcConnection">[io_sfdcConnection]</InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="in_encryptedResourceId">[encryptedResourceId]</InArgument>
+                  <InArgument x:TypeArguments="sd:DataTable" x:Key="in_dtAllAssignmentsAndProjects">[dt_ProjectAssigAndGlobal]</InArgument>
+                  <InArgument x:TypeArguments="sd:DataTable" x:Key="in_dtMilestones" />
+                  <InArgument x:TypeArguments="sd:DataTable" x:Key="in_dtGlobalProjects">[dtAllProjects]</InArgument>
+                  <InArgument x:TypeArguments="sd:DataTable" x:Key="in_dtWeekDailyNotes">[new system.data.DataTable]</InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="in_resourceRole">[resourceRole]</InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="in_str_TimesheetDate">[in_str_TimesheetDate]</InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="in_str_UserEmail">[in_UserEmail]</InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="in_status">Saved</InArgument>
+                  <InArgument x:TypeArguments="x:Boolean" x:Key="in_bool_Update">True</InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="in_recordId">[in_recordId]</InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="in_PSAId">[in_PSAId]</InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="in_PSA_Operation" />
+                  <InArgument x:TypeArguments="scg:Dictionary(x:String, s:Guid)" x:Key="in_dict_PSA_Status">[dict_PSA_Status]</InArgument>
+                </ui:InvokeWorkflowFile.Arguments>
+              </ui:InvokeWorkflowFile>
+            </Sequence>
+          </If.Then>
+          <If.Else>
+            <Sequence sap2010:WorkflowViewState.IdRef="Sequence_15" />
+          </If.Else>
+        </If>
+        <If Condition="[in_str_Update_Type = &quot;Submit&quot;]" sap:VirtualizedContainerService.HintSize="410,383" sap2010:WorkflowViewState.IdRef="If_3">
           <If.Then>
             <Sequence sap:VirtualizedContainerService.HintSize="376,201" sap2010:WorkflowViewState.IdRef="Sequence_11">
               <sap:WorkflowViewStateService.ViewState>
@@ -380,6 +601,11 @@
                   <InArgument x:TypeArguments="x:String" x:Key="in_str_TimesheetDate">[in_str_TimesheetDate]</InArgument>
                   <InArgument x:TypeArguments="x:String" x:Key="in_str_UserEmail">[in_UserEmail]</InArgument>
                   <InArgument x:TypeArguments="x:String" x:Key="in_status">Submitted</InArgument>
+                  <InArgument x:TypeArguments="x:Boolean" x:Key="in_bool_Update">False</InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="in_recordId" />
+                  <InArgument x:TypeArguments="x:String" x:Key="in_PSAId" />
+                  <InArgument x:TypeArguments="x:String" x:Key="in_PSA_Operation">[in_str_Update_Type]</InArgument>
+                  <InArgument x:TypeArguments="scg:Dictionary(x:String, s:Guid)" x:Key="in_dict_PSA_Status">[dict_PSA_Status]</InArgument>
                 </ui:InvokeWorkflowFile.Arguments>
               </ui:InvokeWorkflowFile>
             </Sequence>
@@ -388,6 +614,44 @@
             <Sequence sap2010:WorkflowViewState.IdRef="Sequence_12" />
           </If.Else>
         </If>
+      </Sequence>
+      <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" x:Key="GetCalendars" DisplayName="GetOutlookCalendars.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="334,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_12" UnSafe="False" WorkflowFileName="Data Layer\GetOutlookCalendars.xaml">
+        <ui:InvokeWorkflowFile.Arguments>
+          <InArgument x:TypeArguments="x:String" x:Key="out_str_Default">[out_cal_Default]</InArgument>
+          <InArgument x:TypeArguments="s:String[]" x:Key="out_arr_Cals">[out_arr_Cals]</InArgument>
+          <InArgument x:TypeArguments="x:String" x:Key="in_str_UserEmail">[in_UserEmail]</InArgument>
+          <InArgument x:TypeArguments="x:String" x:Key="out_str_Cals">[out_str_Cals]</InArgument>
+        </ui:InvokeWorkflowFile.Arguments>
+      </ui:InvokeWorkflowFile>
+      <Sequence x:Key="DeleteRecord" sap:VirtualizedContainerService.HintSize="450,377" sap2010:WorkflowViewState.IdRef="Sequence_13">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+        <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="SetupConnection.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="388,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_14" UnSafe="False" WorkflowFileName="SetupConnection.xaml">
+          <ui:InvokeWorkflowFile.Arguments>
+            <InOutArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="Config">[Config]</InOutArgument>
+            <InArgument x:TypeArguments="x:String" x:Key="in_OrchestratorFolderPath">[in_OrchestratorFolderPath]</InArgument>
+            <InArgument x:TypeArguments="x:String" x:Key="in_str_QA_Asset_Suffix">[in_str_QA_Asset_Suffix]</InArgument>
+            <InOutArgument x:TypeArguments="x:String" x:Key="userEmailAddress">[userEmailAddress]</InOutArgument>
+            <OutArgument x:TypeArguments="usc:IConnectionService" x:Key="io_sfdcConnection">[io_sfdcConnection]</OutArgument>
+            <OutArgument x:TypeArguments="x:String" x:Key="encryptedResourceId">[encryptedResourceId]</OutArgument>
+            <OutArgument x:TypeArguments="x:String" x:Key="resourceManager">[resourceManager]</OutArgument>
+            <OutArgument x:TypeArguments="x:String" x:Key="resourceRole">[resourceRole]</OutArgument>
+          </ui:InvokeWorkflowFile.Arguments>
+        </ui:InvokeWorkflowFile>
+        <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Data Layer\DeleteTimecardRecord.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="388,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_13" UnSafe="False" WorkflowFileName="Data Layer\DeleteTimecardRecord.xaml">
+          <ui:InvokeWorkflowFile.Arguments>
+            <InOutArgument x:TypeArguments="usc:IConnectionService" x:Key="io_sfdcConnection">[io_sfdcConnection]</InOutArgument>
+            <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_config">[Config]</InArgument>
+            <InArgument x:TypeArguments="x:String" x:Key="in_RecordId">[in_recordId]</InArgument>
+            <InArgument x:TypeArguments="s:String[]" x:Key="in_RecordIds">[in_recordIds]</InArgument>
+            <InArgument x:TypeArguments="x:String" x:Key="in_str_UserEmail">[in_UserEmail]</InArgument>
+            <InArgument x:TypeArguments="x:String" x:Key="in_str_TimesheetDate">[in_str_TimesheetDate]</InArgument>
+            <InArgument x:TypeArguments="x:String" x:Key="in_str_PSAId">[in_PSAId]</InArgument>
+          </ui:InvokeWorkflowFile.Arguments>
+        </ui:InvokeWorkflowFile>
       </Sequence>
     </Switch>
   </Sequence>

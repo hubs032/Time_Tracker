@@ -10,7 +10,7 @@
     "UiPath.Excel.Activities": "[2.22.3]",
     "UiPath.Mail.Activities": "[1.21.1]",
     "UiPath.MicrosoftOffice365.Activities": "[2.2.7]",
-    "UiPath.System.Activities": "[23.10.6]",
+    "UiPath.System.Activities": "[24.3.1]",
     "UiPath.Testing.Activities": "[23.10.1]",
     "UiPath.UIAutomation.Activities": "[23.10.11]",
     "UiPath.WebAPI.Activities": "[1.13.3]"
@@ -21,12 +21,12 @@
       "serviceDocument": ".entities/EntitiesStore.json",
       "tenantName": "Hackweek_2024",
       "namespace": "Time_Tracker",
-      "uniqueReference": "gcBu8VR4VdY2xyk/Xc1wIMLxSuWgPQifixV4v2q4kc8="
+      "uniqueReference": "aN6GDh+z2fXR8PXjIPkkFaO5d/HwDvxt5jsk5Ufbg6Y="
     }
   ],
   "schemaVersion": "4.0",
   "studioVersion": "23.10.6.0",
-  "projectVersion": "1.0.18",
+  "projectVersion": "1.0.29",
   "runtimeOptions": {
     "autoDispose": false,
     "netFrameworkLazyLoading": false,

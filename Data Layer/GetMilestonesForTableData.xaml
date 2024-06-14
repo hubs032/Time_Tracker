@@ -17,7 +17,7 @@
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1544,2278</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1544,2588</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>GetMilestonesForTableData_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="62">
@@ -105,13 +105,17 @@
       <AssemblyReference>System.Private.Uri</AssemblyReference>
       <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
       <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.ViewModels</AssemblyReference>
+      <AssemblyReference>System.Private.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Linq.Async</AssemblyReference>
+      <AssemblyReference>System.Data.SqlClient</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="Retrieves milestones for all editable projects/assignments from current timecard table.&#xA;" DisplayName="GetMilestonesForTableData" sap:VirtualizedContainerService.HintSize="622,2213" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="Retrieves milestones for all editable projects/assignments from current timecard table.&#xA;" DisplayName="GetMilestonesForTableData" sap:VirtualizedContainerService.HintSize="572,2523" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="scg:List(x:String)" Default="[new List(of string)]" Name="listOfProjectIds" />
       <Variable x:TypeArguments="x:String" Name="projectIds" />
-      <Variable x:TypeArguments="x:String" Name="foundValue" />
+      <Variable x:TypeArguments="x:Object" Name="foundValue" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -119,8 +123,8 @@
         <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:LogMessage DisplayName="Log Messag Start" sap:VirtualizedContainerService.HintSize="560,141" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Start GetMilestonesForTableData.&quot;]" />
-    <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="560,838" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[directcast(in_propertiesDictionary(&quot;assignmentId&quot;),string())]">
+    <ui:LogMessage DisplayName="Log Messag Start" sap:VirtualizedContainerService.HintSize="510,141" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Start GetMilestonesForTableData.&quot;]" />
+    <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="510,838" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[directcast(in_propertiesDictionary(&quot;assignmentId&quot;),string())]">
       <ui:ForEach.Body>
         <ActivityAction x:TypeArguments="x:String">
           <ActivityAction.Argument>
@@ -134,19 +138,22 @@
             </sap:WorkflowViewStateService.ViewState>
             <ui:LookupDataTable LookupColumnIndex="{x:Null}" LookupDataColumn="{x:Null}" RowIndex="{x:Null}" TargetColumnIndex="{x:Null}" TargetDataColumn="{x:Null}" DataTable="[in_dtTimecardWeekAllData]" DisplayName="Lookup Data Table for project id" sap:VirtualizedContainerService.HintSize="334,292" sap2010:WorkflowViewState.IdRef="LookupDataTable_1" LookupColumnName="[in_config(&quot;column_assignmentId&quot;).ToString]" LookupValue="[assignmentId]" TargetColumnName="[in_config(&quot;column_projectRId&quot;).ToString]">
               <ui:LookupDataTable.CellValue>
-                <OutArgument x:TypeArguments="x:String">[foundValue]</OutArgument>
+                <OutArgument x:TypeArguments="x:Object">[foundValue]</OutArgument>
               </ui:LookupDataTable.CellValue>
             </ui:LookupDataTable>
-            <If Condition="[not listOfProjectIds.Contains( foundValue) andalso not String.IsNullOrWhiteSpace(foundValue)]" DisplayName="If value not previously found, add" sap:VirtualizedContainerService.HintSize="334,232" sap2010:WorkflowViewState.IdRef="If_2">
+            <If Condition="[not listOfProjectIds.Contains( foundValue.ToString) andalso not String.IsNullOrWhiteSpace(foundValue.ToString)]" DisplayName="If value not previously found, add" sap:VirtualizedContainerService.HintSize="334,232" sap2010:WorkflowViewState.IdRef="If_2">
               <If.Then>
-                <AddToCollection x:TypeArguments="x:String" Collection="[listOfProjectIds]" DisplayName="Add To Collection of found project Ids" sap:VirtualizedContainerService.HintSize="200,25" sap2010:WorkflowViewState.IdRef="AddToCollection`1_1" Item="[&quot;'&quot;+foundValue+&quot;'&quot;]" />
+                <AddToCollection x:TypeArguments="x:String" Collection="[listOfProjectIds]" DisplayName="Add To Collection of found project Ids" sap:VirtualizedContainerService.HintSize="200,25" sap2010:WorkflowViewState.IdRef="AddToCollection`1_1" Item="[&quot;'&quot;+foundValue.ToString+&quot;'&quot;]" />
               </If.Then>
+              <If.Else>
+                <Sequence DisplayName="" sap2010:WorkflowViewState.IdRef="Sequence_4" />
+              </If.Else>
             </If>
           </Sequence>
         </ActivityAction>
       </ui:ForEach.Body>
     </ui:ForEach>
-    <Assign DisplayName="Assign join  found project ids" sap:VirtualizedContainerService.HintSize="560,81" sap2010:WorkflowViewState.IdRef="Assign_3">
+    <Assign DisplayName="Assign join  found project ids" sap:VirtualizedContainerService.HintSize="510,82" sap2010:WorkflowViewState.IdRef="Assign_3">
       <Assign.To>
         <OutArgument x:TypeArguments="x:String">[projectIds]</OutArgument>
       </Assign.To>
@@ -154,7 +161,7 @@
         <InArgument x:TypeArguments="x:String">[String.join("," , listOfProjectIds)]</InArgument>
       </Assign.Value>
     </Assign>
-    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke Salesforce_GetProjectMilestones workflow" sap:VirtualizedContainerService.HintSize="560,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" LogEntry="No" LogExit="No" UnSafe="False" WorkflowFileName="ServiceLayer\Salesforce\Salesforce_GetProjectMilestones.xaml">
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke Salesforce_GetProjectMilestones workflow" sap:VirtualizedContainerService.HintSize="510,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" LogEntry="No" LogExit="No" UnSafe="False" WorkflowFileName="ServiceLayer\Salesforce\Salesforce_GetProjectMilestones.xaml">
       <ui:InvokeWorkflowFile.Arguments>
         <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_config">[in_config]</InArgument>
         <InOutArgument x:TypeArguments="usc:IConnectionService" x:Key="io_sfdcConnection">[io_sfdcConnection]</InOutArgument>
@@ -163,37 +170,37 @@
         <InArgument x:TypeArguments="x:String" x:Key="in_resourceRole">[in_resourceRole]</InArgument>
       </ui:InvokeWorkflowFile.Arguments>
     </ui:InvokeWorkflowFile>
-    <ui:AddDataColumn x:TypeArguments="x:Object" AllowDBNull="{x:Null}" AutoIncrement="{x:Null}" Column="{x:Null}" DefaultValue="{x:Null}" MaxLength="{x:Null}" Unique="{x:Null}" ColumnName="[in_config(&quot;column_assignmentId&quot;).ToString]" DataTable="[out_dtMilestones]" DisplayName="Add Data Column Assignment Id" sap:VirtualizedContainerService.HintSize="560,186" sap2010:WorkflowViewState.IdRef="AddDataColumn`1_1" />
-    <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[out_dtMilestones]" DisplayName="For Each Row in milestones, add corresponding assignment id" sap:VirtualizedContainerService.HintSize="560,401" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
+    <ui:AddDataColumn x:TypeArguments="x:Object" AllowDBNull="{x:Null}" AutoIncrement="{x:Null}" Column="{x:Null}" DefaultValue="{x:Null}" MaxLength="{x:Null}" Unique="{x:Null}" ColumnName="[in_config(&quot;column_assignmentId&quot;).ToString]" DataTable="[out_dtMilestones]" DisplayName="Add Data Column Assignment Id" sap:VirtualizedContainerService.HintSize="510,186" sap2010:WorkflowViewState.IdRef="AddDataColumn`1_1" />
+    <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[out_dtMilestones]" DisplayName="For Each Row in milestones, add corresponding assignment id" sap:VirtualizedContainerService.HintSize="510,688" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
       <ui:ForEachRow.Body>
         <ActivityAction x:TypeArguments="sd:DataRow">
           <ActivityAction.Argument>
             <DelegateInArgument x:TypeArguments="sd:DataRow" Name="row" />
           </ActivityAction.Argument>
-          <Sequence DisplayName="look for assignment id" sap:VirtualizedContainerService.HintSize="304,215.2" sap2010:WorkflowViewState.IdRef="Sequence_3">
+          <Sequence DisplayName="look for assignment id" sap:VirtualizedContainerService.HintSize="476,502" sap2010:WorkflowViewState.IdRef="Sequence_3">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <ui:LookupDataTable LookupColumnIndex="{x:Null}" LookupDataColumn="{x:Null}" RowIndex="{x:Null}" TargetColumnIndex="{x:Null}" TargetDataColumn="{x:Null}" DataTable="[in_dtTimecardWeekAllData]" DisplayName="Lookup Data Table assignment id" sap:VirtualizedContainerService.HintSize="262.4,22.4" sap2010:WorkflowViewState.IdRef="LookupDataTable_2" LookupColumnName="[in_config(&quot;column_projectRId&quot;).ToString]" LookupValue="[row(in_config(&quot;column_projectC&quot;).ToString).ToString]" TargetColumnName="[in_config(&quot;column_assignmentId&quot;).ToString]">
+            <ui:LookupDataTable LookupColumnIndex="{x:Null}" LookupDataColumn="{x:Null}" RowIndex="{x:Null}" TargetColumnIndex="{x:Null}" TargetDataColumn="{x:Null}" DataTable="[in_dtTimecardWeekAllData]" DisplayName="Lookup Data Table assignment id" sap:VirtualizedContainerService.HintSize="434,292" sap2010:WorkflowViewState.IdRef="LookupDataTable_2" LookupColumnName="[in_config(&quot;column_projectRId&quot;).ToString]" LookupValue="[row(in_config(&quot;column_projectC&quot;).ToString).ToString]" TargetColumnName="[in_config(&quot;column_assignmentId&quot;).ToString]">
               <ui:LookupDataTable.CellValue>
-                <OutArgument x:TypeArguments="x:String">[foundValue]</OutArgument>
+                <OutArgument x:TypeArguments="x:Object">[foundValue]</OutArgument>
               </ui:LookupDataTable.CellValue>
             </ui:LookupDataTable>
-            <Assign DisplayName="Assign found value to assignment id" sap:VirtualizedContainerService.HintSize="262.4,60" sap2010:WorkflowViewState.IdRef="Assign_4">
+            <Assign DisplayName="Assign found value to assignment id" sap:VirtualizedContainerService.HintSize="434,82" sap2010:WorkflowViewState.IdRef="Assign_4">
               <Assign.To>
                 <OutArgument x:TypeArguments="x:Object">[row(in_config("column_assignmentId").ToString)]</OutArgument>
               </Assign.To>
               <Assign.Value>
-                <InArgument x:TypeArguments="x:Object">[foundValue]</InArgument>
+                <InArgument x:TypeArguments="x:Object">[foundValue.ToString]</InArgument>
               </Assign.Value>
             </Assign>
           </Sequence>
         </ActivityAction>
       </ui:ForEachRow.Body>
     </ui:ForEachRow>
-    <Assign DisplayName="Assign dt to json" sap:VirtualizedContainerService.HintSize="560,60" sap2010:WorkflowViewState.IdRef="Assign_5">
+    <Assign DisplayName="Assign dt to json" sap:VirtualizedContainerService.HintSize="510,82" sap2010:WorkflowViewState.IdRef="Assign_5">
       <Assign.To>
         <OutArgument x:TypeArguments="x:String">[out_responseData]</OutArgument>
       </Assign.To>
