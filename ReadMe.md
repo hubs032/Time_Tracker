@@ -8,6 +8,7 @@
 ## Outlook Categories
 1. ~~Pull for new user - DONE~~
 2. ~~Be able to refresh (add new/mark missing as inactive) - DONE~~
+3. refactor to pull all categories and then do the lookups via datatable instead of numerous DS queries (Performance Issue)
 	
 ## PSA
 1. ~~Get current assignments (including open ended assignments) - DONE~~
