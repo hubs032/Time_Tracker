@@ -32,7 +32,7 @@
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1773,1002</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>878,3279</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>ActivityBuilder_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -185,7 +185,7 @@
       <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Main Sequence" sap:VirtualizedContainerService.HintSize="559,937" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Main Sequence" sap:VirtualizedContainerService.HintSize="888,3214" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="scg:Dictionary(x:String, x:Object)" Name="Config" />
       <Variable x:TypeArguments="x:String" Name="userEmailAddress" />
@@ -201,12 +201,12 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Data Layer\GetPSAStatus.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="497,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_16" UnSafe="False" WorkflowFileName="Data Layer\GetPSAStatus.xaml">
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Data Layer\GetPSAStatus.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="826,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_16" UnSafe="False" WorkflowFileName="Data Layer\GetPSAStatus.xaml">
       <ui:InvokeWorkflowFile.Arguments>
         <OutArgument x:TypeArguments="scg:Dictionary(x:String, s:Guid)" x:Key="arr_PSA_Status_Dict">[dict_PSA_Status]</OutArgument>
       </ui:InvokeWorkflowFile.Arguments>
     </ui:InvokeWorkflowFile>
-    <Switch x:TypeArguments="x:String" DisplayName="Switch" Expression="[in_str_Activity]" sap:VirtualizedContainerService.HintSize="497,673" sap2010:WorkflowViewState.IdRef="Switch`1_1">
+    <Switch x:TypeArguments="x:String" DisplayName="Switch" Expression="[in_str_Activity]" sap:VirtualizedContainerService.HintSize="826,2950" sap2010:WorkflowViewState.IdRef="Switch`1_1">
       <Switch.Default>
         <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,141" sap2010:WorkflowViewState.IdRef="LogMessage_1" Message="[&quot;No Activity Selected&quot;]" />
       </Switch.Default>
@@ -424,6 +424,7 @@
                                 <OutArgument x:TypeArguments="x:String" x:Key="resourceRole">[resourceRole]</OutArgument>
                               </ui:InvokeWorkflowFile.Arguments>
                             </ui:InvokeWorkflowFile>
+                            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="434,141" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Info" Message="[&quot;Record ID Array: &quot; + string.Join(&quot; ## &quot;,in_recordIds)]" />
                             <Assign sap:VirtualizedContainerService.HintSize="434,82" sap2010:WorkflowViewState.IdRef="Assign_3">
                               <Assign.To>
                                 <OutArgument x:TypeArguments="s:String[]">[in_recordIds]</OutArgument>
@@ -432,7 +433,6 @@
                                 <InArgument x:TypeArguments="s:String[]">[arr_TimeEntries.DistinctBy(Function(x) x.PSAId).ToArray().Select(Function(y) y.PSAId).ToArray()]</InArgument>
                               </Assign.Value>
                             </Assign>
-                            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="434,141" sap2010:WorkflowViewState.IdRef="LogMessage_3" Message="[string.Join(&quot; ## &quot;,in_recordIds)]" />
                             <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Data Layer\DeleteTimecardRecord.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="434,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_18" UnSafe="False" WorkflowFileName="Data Layer\DeleteTimecardRecord.xaml">
                               <ui:InvokeWorkflowFile.Arguments>
                                 <InOutArgument x:TypeArguments="usc:IConnectionService" x:Key="io_sfdcConnection">[io_sfdcConnection]</InOutArgument>
@@ -475,7 +475,7 @@
           </If>
         </Sequence>
       </Sequence>
-      <Sequence x:Key="SubmitPSAData" sap:VirtualizedContainerService.HintSize="472,1646" sap2010:WorkflowViewState.IdRef="Sequence_8">
+      <Sequence x:Key="SubmitPSAData" sap:VirtualizedContainerService.HintSize="472,1726" sap2010:WorkflowViewState.IdRef="Sequence_8">
         <Sequence.Variables>
           <Variable x:TypeArguments="sd:DataTable" Default="[new system.data.DataTable]" Name="dt_ProjectAssigAndGlobal" />
           <Variable x:TypeArguments="sd:DataTable" Default="[new system.data.DataTable]" Name="dtAllProjects" />
@@ -544,7 +544,7 @@
             <Sequence sap2010:WorkflowViewState.IdRef="Sequence_10" />
           </If.Else>
         </If>
-        <If Condition="[in_str_Update_Type = &quot;Update&quot;]" sap:VirtualizedContainerService.HintSize="410,383" sap2010:WorkflowViewState.IdRef="If_4">
+        <If Condition="[in_str_Update_Type = &quot;Update&quot;]" sap:VirtualizedContainerService.HintSize="410,463" sap2010:WorkflowViewState.IdRef="If_4">
           <If.Then>
             <Sequence sap:VirtualizedContainerService.HintSize="376,201" sap2010:WorkflowViewState.IdRef="Sequence_14">
               <sap:WorkflowViewStateService.ViewState>
@@ -576,7 +576,13 @@
             </Sequence>
           </If.Then>
           <If.Else>
-            <Sequence sap2010:WorkflowViewState.IdRef="Sequence_15" />
+            <Sequence sap:VirtualizedContainerService.HintSize="300,80" sap2010:WorkflowViewState.IdRef="Sequence_15">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </Sequence>
           </If.Else>
         </If>
         <If Condition="[in_str_Update_Type = &quot;Submit&quot;]" sap:VirtualizedContainerService.HintSize="410,383" sap2010:WorkflowViewState.IdRef="If_3">

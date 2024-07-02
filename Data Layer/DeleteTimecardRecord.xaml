@@ -11,7 +11,7 @@
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1773,3671</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>841,3062</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>DeleteTimecardRecord_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="54">
@@ -125,7 +125,7 @@
       <AssemblyReference>Microsoft.VisualBasic.Core</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="DeleteTimecardRecord" sap:VirtualizedContainerService.HintSize="634,3606" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="DeleteTimecardRecord" sap:VirtualizedContainerService.HintSize="634,2997" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="recordId" />
       <Variable x:TypeArguments="x:Int32" Name="rowIndex" />
@@ -133,6 +133,7 @@
       <Variable x:TypeArguments="sd:DataTable" Name="io_dtTimecardWeekAllData" />
       <Variable x:TypeArguments="scg:Dictionary(x:String, x:Object)" Name="in_propertiesDictionary" />
       <Variable x:TypeArguments="x:String" Name="out_responseData" />
+      <Variable x:TypeArguments="x:Int64" Name="_out_QueryEntityRecords_Generic_1_2__TotalRecords" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -140,9 +141,9 @@
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
     <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="572,141" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Start DeleteTimecardRecord.&quot;]" />
-    <If Condition="[not IsNothing(in_RecordIds) andalso in_RecordIds.Count &gt; 0]" sap:VirtualizedContainerService.HintSize="572,1797" sap2010:WorkflowViewState.IdRef="If_2">
+    <If Condition="[not IsNothing(in_RecordIds) andalso in_RecordIds.Count &gt; 0]" sap:VirtualizedContainerService.HintSize="572,2340" sap2010:WorkflowViewState.IdRef="If_2">
       <If.Then>
-        <Sequence sap:VirtualizedContainerService.HintSize="476,530" sap2010:WorkflowViewState.IdRef="Sequence_4">
+        <Sequence sap:VirtualizedContainerService.HintSize="476,892" sap2010:WorkflowViewState.IdRef="Sequence_4">
           <Sequence.Variables>
             <Variable x:TypeArguments="scg:IList(t:TTTimeEntry)" Name="arr_DeleteEntries" />
             <Variable x:TypeArguments="scg:ICollection(s:Guid)" Name="arr_ToDelete" />
@@ -152,7 +153,8 @@
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <uda:QueryEntityRecords x:TypeArguments="t:TTTimeEntry" TotalRecords="{x:Null}" ContinueOnError="False" DisplayName="Query Entity Records" EntityId="e3b6a8f1-ae18-ef11-96f5-002248095c31" ExpansionDepth="2" sap:VirtualizedContainerService.HintSize="434,140" sap2010:WorkflowViewState.IdRef="QueryEntityRecords`1_2" OutputRecords="[arr_DeleteEntries]" QueriedEntityId="e3b6a8f1-ae18-ef11-96f5-002248095c31" Skip="0" SortAscending="True" SortByField="Id" TimeoutInMs="30000" Top="100">
+          <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="434,141" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;Deleting record count: &quot; + in_RecordIds.Count.tostring]" />
+          <uda:QueryEntityRecords x:TypeArguments="t:TTTimeEntry" ContinueOnError="False" DisplayName="Query Entity Records" EntityId="e3b6a8f1-ae18-ef11-96f5-002248095c31" ExpansionDepth="2" sap:VirtualizedContainerService.HintSize="434,140" sap2010:WorkflowViewState.IdRef="QueryEntityRecords`1_2" OutputRecords="[arr_DeleteEntries]" QueriedEntityId="e3b6a8f1-ae18-ef11-96f5-002248095c31" Skip="0" SortAscending="True" SortByField="Id" TimeoutInMs="30000" Top="1000" TotalRecords="[_out_QueryEntityRecords_Generic_1_2__TotalRecords]">
             <uda:QueryEntityRecords.FilterArguments>
               <uda:FilterArgument FilterActivityType="{x:Null}">
                 <uda:FilterArgument.Filter>
@@ -175,6 +177,7 @@
               </scg:List>
             </uda:QueryEntityRecords.FilterValues>
           </uda:QueryEntityRecords>
+          <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="434,141" sap2010:WorkflowViewState.IdRef="LogMessage_4" Message="[&quot;Found records to delete count: &quot; + arr_DeleteEntries.Count.ToString]" />
           <Assign sap:VirtualizedContainerService.HintSize="434,82" sap2010:WorkflowViewState.IdRef="Assign_4">
             <Assign.To>
               <OutArgument x:TypeArguments="scg:ICollection(s:Guid)">[arr_ToDelete]</OutArgument>
@@ -187,7 +190,7 @@
         </Sequence>
       </If.Then>
       <If.Else>
-        <Sequence sap:VirtualizedContainerService.HintSize="538,1085" sap2010:WorkflowViewState.IdRef="Sequence_5">
+        <Sequence sap:VirtualizedContainerService.HintSize="538,1266" sap2010:WorkflowViewState.IdRef="Sequence_5">
           <Sequence.Variables>
             <Variable x:TypeArguments="x:Int64" Name="int_RecordCnt" />
             <Variable x:TypeArguments="scg:IList(t:TTTimeEntry)" Name="arr_Records" />
@@ -197,10 +200,11 @@
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <Sequence sap:VirtualizedContainerService.HintSize="496,997" sap2010:WorkflowViewState.IdRef="Sequence_7">
+          <Sequence sap:VirtualizedContainerService.HintSize="496,1178" sap2010:WorkflowViewState.IdRef="Sequence_7">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
             <Assign DisplayName="Assign record Id" sap:VirtualizedContainerService.HintSize="434,82" sap2010:WorkflowViewState.IdRef="Assign_3">
@@ -211,6 +215,7 @@
                 <InArgument x:TypeArguments="x:String">[in_RecordId]</InArgument>
               </Assign.Value>
             </Assign>
+            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="434,141" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Info" Message="[&quot;Deleting Record ID: &quot; + recordId]" />
             <uda:QueryEntityRecords x:TypeArguments="t:TTTimeEntry" ContinueOnError="False" DisplayName="Query Entity Records" EntityId="e3b6a8f1-ae18-ef11-96f5-002248095c31" ExpansionDepth="2" sap:VirtualizedContainerService.HintSize="434,140" sap2010:WorkflowViewState.IdRef="QueryEntityRecords`1_1" OutputRecords="[arr_Records]" QueriedEntityId="e3b6a8f1-ae18-ef11-96f5-002248095c31" Skip="0" SortAscending="True" SortByField="Id" TimeoutInMs="30000" Top="100" TotalRecords="[int_RecordCnt]">
               <uda:QueryEntityRecords.FilterArguments>
                 <uda:FilterArgument FilterActivityType="{x:Null}">
@@ -289,7 +294,7 @@
         </Sequence>
       </If.Else>
     </If>
-    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="572,272" sap2010:WorkflowViewState.IdRef="CommentOut_2">
+    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="572,52" sap2010:WorkflowViewState.IdRef="CommentOut_2">
       <ui:CommentOut.Body>
         <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="496,193" sap2010:WorkflowViewState.IdRef="Sequence_6">
           <sap:WorkflowViewStateService.ViewState>
@@ -307,8 +312,14 @@
           </Assign>
         </Sequence>
       </ui:CommentOut.Body>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
     </ui:CommentOut>
-    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="572,1165" sap2010:WorkflowViewState.IdRef="CommentOut_1">
+    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="572,52" sap2010:WorkflowViewState.IdRef="CommentOut_1">
       <ui:CommentOut.Body>
         <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="496,1086" sap2010:WorkflowViewState.IdRef="Sequence_3">
           <sap:WorkflowViewStateService.ViewState>
@@ -342,6 +353,13 @@
           </Assign>
         </Sequence>
       </ui:CommentOut.Body>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
     </ui:CommentOut>
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="572,141" sap2010:WorkflowViewState.IdRef="LogMessage_5" Level="Info" Message="[&quot;End DeleteTimecardRecord.&quot;]" />
   </Sequence>
 </Activity>
