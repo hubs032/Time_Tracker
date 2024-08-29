@@ -32,7 +32,7 @@
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>878,3279</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1706,1358</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>ActivityBuilder_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -88,6 +88,10 @@
       <x:String>UiPath.Excel</x:String>
       <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
       <x:String>Microsoft.Graph</x:String>
+      <x:String>UiPath.Core.Activities.SAP</x:String>
+      <x:String>UiPath.UIAutomationCore.Contracts</x:String>
+      <x:String>UiPath.Platform.ObjectLibrary</x:String>
+      <x:String>System.Globalization</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -185,7 +189,7 @@
       <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Main Sequence" sap:VirtualizedContainerService.HintSize="888,3214" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Main Sequence" sap:VirtualizedContainerService.HintSize="559,1293" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="scg:Dictionary(x:String, x:Object)" Name="Config" />
       <Variable x:TypeArguments="x:String" Name="userEmailAddress" />
@@ -201,12 +205,12 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Data Layer\GetPSAStatus.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="826,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_16" UnSafe="False" WorkflowFileName="Data Layer\GetPSAStatus.xaml">
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Data Layer\GetPSAStatus.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="497,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_16" UnSafe="False" WorkflowFileName="Data Layer\GetPSAStatus.xaml">
       <ui:InvokeWorkflowFile.Arguments>
         <OutArgument x:TypeArguments="scg:Dictionary(x:String, s:Guid)" x:Key="arr_PSA_Status_Dict">[dict_PSA_Status]</OutArgument>
       </ui:InvokeWorkflowFile.Arguments>
     </ui:InvokeWorkflowFile>
-    <Switch x:TypeArguments="x:String" DisplayName="Switch" Expression="[in_str_Activity]" sap:VirtualizedContainerService.HintSize="826,2950" sap2010:WorkflowViewState.IdRef="Switch`1_1">
+    <Switch x:TypeArguments="x:String" DisplayName="Switch" Expression="[in_str_Activity]" sap:VirtualizedContainerService.HintSize="497,1029" sap2010:WorkflowViewState.IdRef="Switch`1_1">
       <Switch.Default>
         <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,141" sap2010:WorkflowViewState.IdRef="LogMessage_1" Message="[&quot;No Activity Selected&quot;]" />
       </Switch.Default>
@@ -246,13 +250,14 @@
         </ui:InvokeWorkflowFile>
         <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="388,141" sap2010:WorkflowViewState.IdRef="LogMessage_2" Message="[jsonOutput]" />
       </Sequence>
-      <Sequence x:Key="GetOutlookData" sap:VirtualizedContainerService.HintSize="786,2654" sap2010:WorkflowViewState.IdRef="Sequence_4">
+      <Sequence x:Key="GetOutlookData" sap:VirtualizedContainerService.HintSize="786,3642" sap2010:WorkflowViewState.IdRef="Sequence_4">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
-        <Sequence DisplayName="Make sure all categories have mapping" sap:VirtualizedContainerService.HintSize="724,2543" sap2010:WorkflowViewState.IdRef="Sequence_5">
+        <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="724,141" sap2010:WorkflowViewState.IdRef="LogMessage_6" Level="Info" Message="[&quot;Getting Outlook Data&quot;]" />
+        <Sequence DisplayName="Make sure all categories have mapping" sap:VirtualizedContainerService.HintSize="724,3436" sap2010:WorkflowViewState.IdRef="Sequence_5">
           <Sequence.Variables>
             <Variable x:TypeArguments="x:Int64" Name="int_MissingMappingCnt" />
           </Sequence.Variables>
@@ -286,19 +291,20 @@
               </scg:List>
             </uda:QueryEntityRecords.FilterValues>
           </uda:QueryEntityRecords>
-          <If Condition="[int_MissingMappingCnt &gt; 0]" sap:VirtualizedContainerService.HintSize="662,2252" sap2010:WorkflowViewState.IdRef="If_1">
+          <If Condition="[int_MissingMappingCnt &gt; 0]" sap:VirtualizedContainerService.HintSize="662,3145" sap2010:WorkflowViewState.IdRef="If_1">
             <If.Then>
-              <Sequence sap:VirtualizedContainerService.HintSize="376,173" sap2010:WorkflowViewState.IdRef="Sequence_6">
+              <Sequence sap:VirtualizedContainerService.HintSize="376,354" sap2010:WorkflowViewState.IdRef="Sequence_6">
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                   </scg:Dictionary>
                 </sap:WorkflowViewStateService.ViewState>
                 <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" AutoCloseAfter="00:00:00" DisplayName="Message Box" sap:VirtualizedContainerService.HintSize="334,85" sap2010:WorkflowViewState.IdRef="MessageBox_1" Text="[&quot;Some outlook categories are missing mapping info.  Please update mapping for all categories!&quot;]" />
+                <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,141" sap2010:WorkflowViewState.IdRef="LogMessage_5" Level="Error" Message="[&quot;Some outlook categories are missing mapping info.  Please update mapping for all categories!&quot;]" />
               </Sequence>
             </If.Then>
             <If.Else>
-              <Sequence sap:VirtualizedContainerService.HintSize="628,1897" sap2010:WorkflowViewState.IdRef="Sequence_7">
+              <Sequence sap:VirtualizedContainerService.HintSize="628,2609" sap2010:WorkflowViewState.IdRef="Sequence_7">
                 <Sequence.Variables>
                   <Variable x:TypeArguments="x:String" Name="weekStartDate" />
                   <Variable x:TypeArguments="x:String" Name="weekEndDate" />
@@ -318,7 +324,7 @@
                           <OutArgument x:TypeArguments="x:String">[weekEndDate]</OutArgument>
                         </ui:AssignOperation.To>
                         <ui:AssignOperation.Value>
-                          <InArgument x:TypeArguments="x:String">[( Datetime.ParseExact( in_str_TimesheetDate,"M/d/yyyy", Globalization.CultureInfo.InvariantCulture)).toString("yyyy-MM-dd")]</InArgument>
+                          <InArgument x:TypeArguments="x:String">[( Datetime.ParseExact( in_str_TimesheetDate,"M/d/yyyy", Globalization.CultureInfo.InvariantCulture)).adddays(1).toString("yyyy-MM-dd")]</InArgument>
                         </ui:AssignOperation.Value>
                       </ui:AssignOperation>
                       <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_2">
@@ -338,7 +344,8 @@
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
                 </ui:MultipleAssign>
-                <uda:QueryEntityRecords x:TypeArguments="t:TTTimeEntry" TotalRecords="{x:Null}" ContinueOnError="False" DisplayName="Query Entity Records" EntityId="e3b6a8f1-ae18-ef11-96f5-002248095c31" ExpansionDepth="2" sap:VirtualizedContainerService.HintSize="586,140" sap2010:WorkflowViewState.IdRef="QueryEntityRecords`1_3" OutputRecords="[arr_TimeEntries]" QueriedEntityId="e3b6a8f1-ae18-ef11-96f5-002248095c31" Skip="0" SortAscending="True" SortByField="Id" TimeoutInMs="30000" Top="100">
+                <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="586,141" sap2010:WorkflowViewState.IdRef="LogMessage_4" Level="Info" Message="[&quot;Start: &quot;&amp;weekStartDate.ToString &amp; Environment.NewLine &amp; &quot;End Date: &quot;&amp; weekEndDate &amp; Environment.NewLine &amp; &quot;User Email: &quot;&amp; in_UserEmail]" />
+                <uda:QueryEntityRecords x:TypeArguments="t:TTTimeEntry" TotalRecords="{x:Null}" ContinueOnError="False" DisplayName="Query Entity Records" EntityId="e3b6a8f1-ae18-ef11-96f5-002248095c31" ExpansionDepth="2" sap:VirtualizedContainerService.HintSize="586,140" sap2010:WorkflowViewState.IdRef="QueryEntityRecords`1_3" OutputRecords="[arr_TimeEntries]" QueriedEntityId="e3b6a8f1-ae18-ef11-96f5-002248095c31" Skip="0" SortAscending="True" SortByField="Id" TimeoutInMs="30000" Top="500">
                   <uda:QueryEntityRecords.FilterArguments>
                     <uda:FilterArgument FilterActivityType="{x:Null}">
                       <uda:FilterArgument.Filter>
@@ -367,7 +374,7 @@
                     </scg:List>
                   </uda:QueryEntityRecords.FilterValues>
                 </uda:QueryEntityRecords>
-                <uda:QueryEntityRecords x:TypeArguments="t:TTTimeEntry" TotalRecords="{x:Null}" ContinueOnError="False" DisplayName="Query Entity Records" EntityId="e3b6a8f1-ae18-ef11-96f5-002248095c31" ExpansionDepth="2" sap:VirtualizedContainerService.HintSize="586,140" sap2010:WorkflowViewState.IdRef="QueryEntityRecords`1_4" OutputRecords="[arr_TimeEntries_Manual]" QueriedEntityId="e3b6a8f1-ae18-ef11-96f5-002248095c31" Skip="0" SortAscending="True" SortByField="Id" TimeoutInMs="30000" Top="100">
+                <uda:QueryEntityRecords x:TypeArguments="t:TTTimeEntry" TotalRecords="{x:Null}" ContinueOnError="False" DisplayName="Query Entity Records" EntityId="e3b6a8f1-ae18-ef11-96f5-002248095c31" ExpansionDepth="2" sap:VirtualizedContainerService.HintSize="586,140" sap2010:WorkflowViewState.IdRef="QueryEntityRecords`1_4" OutputRecords="[arr_TimeEntries_Manual]" QueriedEntityId="e3b6a8f1-ae18-ef11-96f5-002248095c31" Skip="0" SortAscending="True" SortByField="Id" TimeoutInMs="30000" Top="500">
                   <uda:QueryEntityRecords.FilterArguments>
                     <uda:FilterArgument FilterActivityType="{x:Null}">
                       <uda:FilterArgument.Filter>
@@ -396,17 +403,20 @@
                     </scg:List>
                   </uda:QueryEntityRecords.FilterValues>
                 </uda:QueryEntityRecords>
-                <If Condition="[arr_TimeEntries.Count &gt;0]" sap:VirtualizedContainerService.HintSize="586,1109" sap2010:WorkflowViewState.IdRef="If_5">
+                <If Condition="[arr_TimeEntries.Count &gt;0]" sap:VirtualizedContainerService.HintSize="586,1640" sap2010:WorkflowViewState.IdRef="If_5">
                   <If.Then>
-                    <Sequence sap:VirtualizedContainerService.HintSize="552,927" sap2010:WorkflowViewState.IdRef="Sequence_16">
+                    <Sequence sap:VirtualizedContainerService.HintSize="552,1458" sap2010:WorkflowViewState.IdRef="Sequence_16">
                       <sap:WorkflowViewStateService.ViewState>
                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
                           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                         </scg:Dictionary>
                       </sap:WorkflowViewStateService.ViewState>
-                      <If Condition="[arr_TimeEntries_Manual.count = 0]" sap:VirtualizedContainerService.HintSize="510,839" sap2010:WorkflowViewState.IdRef="If_6">
+                      <If Condition="[arr_TimeEntries_Manual.count = 0]" sap:VirtualizedContainerService.HintSize="510,1370" sap2010:WorkflowViewState.IdRef="If_6">
                         <If.Then>
-                          <Sequence sap:VirtualizedContainerService.HintSize="476,657" sap2010:WorkflowViewState.IdRef="Sequence_18">
+                          <Sequence sap:VirtualizedContainerService.HintSize="476,959" sap2010:WorkflowViewState.IdRef="Sequence_18">
+                            <Sequence.Variables>
+                              <Variable x:TypeArguments="s:Guid[]" Name="arr_DSRecs" />
+                            </Sequence.Variables>
                             <sap:WorkflowViewStateService.ViewState>
                               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -424,7 +434,6 @@
                                 <OutArgument x:TypeArguments="x:String" x:Key="resourceRole">[resourceRole]</OutArgument>
                               </ui:InvokeWorkflowFile.Arguments>
                             </ui:InvokeWorkflowFile>
-                            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="434,141" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Info" Message="[&quot;Record ID Array: &quot; + string.Join(&quot; ## &quot;,in_recordIds)]" />
                             <Assign sap:VirtualizedContainerService.HintSize="434,82" sap2010:WorkflowViewState.IdRef="Assign_3">
                               <Assign.To>
                                 <OutArgument x:TypeArguments="s:String[]">[in_recordIds]</OutArgument>
@@ -433,6 +442,7 @@
                                 <InArgument x:TypeArguments="s:String[]">[arr_TimeEntries.DistinctBy(Function(x) x.PSAId).ToArray().Select(Function(y) y.PSAId).ToArray()]</InArgument>
                               </Assign.Value>
                             </Assign>
+                            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="434,141" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Info" Message="[&quot;Record ID Array: &quot; + string.Join(&quot; ## &quot;,in_recordIds)]" />
                             <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Data Layer\DeleteTimecardRecord.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="434,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_18" UnSafe="False" WorkflowFileName="Data Layer\DeleteTimecardRecord.xaml">
                               <ui:InvokeWorkflowFile.Arguments>
                                 <InOutArgument x:TypeArguments="usc:IConnectionService" x:Key="io_sfdcConnection">[io_sfdcConnection]</InOutArgument>
@@ -444,10 +454,26 @@
                                 <InArgument x:TypeArguments="x:String" x:Key="in_str_PSAId">[in_PSAId]</InArgument>
                               </ui:InvokeWorkflowFile.Arguments>
                             </ui:InvokeWorkflowFile>
+                            <Assign sap:VirtualizedContainerService.HintSize="434,82" sap2010:WorkflowViewState.IdRef="Assign_4">
+                              <Assign.To>
+                                <OutArgument x:TypeArguments="s:Guid[]">[arr_DSRecs]</OutArgument>
+                              </Assign.To>
+                              <Assign.Value>
+                                <InArgument x:TypeArguments="s:Guid[]">[arr_TimeEntries.DistinctBy(Function(x) x.Id).ToArray().Select(Function(y) y.Id).ToArray()]</InArgument>
+                              </Assign.Value>
+                            </Assign>
+                            <uda:DeleteMultipleEntityRecords x:TypeArguments="t:TTTimeEntry" FailedRecords="{x:Null}" ContinueBatchOnFailure="True" ContinueOnError="False" DisplayName="Delete Multiple Entity Records" EntityId="e3b6a8f1-ae18-ef11-96f5-002248095c31" sap:VirtualizedContainerService.HintSize="434,140" sap2010:WorkflowViewState.IdRef="DeleteMultipleEntityRecords`1_1" InputRecords="[arr_DSRecs]" TimeoutInMs="30000" />
                           </Sequence>
                         </If.Then>
                         <If.Else>
-                          <Sequence sap2010:WorkflowViewState.IdRef="Sequence_19" />
+                          <Sequence sap:VirtualizedContainerService.HintSize="376,229" sap2010:WorkflowViewState.IdRef="Sequence_19">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,141" sap2010:WorkflowViewState.IdRef="LogMessage_7" Message="[&quot;Non-outlook entries exist.&quot;]" />
+                          </Sequence>
                         </If.Else>
                       </If>
                     </Sequence>
@@ -468,6 +494,8 @@
                     <InArgument x:TypeArguments="x:String" x:Key="in_str_internalPrefix">[in_str_internalPrefix]</InArgument>
                     <InArgument x:TypeArguments="x:String" x:Key="in_str_TimesheetDate">[in_str_TimesheetDate]</InArgument>
                     <InArgument x:TypeArguments="x:String" x:Key="in_str_UserEmail">[in_UserEmail]</InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="in_str_CalendarName" />
+                    <InArgument x:TypeArguments="x:String" x:Key="BreakTriggerScopeInArgument" />
                   </ui:InvokeWorkflowFile.Arguments>
                 </ui:InvokeWorkflowFile>
               </Sequence>
@@ -475,7 +503,7 @@
           </If>
         </Sequence>
       </Sequence>
-      <Sequence x:Key="SubmitPSAData" sap:VirtualizedContainerService.HintSize="472,1726" sap2010:WorkflowViewState.IdRef="Sequence_8">
+      <Sequence x:Key="SubmitPSAData" sap:VirtualizedContainerService.HintSize="472,1646" sap2010:WorkflowViewState.IdRef="Sequence_8">
         <Sequence.Variables>
           <Variable x:TypeArguments="sd:DataTable" Default="[new system.data.DataTable]" Name="dt_ProjectAssigAndGlobal" />
           <Variable x:TypeArguments="sd:DataTable" Default="[new system.data.DataTable]" Name="dtAllProjects" />
@@ -544,7 +572,7 @@
             <Sequence sap2010:WorkflowViewState.IdRef="Sequence_10" />
           </If.Else>
         </If>
-        <If Condition="[in_str_Update_Type = &quot;Update&quot;]" sap:VirtualizedContainerService.HintSize="410,463" sap2010:WorkflowViewState.IdRef="If_4">
+        <If Condition="[in_str_Update_Type = &quot;Update&quot;]" sap:VirtualizedContainerService.HintSize="410,383" sap2010:WorkflowViewState.IdRef="If_4">
           <If.Then>
             <Sequence sap:VirtualizedContainerService.HintSize="376,201" sap2010:WorkflowViewState.IdRef="Sequence_14">
               <sap:WorkflowViewStateService.ViewState>
@@ -656,6 +684,49 @@
             <InArgument x:TypeArguments="x:String" x:Key="in_str_UserEmail">[in_UserEmail]</InArgument>
             <InArgument x:TypeArguments="x:String" x:Key="in_str_TimesheetDate">[in_str_TimesheetDate]</InArgument>
             <InArgument x:TypeArguments="x:String" x:Key="in_str_PSAId">[in_PSAId]</InArgument>
+          </ui:InvokeWorkflowFile.Arguments>
+        </ui:InvokeWorkflowFile>
+      </Sequence>
+      <Sequence x:Key="ExportSubmission" sap:VirtualizedContainerService.HintSize="450,711" sap2010:WorkflowViewState.IdRef="Sequence_20">
+        <Sequence.Variables>
+          <Variable x:TypeArguments="sd:DataTable" Name="dtAllAssigOpenForTimeEntry" />
+          <Variable x:TypeArguments="sd:DataTable" Name="dtAllProjects" />
+          <Variable x:TypeArguments="sd:DataTable" Name="dt_ProjectAssigAndGlobal" />
+        </Sequence.Variables>
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+        <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="388,141" sap2010:WorkflowViewState.IdRef="LogMessage_8" Message="[&quot;Export Branch of Main.xaml&quot;]" />
+        <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="SetupConnection.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="388,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_19" UnSafe="False" WorkflowFileName="SetupConnection.xaml">
+          <ui:InvokeWorkflowFile.Arguments>
+            <InOutArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="Config">[Config]</InOutArgument>
+            <InArgument x:TypeArguments="x:String" x:Key="in_OrchestratorFolderPath">[in_OrchestratorFolderPath]</InArgument>
+            <InArgument x:TypeArguments="x:String" x:Key="in_str_QA_Asset_Suffix">[in_str_QA_Asset_Suffix]</InArgument>
+            <InOutArgument x:TypeArguments="x:String" x:Key="userEmailAddress">[userEmailAddress]</InOutArgument>
+            <OutArgument x:TypeArguments="usc:IConnectionService" x:Key="io_sfdcConnection">[io_sfdcConnection]</OutArgument>
+            <OutArgument x:TypeArguments="x:String" x:Key="encryptedResourceId">[encryptedResourceId]</OutArgument>
+            <OutArgument x:TypeArguments="x:String" x:Key="resourceManager">[resourceManager]</OutArgument>
+            <OutArgument x:TypeArguments="x:String" x:Key="resourceRole">[resourceRole]</OutArgument>
+          </ui:InvokeWorkflowFile.Arguments>
+        </ui:InvokeWorkflowFile>
+        <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Data Layer\GetDataForAssignmentsAndProjects.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="388,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_20" UnSafe="False" WorkflowFileName="Data Layer\GetDataForAssignmentsAndProjects.xaml">
+          <ui:InvokeWorkflowFile.Arguments>
+            <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_config">[Config]</InArgument>
+            <InOutArgument x:TypeArguments="usc:IConnectionService" x:Key="io_sfdcConnection">[io_sfdcConnection]</InOutArgument>
+            <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_dtAllAssigOpenForTimeEntry">[dtAllAssigOpenForTimeEntry]</OutArgument>
+            <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_dtAllProjects">[dtAllProjects]</OutArgument>
+            <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_dtProjectAssigAndGlobal">[dt_ProjectAssigAndGlobal]</OutArgument>
+            <InArgument x:TypeArguments="x:String" x:Key="in_weekDate">[in_str_TimesheetDate]</InArgument>
+            <InArgument x:TypeArguments="x:String" x:Key="in_encryptedeResourceId">[encryptedResourceId]</InArgument>
+          </ui:InvokeWorkflowFile.Arguments>
+        </ui:InvokeWorkflowFile>
+        <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Data Layer\ExportManualSubmission.xaml" sap:VirtualizedContainerService.HintSize="388,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_21" UnSafe="False" WorkflowFileName="Data Layer\ExportManualSubmission.xaml">
+          <ui:InvokeWorkflowFile.Arguments>
+            <InArgument x:TypeArguments="sd:DataTable" x:Key="in_dtAllAssignmentsAndProjects">[dt_ProjectAssigAndGlobal]</InArgument>
+            <InArgument x:TypeArguments="x:String" x:Key="in_str_TimesheetDate">[in_str_TimesheetDate]</InArgument>
+            <InArgument x:TypeArguments="x:String" x:Key="in_str_UserEmail">[in_UserEmail]</InArgument>
           </ui:InvokeWorkflowFile.Arguments>
         </ui:InvokeWorkflowFile>
       </Sequence>

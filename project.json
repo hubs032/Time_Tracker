@@ -26,7 +26,7 @@
   ],
   "schemaVersion": "4.0",
   "studioVersion": "23.10.6.0",
-  "projectVersion": "1.0.31",
+  "projectVersion": "1.0.48",
   "runtimeOptions": {
     "autoDispose": false,
     "netFrameworkLazyLoading": false,
